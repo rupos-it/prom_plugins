@@ -126,7 +126,7 @@ public class MeasuresBPMNintoMetricsPlugin {
 
 
 		for (Transition t : net.getTransitions()) {
-			if (!t.isInvisible()) {
+			if (!t.isInvisible() &&  !t.getLabel().startsWith("ArtificialEnd")) {
 				String tname = t.getLabel();
 				String name = (String) tname.subSequence(0, tname.indexOf("+"));
 
@@ -280,7 +280,7 @@ public class MeasuresBPMNintoMetricsPlugin {
 
 
 		for (Transition t : net.getTransitions()) {
-			if (!t.isInvisible()) {
+			if (!t.isInvisible() &&  !t.getLabel().startsWith("ArtificialEnd") ) {
 				String tname = t.getLabel();
 				String name = (String) tname.subSequence(0, tname.indexOf("+"));
 				Activity activity = null;
