@@ -1,0 +1,4617 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <log xes.version="1.0" xes.features="nested-attributes" openxes.version="1.0RC7" xmlns="http://www.xes-standard.org/">
+	<extension name="Lifecycle" prefix="lifecycle" uri="http://www.xes-standard.org/lifecycle.xesext"/>
+	<extension name="Organizational" prefix="org" uri="http://www.xes-standard.org/org.xesext"/>
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"/>
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"/>
+	<extension name="Semantic" prefix="semantic" uri="http://www.xes-standard.org/semantic.xesext"/>
+	<global scope="trace">
+		<string key="concept:name" value="__INVALID__"/>
+	</global>
+	<global scope="event">
+		<string key="concept:name" value="__INVALID__"/>
+		<string key="lifecycle:transition" value="complete"/>
+	</global>
+	<classifier name="MXML Legacy Classifier" keys="concept:name lifecycle:transition"/>
+	<classifier name="Event Name" keys="concept:name"/>
+	<classifier name="Resource" keys="org:resource"/>
+	<string key="source" value="Example One from Guancio"/>
+	<string key="concept:name" value="Paper"/>
+	<string key="lifecycle:model" value="standard"/>
+	<string key="description" value="Paper Submission"/>
+       
+
+	<trace>
+		<string key="concept:name" value="0"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T17:32:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T17:56:03.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-08T18:15:00.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-08T18:26:37.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-08T18:50:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-08T19:18:27.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T19:33:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T20:09:49.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="1"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T18:36:23.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T19:18:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T19:45:53.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T19:47:39.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="2"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T19:23:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T20:15:45.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-08T20:33:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-08T20:37:46.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-08T20:39:07.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-08T21:32:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T21:54:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T22:19:29.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="3"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T20:49:44.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T20:57:27.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T21:17:15.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T21:38:18.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="4"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T21:49:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T21:49:42.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T21:57:43.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-08T22:21:04.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="5"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T22:41:02.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T23:00:21.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-08T23:08:44.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-08T23:17:44.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-08T23:41:30.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T00:04:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T00:32:37.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T00:54:31.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="6"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T23:30:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-08T23:41:50.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T00:10:17.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T00:29:49.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="7"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T00:45:27.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T01:18:26.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T01:42:27.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T01:44:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T01:49:59.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T02:12:46.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T02:29:48.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T02:53:13.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="8"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T01:29:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T02:14:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T02:44:15.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T02:53:05.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="9"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T02:30:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T03:19:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T03:26:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T04:12:20.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T04:32:49.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T04:48:45.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T04:54:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T05:13:41.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="10"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T03:44:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T03:51:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T03:53:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T04:44:03.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T04:50:29.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T05:40:38.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T05:49:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T05:51:29.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="11"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T04:31:19.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T05:16:56.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T05:37:10.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T05:48:14.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-09T05:56:40.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-09T06:14:01.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T06:14:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T06:47:17.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="12"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T05:27:31.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T05:29:04.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T05:52:55.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T05:57:42.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="13"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T06:26:41.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T06:27:14.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T06:37:28.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T06:57:47.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="14"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T07:47:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T07:56:46.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T08:00:28.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T08:18:31.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-09T08:18:55.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-09T08:32:18.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T08:39:52.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T08:56:37.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="15"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T08:28:31.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T08:35:52.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T08:42:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T08:59:20.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T09:13:34.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T09:27:48.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T09:29:51.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T10:02:37.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="16"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T09:21:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T09:33:11.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T09:57:10.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T10:02:50.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="17"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T10:26:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T10:39:12.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T10:45:29.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T11:21:36.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="18"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T11:36:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T11:45:22.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T12:00:08.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T12:18:21.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-09T12:18:26.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-09T13:07:08.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T13:31:59.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T14:03:37.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="19"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T12:33:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T12:53:48.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T13:20:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T13:28:06.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="20"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T13:24:35.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T14:07:35.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T14:22:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T14:31:20.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="21"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T14:30:30.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T14:35:50.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T15:04:15.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T15:26:10.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="22"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T15:32:08.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T15:43:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T15:53:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T16:00:16.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T16:16:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-09T16:42:13.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T17:06:19.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T17:23:23.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="23"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T16:30:15.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T16:47:56.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T17:06:35.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T17:26:21.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="24"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T17:22:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T17:47:53.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T18:10:29.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T18:43:01.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="25"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T18:41:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T18:57:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T19:14:08.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T19:28:29.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T19:36:51.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T19:48:26.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T20:17:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T20:21:05.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="26"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T19:35:25.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T20:15:34.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T20:37:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T20:50:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T21:13:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T21:14:07.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T21:14:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T21:59:01.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="27"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T20:25:36.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T20:55:19.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T21:01:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T21:31:51.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="28"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T21:51:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T21:57:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T22:11:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T22:21:55.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="29"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T22:48:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T23:07:09.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T23:27:41.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-09T23:36:40.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-09T23:43:57.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T00:02:08.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T00:09:42.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T00:50:55.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="30"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T23:35:18.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-09T23:43:34.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T23:51:27.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-09T23:58:45.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="31"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T00:28:53.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T00:39:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T01:03:04.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T01:29:15.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T01:55:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T02:06:18.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T02:07:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T03:04:51.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="32"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T01:38:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T02:18:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T02:34:44.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T03:14:23.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="33"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T02:24:13.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T03:18:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T03:45:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T03:49:40.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T04:15:17.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T04:33:10.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T04:44:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T04:58:07.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="34"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T03:31:56.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T03:47:52.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T03:50:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T04:20:21.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T04:50:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T05:03:45.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T05:23:49.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T05:34:42.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="35"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T04:48:13.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T04:51:02.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T05:08:07.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T05:46:20.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="36"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T05:41:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T05:49:05.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T06:01:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T06:40:19.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T06:43:37.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T07:34:54.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T07:38:08.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T08:13:51.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="37"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T06:25:42.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T07:01:29.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T07:19:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T07:24:05.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T07:44:48.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T08:14:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T08:20:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T08:38:43.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="38"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T07:40:23.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T07:45:29.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T08:13:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T08:17:03.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T08:45:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T08:46:11.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T09:04:17.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T09:15:43.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="39"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T08:50:19.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T08:53:34.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T08:58:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T09:23:16.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T09:29:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T10:10:37.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T10:21:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T10:48:29.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="40"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T09:49:52.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T10:09:52.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T10:20:53.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T10:59:30.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="41"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T10:38:17.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T11:01:12.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T11:30:41.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T11:50:59.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="42"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T11:22:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T11:51:57.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T12:13:40.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T12:33:28.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="43"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T12:37:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T13:17:23.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T13:24:37.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T13:53:08.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="44"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T13:30:18.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T13:47:36.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T14:14:21.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T14:30:46.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T14:31:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T15:04:11.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T15:19:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T15:23:47.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="45"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T14:22:40.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T15:10:36.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T15:39:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T15:58:37.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T16:05:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-10T16:20:14.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T16:38:02.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T17:04:58.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="46"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T15:43:10.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T16:03:28.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T16:29:02.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T16:56:08.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="47"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T16:48:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T17:17:14.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T17:21:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T17:49:15.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="48"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T17:40:58.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T18:04:17.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T18:18:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T18:48:57.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="49"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T18:22:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T18:22:31.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T18:36:26.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T18:49:51.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="50"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T19:35:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T20:15:07.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T20:25:56.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T20:29:15.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="51"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T20:27:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T20:57:00.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T21:22:40.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T21:55:28.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="52"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T21:47:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T22:01:31.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T22:27:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T22:41:10.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T22:43:47.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-10T22:50:13.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T22:53:27.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T23:02:37.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="53"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T22:48:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T23:14:24.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T23:20:05.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-10T23:52:13.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T00:04:00.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T00:17:44.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T00:42:31.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T01:02:31.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="54"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T23:41:21.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-10T23:46:27.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-10T23:52:47.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T00:12:03.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="55"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T00:32:37.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T00:49:02.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T01:18:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T01:28:39.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-11T01:30:51.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-11T01:31:21.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T01:53:44.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T02:12:58.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="56"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T01:37:55.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T02:08:08.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T02:08:49.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T02:24:33.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T02:32:02.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T03:23:19.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T03:24:54.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T04:04:41.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="57"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T02:25:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T03:05:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T03:25:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T03:42:06.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T03:57:42.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T04:18:59.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T04:41:52.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T04:44:35.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="58"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T03:40:54.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T04:09:26.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T04:14:48.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T04:37:55.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="59"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T04:39:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T05:02:31.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T05:17:07.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T05:44:28.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="60"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T05:47:04.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T06:07:56.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T06:08:18.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T06:47:19.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="61"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T06:31:48.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T06:58:54.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T07:10:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T07:30:00.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-11T07:32:08.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-11T08:27:05.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T08:30:36.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T08:38:48.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="62"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T07:25:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T07:28:14.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T07:48:26.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T08:23:15.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="63"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T08:47:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T09:09:08.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T09:28:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T09:45:08.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-11T09:53:45.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-11T10:16:29.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T10:30:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T10:33:14.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="64"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T09:39:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T09:46:32.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T10:06:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T10:33:17.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T10:56:02.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T11:15:32.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T11:36:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T12:07:35.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="65"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T10:26:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T10:43:57.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T10:58:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T11:42:29.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="66"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T11:38:44.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T12:01:10.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T12:17:59.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T12:18:00.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T12:30:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T12:39:47.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T13:02:35.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T13:31:05.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="67"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T12:46:18.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T12:51:05.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T13:10:56.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T13:42:47.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="68"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T13:46:59.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T14:12:17.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T14:21:07.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T14:34:11.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="69"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T14:47:11.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T15:04:39.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T15:22:42.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T15:57:12.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="70"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T15:22:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T15:45:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T15:48:37.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T16:28:34.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-11T16:32:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-11T17:11:12.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T17:26:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T17:47:25.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="71"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T16:25:06.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T16:42:31.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T17:04:14.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T17:16:27.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="72"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T17:47:01.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T18:00:03.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T18:02:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T18:48:00.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T18:51:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-11T19:15:46.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T19:17:57.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T19:41:51.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="73"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T18:32:23.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T19:16:08.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T19:27:28.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T19:39:45.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="74"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T19:26:26.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T20:05:56.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T20:13:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T20:42:22.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="75"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T20:39:58.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T20:59:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T21:08:17.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T21:12:20.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="76"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T21:33:29.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T21:48:44.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T22:11:35.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T22:25:57.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="77"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T22:38:07.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T22:43:37.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T23:03:27.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-11T23:06:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-11T23:15:27.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-12T00:03:01.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T00:22:00.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T00:37:28.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="78"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T23:37:12.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-11T23:52:10.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-11T23:57:55.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T00:05:23.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="79"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T00:47:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T00:48:37.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T01:12:58.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T01:42:48.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="80"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T01:27:47.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T02:05:47.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T02:19:28.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T02:35:28.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="81"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T02:22:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T03:15:20.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T03:18:57.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T03:42:33.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="82"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T03:35:23.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T03:54:57.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T03:59:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T03:59:35.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="83"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T04:33:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T05:13:47.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T05:35:30.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T05:56:56.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="84"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T05:28:05.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T06:06:56.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T06:35:07.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T06:53:49.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-12T06:59:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-12T07:29:29.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T07:32:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T08:24:52.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="85"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T06:36:44.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T06:56:53.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T07:16:21.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T07:33:10.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="86"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T07:51:10.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T08:13:02.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T08:17:30.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T08:24:51.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="87"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T08:39:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T08:56:25.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T09:02:15.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T09:46:03.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="88"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T09:49:40.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T10:02:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T10:25:38.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T10:53:52.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="89"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T10:24:18.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T11:08:05.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T11:21:20.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T11:34:48.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="90"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T11:23:48.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T12:17:46.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T12:39:13.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T12:49:43.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-12T13:05:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereConRiserva"/>
+          <date key="time:timestamp" value="2011-11-12T13:07:47.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T13:20:21.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T13:23:36.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="91"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T12:36:57.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T12:50:42.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T13:08:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T13:24:28.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="92"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T13:29:46.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T13:51:21.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T14:01:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T14:01:58.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="93"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T14:23:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T14:34:19.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T14:37:56.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T15:30:06.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="94"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T15:23:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T16:09:26.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T16:19:35.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T16:31:30.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="95"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T16:47:35.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T17:05:28.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T17:31:33.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T17:46:05.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="96"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T17:29:03.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T18:15:22.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T18:34:50.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T18:53:52.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-12T18:59:43.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParereNegativo"/>
+          <date key="time:timestamp" value="2011-11-12T19:44:30.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T20:04:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T20:15:06.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="97"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T18:43:24.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T18:57:36.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T19:21:30.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="Parere"/>
+          <date key="time:timestamp" value="2011-11-12T19:50:34.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-12T20:09:46.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="ParerePositivo"/>
+          <date key="time:timestamp" value="2011-11-12T20:12:26.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T20:26:51.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RilascioAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T21:01:05.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="98"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T19:30:13.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T20:08:59.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T20:16:39.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="NegaAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T20:29:21.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="99"/>
+		<string key="description" value="PaperOne"/>
+                
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T20:43:28.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="AvvioProcedimento"/>
+          <date key="time:timestamp" value="2011-11-12T20:55:23.000+01:00"/>
+        </event>
+        
+        <event>
+          
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="start"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T21:13:22.000+01:00"/>
+          </event>
+        <event>
+          <string key="org:resource" value="Guancio"/>
+          <string key="lifecycle:transition" value="complete"/>
+          <string key="concept:name" value="RinnovoAutorizzazione"/>
+          <date key="time:timestamp" value="2011-11-12T21:49:49.000+01:00"/>
+        </event>
+        
+        </trace>
+
+
+        </log>
+          
