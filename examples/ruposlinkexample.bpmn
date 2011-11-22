@@ -21,10 +21,6 @@
       <bpmn2:incoming>SequenceFlow_36</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_32</bpmn2:outgoing>
     </bpmn2:task>
-    <bpmn2:task id="Task_6" name="RilascioAutorizzazione">
-      <bpmn2:incoming>SequenceFlow_20</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_30</bpmn2:outgoing>
-    </bpmn2:task>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_5" name="GW5" gatewayDirection="Mixed">
       <bpmn2:incoming>SequenceFlow_28</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_30</bpmn2:incoming>
@@ -34,10 +30,6 @@
     <bpmn2:endEvent id="EndEvent_1" name="End">
       <bpmn2:incoming>SequenceFlow_34</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:task id="Task_8" name="NegaAutorizzazione">
-      <bpmn2:incoming>SequenceFlow_26</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
-    </bpmn2:task>
     <bpmn2:task id="Task_3" name="ParereConRiserva">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_18</bpmn2:outgoing>
@@ -83,11 +75,19 @@
     <bpmn2:sequenceFlow id="SequenceFlow_22" name="" sourceRef="Task_5" targetRef="ExclusiveGateway_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_24" name="" sourceRef="ExclusiveGateway_1" targetRef="ExclusiveGateway_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_26" name="" sourceRef="ExclusiveGateway_4" targetRef="Task_8"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="Task_8" targetRef="ExclusiveGateway_5"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_30" name="" sourceRef="Task_6" targetRef="ExclusiveGateway_5"/>
     <bpmn2:sequenceFlow id="SequenceFlow_32" name="" sourceRef="Task_7" targetRef="ExclusiveGateway_5"/>
     <bpmn2:sequenceFlow id="SequenceFlow_34" name="" sourceRef="ExclusiveGateway_5" targetRef="EndEvent_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_36" name="" sourceRef="ExclusiveGateway_1" targetRef="Task_7"/>
+    <bpmn2:task id="Task_8" name="NegaAutorizzazione">
+      <bpmn2:incoming>SequenceFlow_26</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="Task_8" targetRef="ExclusiveGateway_5"/>
+    <bpmn2:task id="Task_6" name="RilascioAutorizzazione">
+      <bpmn2:incoming>SequenceFlow_20</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_30</bpmn2:outgoing>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_30" name="" sourceRef="Task_6" targetRef="ExclusiveGateway_5"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_3NVuEQooEeG5MqCfy0yMNA">
     <bpmndi:BPMNPlane id="_3NVuEgooEeG5MqCfy0yMNA" bpmnElement="Process_1">
@@ -119,7 +119,7 @@
         <dc:Bounds height="50.0" width="110.0" x="860.0" y="21.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Task_8" bpmnElement="Task_8">
-        <dc:Bounds height="50.0" width="110.0" x="860.0" y="300.0"/>
+        <dc:Bounds height="50.0" width="110.0" x="860.0" y="301.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_2" bpmnElement="ExclusiveGateway_1">
         <dc:Bounds height="65.0" width="50.0" x="250.0" y="143.0"/>
@@ -194,10 +194,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" bpmnElement="SequenceFlow_26" sourceElement="BPMNShape_ExclusiveGateway_5" targetElement="BPMNShape_Task_8">
         <di:waypoint xsi:type="dc:Point" x="791.0" y="325.0"/>
-        <di:waypoint xsi:type="dc:Point" x="860.0" y="325.0"/>
+        <di:waypoint xsi:type="dc:Point" x="860.0" y="326.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_14" bpmnElement="SequenceFlow_28" sourceElement="BPMNShape_Task_8" targetElement="BPMNShape_ExclusiveGateway_6">
-        <di:waypoint xsi:type="dc:Point" x="970.0" y="325.0"/>
+        <di:waypoint xsi:type="dc:Point" x="970.0" y="326.0"/>
         <di:waypoint xsi:type="dc:Point" x="1064.0" y="324.0"/>
         <di:waypoint xsi:type="dc:Point" x="1065.0" y="194.0"/>
       </bpmndi:BPMNEdge>
