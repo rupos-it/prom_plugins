@@ -101,6 +101,9 @@ public class UIMain {
         PluginDescriptor importLogToFind = null;
 		final PluginDescriptor importLog = importLogToFind;
 
+		pyi.exec("class PlClass():\n  pass\n");
+		pyi.exec("plugins = PlClass()\n");
+		
 		for (PluginDescriptor plugin : globalContext.getPluginManager().getAllPlugins()) {
 			if ("Open XES Log File".equals(plugin.getName())) {
 			}
@@ -135,6 +138,8 @@ public class UIMain {
 			System.out.println(pluginName);
 			
 			pyi.exec(code);
+			
+			pyi.exec("plugins." + pluginName + " = " + pluginName + "\n");
 			importLogToFind = plugin;
 		}
 
