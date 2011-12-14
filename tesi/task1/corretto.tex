@@ -1,0 +1,14 @@
+\documentclass {report}
+\begin {document}
+
+                        ANALISI DI CONFORMANCE DI UN PROCESSO CON UN SOLO TASK
+
+
+In questa esecuzione si può vedere come la creazione ci sia in  tutte le istanze di processo, ma in una c'è uno skip subito dopo.
+Quindi i processi in cui si verifica l'assegnazione sono 2.
+Nel blocco successivo la rete presenta alcuni cicli, per cui l'indicatore sugli archi non corrisponde esattamente al numero delle istanze di processo in cui ciascun arco è stato attraversato. Per esempio, in 2 casi viene attivata la transizione start, e in 1 altro caso avviene la revoke. Non si tratta, però, di 3 differenti istanze di processo: nella piazza del preset di start (assigned), infatti, i processi rimanenti sono solo 2. Evidentemente, uno dei due è dapprima passato per una revoke e per una reassign, dopodichè è tornato in assigned e iniziato la sua esecuzione.
+Una situazione analoga si presenta nella piazza del postset di start (running): uno dei due processi va in pausa ne viene ripresa l'esecuzione, poi avviene lo skip (evento che avviene anche per l'altro processo, ecco spiegato il motivo di "2" sull'arco da running alla transizione invisibile).
+Va da sè che nessuno dei 3 processi viene portato a completamento.
+Non ci sono missing token, nè remaining token nelle piazze: l'esecuzione risulta corretta.
+
+\end{document}
