@@ -9,9 +9,9 @@ javascrips/conformance.html
 bindist
 prom5_log_files
 
-PetriNetReplayAnalysis/dist/
+PetriNetReplayAnalysis
 
-BPMNMeasures/dist/
+BPMNMeasures
 
 examples
 cover-xml
