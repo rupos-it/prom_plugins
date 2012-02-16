@@ -17,6 +17,7 @@ for directory in $DIR
 do 
   echo "$directory"
   mkdir prom61_origin/$directory/stdlib
+  mkdir prom61_origin/$directory/doc
   rm prom61_origin/$directory/images
   ln -s ../../../$directory1/images prom61_origin/$directory/stdlib/images
   for file in "$directory1"*.*

@@ -12,15 +12,40 @@ mkdir PetriNetReplayAnalysis/stdlib
 ln -s ../../$directory/images BPMNMeasures/stdlib/images
 ln -s ../../$directory/images PetriNetReplayAnalysis/stdlib/images
  
-ln -s ../../prom61_origin/ProM/dist/ProM-Contexts.jar  BPMNMeasures/stdlib/ProM-Contexts.jar
- ln -s ../../prom61_origin/ProM/dist/ProM-Framework.jar  BPMNMeasures/stdlib/ProM-Framework.jar
-  ln -s ../../prom61_origin/ProM/dist/ProM-Models.jar  BPMNMeasures/stdlib/ProM-Models.jar
-  ln -s ../../prom61_origin/ProM/dist/ProM-Plugins.jar  BPMNMeasures/stdlib/ProM-Plugins.jar
+
+#link petrinetanalysis stdlib/prom and packagelib
 
 ln -s ../../prom61_origin/ProM/dist/ProM-Contexts.jar  PetriNetReplayAnalysis/stdlib/ProM-Contexts.jar
  ln -s ../../prom61_origin/ProM/dist/ProM-Framework.jar  PetriNetReplayAnalysis/stdlib/ProM-Framework.jar
   ln -s ../../prom61_origin/ProM/dist/ProM-Models.jar  PetriNetReplayAnalysis/stdlib/ProM-Models.jar
   ln -s ../../prom61_origin/ProM/dist/ProM-Plugins.jar  PetriNetReplayAnalysis/stdlib/ProM-Plugins.jar
+mkdir PetriNetReplayAnalysis/packagelib
+ln -s ../../prom61_origin/Log/dist/Log.jar  PetriNetReplayAnalysis/packagelib/Log.jar
+ln -s ../../prom61_origin/PetriNets/dist/PetriNets.jar  PetriNetReplayAnalysis/packagelib/PetriNets.jar
+ln -s ../../prom61_origin/InteractiveVisualization/dist/InteractiveVisualization.jar  PetriNetReplayAnalysis/packagelib/InteractiveVisualization.jar
+
+ln -s ../../prom61_origin/LogDialog/dist/LogDialog.jar  PetriNetReplayAnalysis/packagelib/LogDialog.jar
+ln -s ../../prom61_origin/LogMerge/dist/LogMerge.jar  PetriNetReplayAnalysis/packagelib/LogMerge.jar
+ln -s ../../prom61_origin/PetriNetReplayer/dist/PetriNetReplayer.jar  PetriNetReplayAnalysis/packagelib/PetriNetReplayer.jar
+
+#link bmpnmeasures stdlib/prom and packagelib
+
+ln -s ../../prom61_origin/ProM/dist/ProM-Contexts.jar  BPMNMeasures/stdlib/ProM-Contexts.jar
+ ln -s ../../prom61_origin/ProM/dist/ProM-Framework.jar  BPMNMeasures/stdlib/ProM-Framework.jar
+  ln -s ../../prom61_origin/ProM/dist/ProM-Models.jar  BPMNMeasures/stdlib/ProM-Models.jar
+  ln -s ../../prom61_origin/ProM/dist/ProM-Plugins.jar  BPMNMeasures/stdlib/ProM-Plugins.jar
+mkdir BPMNMeasures/packagelib
+
+ ln -s ../../prom61_origin/Log/dist/Log.jar  BPMNMeasures/packagelib/Log.jar
+ln -s ../../prom61_origin/PetriNets/dist/PetriNets.jar  BPMNMeasures/packagelib/PetriNets.jar
+ln -s ../../prom61_origin/InteractiveVisualization/dist/InteractiveVisualization.jar  BPMNMeasures/packagelib/InteractiveVisualization.jar
+
+ln -s ../../prom61_origin/LogDialog/dist/LogDialog.jar  BPMNMeasures/packagelib/LogDialog.jar
+ln -s ../../prom61_origin/LogMerge/dist/LogMerge.jar  BPMNMeasures/packagelib/LogMerge.jar
+ln -s ../../prom61_origin/PetriNetReplayer/dist/PetriNetReplayer.jar  BPMNMeasures/packagelib/PetriNetReplayer.jar
+ln -s ../../prom61_origin/BPMN/dist/BPMN.jar  BPMNMeasures/packagelib/BPMN.jar
+ln -s ../../PetriNetReplayAnalysis/dist/PetriNetReplayAnalysis.jar  BPMNMeasures/packagelib/PetriNetReplayAnalysis.jar
+
 
 for file in "$directory"*.*
 do 
