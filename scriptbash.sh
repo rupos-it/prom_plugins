@@ -9,9 +9,13 @@ directory3=PetriNetReplayAnalysis
 
 mkdir BPMNMeasures/stdlib
 mkdir PetriNetReplayAnalysis/stdlib
+mkdir PetriNetReplayAnalysis/lib
+ln -s ../../prom61_origin/CostBasedAnalysis/tests/libs-external/  BPMNMeasures/tests/libs-external
+
+ln -s ../../prom61_origin/CostBasedAnalysis/tests/libs-external/  PetriNetReplayAnalysis/tests/libs-external
+ 
 ln -s ../../$directory/images BPMNMeasures/stdlib/images
 ln -s ../../$directory/images PetriNetReplayAnalysis/stdlib/images
- 
 
 #link petrinetanalysis stdlib/prom and packagelib
 
