@@ -126,69 +126,172 @@ public class BPMNtoPN {
 		for (Activity c : bpmn.getActivities()) {
 			String id = c.getLabel();
 
-			//mio task
-			//costanti
-			final String crt="create", ass="assign", rvk="revoke", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", skd="skipped";
-			final String A="alfa", B="beta", G="gamma", D="delta", S="sigma", L="lambda", E="epsilon";
-			final String ctd="created", asd="assigned", rvg="revoking", rvd="revoked", run="running", spd="suspended", skg="skipping"; 
-			
-			int i;
-			Map<String , Transition> t = new HashMap<String, Transition>();
-			String[] visible = { crt, ass, rvk, rea, st, pau, rsm, cpl, skd };
-			final int n_vs = visible.length;
-			for (i=0; i < n_vs; i++) {
-				String trsName = id + "+" + visible[i];
-				Transition trs = net.addTransition(trsName,this.subNet);
-				trs.setInvisible(false);
-				t.put(visible[i], trs);
-			}
+/*			String[] visible = { crt, ass, rvk, rea, pau, rsm, skd, st, cpl };
 			String[] invisible = { A, B, G, D, S, L, E };
+			String[] places = { ctd, asd, rvg, rvd, run, spd, skg };
+
+			Map <String, Integer> set = new HashMap<String, Integer>(); 
+			set.put(crt, 0);
+			set.put(ass, 1);
+			set.put(rvk, 1);
+			set.put(rea, 1);
+			set.put(pau, 2);
+			set.put(rsm, 2);
+			set.put(skd, 3);
+			set.put(A, 3);
+			set.put(B, 1);
+			set.put(B, 3);			
+			set.put(G, 1);
+			set.put(D, 1);
+			set.put(D, 3);			
+			set.put(S, 1);
+			set.put(E, 3);
+			set.put(L, 2);
+			set.put(L, 3);
+			set.put(ctd, 0);
+			set.put(asd, 1);
+			set.put(rvg, 1);
+			set.put(rvd, 1);
+			set.put(spd, 2);
+			set.put(skg, 3);
+*/
+			/*			final int n_vs = visible.length;
+			for (i=0; i < n_vs; i++) {
+				if(visible[i].equals(st) || visible[i].equals(cpl) || selected[set.get(visible[i])]) {
+					String trsName = id + "+" + visible[i];
+					Transition trs = net.addTransition(trsName,this.subNet);
+					trs.setInvisible(false);
+					t.put(visible[i], trs);
+				}
+			}
+
 			final int n_inv = invisible.length;
 			while (i < n_vs + n_inv) {
-				String trsName = id + "+" + invisible[i-n_vs];
-				Transition trs = net.addTransition(trsName,this.subNet);
-				trs.setInvisible(true);
-				t.put(invisible[i-n_vs], trs);
+				if(selected[set.get(invisible[i-n_vs])]) {
+					String trsName = id + "+" + invisible[i-n_vs];
+					Transition trs = net.addTransition(trsName,this.subNet);
+					trs.setInvisible(true);
+					t.put(invisible[i-n_vs], trs);
+				}
 				i++;
 			}
 			
 			Map<String, Place> p = new HashMap<String, Place>();
-			String[] places = { ctd, asd, rvg, rvd, run, spd, skg };
 			final int n_pl = places.length;
 			for (i=0; i<n_pl; i++) {
-				String placeName = id + "+" + places[i];
-				p.put(places[i], net.addPlace(placeName, this.subNet));
+				if(places[i].equals(run) || selected[set.get(places[i])]) {
+					String placeName = id + "+" + places[i];
+					p.put(places[i], net.addPlace(placeName, this.subNet));
+				}
 			}
-				
-			net.addArc (t.get(crt), p.get(ctd));
-			net.addArc (p.get(ctd), t.get(ass));
-			net.addArc (p.get(ctd), t.get(A));
-			net.addArc (t.get(A), p.get(skg));
-			net.addArc (t.get(ass), p.get(asd));
-			net.addArc (p.get(asd), t.get(B));
-			net.addArc (t.get(B), p.get(skg));
-			net.addArc (p.get(asd), t.get(G));
-			net.addArc (t.get(G), p.get(rvg));
-			net.addArc (p.get(rvg), t.get(rvk));
-			net.addArc (t.get(rvk), p.get(rvd));
-			net.addArc (p.get(rvd), t.get(D));
-			net.addArc (t.get(D), p.get(skg));
-			net.addArc (p.get(rvd), t.get(rea));
-			net.addArc (t.get(rea), p.get(asd));
-			net.addArc (p.get(asd), t.get(st));
+	*/		
+			//mio task
+
+			boolean selected[] = new boolean[4];
+			selected[0] = false;			// create
+			selected[1] = true;			// assign
+			selected[2] = true;			// pause
+			selected[3] = false;			// skip 
+
+			Map<String , Transition> t = new HashMap<String, Transition>();
+			Map<String, Place> p = new HashMap<String, Place>();
+
+			//costanti
+			final String crt="create", ass="assign", rvk="revoke", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", skd="skipped";
+			final String A="alfa", B="beta", G="gamma", D="delta", S="sigma", L="lambda", E="epsilon";
+			final String ctd="created", asd="assigned", rvg="revoking", rvd="revoked", run="running", spd="suspended", skg="skipping";
+
+			//aggiungo transizioni e piazze alle hashmap
+			insertTransition(net,id,st,t,false);
+			insertPlace(net,id,run,p);
+			insertTransition(net,id,cpl,t,false);
+			if(selected[0]) {
+				insertTransition(net, id, crt, t, false);
+				insertPlace(net,id,ctd,p);
+			}
+			if(selected[1]) {
+				insertTransition(net,id,ass,t,false);
+				insertPlace(net,id,asd,p);
+				insertTransition(net,id,G,t,true);
+				insertPlace(net,id,rvg,p);
+				insertTransition(net,id,rvk,t,false);
+				insertPlace(net,id,rvd,p);
+				insertTransition(net,id,rea,t,false);
+				insertTransition(net,id,S,t,true);
+			}
+			if(selected[1] && selected[3]) {
+				insertTransition(net,id,B,t,true);
+				insertTransition(net,id,D,t,true);				
+			}
+			if(selected[2]) {
+				insertTransition(net,id,pau,t,false);
+				insertPlace(net,id,spd,p);
+				insertTransition(net,id,rsm,t,false);				
+			}
+			if(selected[2] && selected[3])
+				insertTransition(net,id,L,t,true);
+			if(selected[3]) {
+				insertTransition(net,id,A,t,true);
+				insertTransition(net,id,E,t,true);								
+				insertPlace(net,id,skg,p);
+				insertTransition(net,id,skd,t,false);				
+			}
+			
+			
+			//archi
 			net.addArc (t.get(st), p.get(run));
-			net.addArc (p.get(run), t.get(E));
-			net.addArc (t.get(E), p.get(skg));
-			net.addArc (p.get(run), t.get(pau));
-			net.addArc (t.get(pau), p.get(spd));
-			net.addArc (p.get(spd), t.get(S));
-			net.addArc (t.get(S), p.get(rvg));			
-			net.addArc (p.get(spd), t.get(L));
-			net.addArc (t.get(L), p.get(skg));
-			net.addArc (p.get(spd), t.get(rsm));
-			net.addArc (t.get(rsm), p.get(run));
 			net.addArc (p.get(run), t.get(cpl));
-			net.addArc (p.get(skg), t.get(skd));
+			if(selected[0]) {
+				net.addArc (t.get(crt), p.get(ctd));
+				if(selected[2])
+					net.addArc (p.get(ctd), t.get(ass));
+				else
+					net.addArc (p.get(ctd), t.get(st));
+				if(selected[3])
+					net.addArc (p.get(ctd), t.get(A));
+			}
+			if(selected[1]) {
+				net.addArc (t.get(ass), p.get(asd));
+				net.addArc (p.get(asd), t.get(G));
+				net.addArc (t.get(G), p.get(rvg));
+				net.addArc (t.get(S), p.get(rvg));
+				net.addArc (p.get(rvg), t.get(rvk));
+				net.addArc (t.get(rvk), p.get(rvd));
+				net.addArc (p.get(rvd), t.get(rea));
+				net.addArc (t.get(rea), p.get(asd));
+				net.addArc (p.get(asd), t.get(st));
+				if(selected[3]) {				
+					net.addArc (p.get(asd), t.get(B));
+					net.addArc (t.get(B), p.get(skg));
+					net.addArc (p.get(rvd), t.get(D));
+					net.addArc (t.get(D), p.get(skg));
+				}
+			}
+			if(selected[3]) {
+				net.addArc (t.get(A), p.get(skg));
+				net.addArc (p.get(run), t.get(E));
+				net.addArc (t.get(E), p.get(skg));
+			}
+			if(selected[2]) {
+				net.addArc (p.get(run), t.get(pau));
+				net.addArc (t.get(pau), p.get(spd));
+				net.addArc (p.get(spd), t.get(rsm));
+				net.addArc (t.get(rsm), p.get(run));
+				if(selected[1])
+					net.addArc (p.get(spd), t.get(S));
+				if(selected[3]) {
+					net.addArc (p.get(spd), t.get(L));
+					net.addArc (t.get(L), p.get(skg));
+				}
+				if (selected[1])
+					net.addArc (t.get(S), p.get(rvg));			
+			}
+			else if(selected[1])
+				net.addArc (p.get(run), t.get(S));
+			if(selected[3])
+				net.addArc (p.get(skg), t.get(skd));
+
+			
 			//fine mio task
 			
 			
@@ -198,20 +301,58 @@ public class BPMNtoPN {
 			Transition t1 = net.addTransition(id + "+complete", this.subNet);
 			net.addArc(p, t1, 1, this.subNet);
 */
+				/*net.addArc (t.get(crt), p.get(ctd));
+					net.addArc (p.get(ctd), t.get(ass));
+					net.addArc (p.get(ctd), t.get(st));
+					net.addArc (p.get(ctd), t.get(A));
+					net.addArc (t.get(A), p.get(skg));
+				net.addArc (t.get(ass), p.get(asd));
+				net.addArc (p.get(asd), t.get(G));
+				net.addArc (t.get(G), p.get(rvg));
+				net.addArc (p.get(rvg), t.get(rvk));
+				net.addArc (t.get(rvk), p.get(rvd));
+				net.addArc (p.get(rvd), t.get(rea));
+				net.addArc (t.get(rea), p.get(asd));
+				net.addArc (p.get(asd), t.get(st));
+					net.addArc (p.get(asd), t.get(B));
+					net.addArc (t.get(B), p.get(skg));
+					net.addArc (p.get(rvd), t.get(D));
+					net.addArc (t.get(D), p.get(skg));
+			net.addArc (t.get(st), p.get(run));
+				net.addArc (p.get(run), t.get(E));
+				net.addArc (t.get(E), p.get(skg));
+				net.addArc (p.get(run), t.get(pau));
+				net.addArc (t.get(pau), p.get(spd));
+				net.addArc (p.get(spd), t.get(S));
+				net.addArc (p.get(spd), t.get(rsm));
+				net.addArc (t.get(rsm), p.get(run));
+					net.addArc (p.get(spd), t.get(L));
+					net.addArc (t.get(L), p.get(skg));
+					net.addArc (t.get(S), p.get(rvg));			
+			net.addArc (p.get(run), t.get(cpl));
+				net.addArc (p.get(skg), t.get(skd));
+*/
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
 					.getGraph().getInEdges(c)) {
 				if(s instanceof Flow)	{
 
 					Place pst = flowMap.get(s);
+					if(selected[0])
+						net.addArc(pst, t.get(crt), 1, this.subNet);
+					else {
+						if(selected[1])
+							net.addArc(pst, t.get(ass), 1, this.subNet);
+						else
+							net.addArc(pst, t.get(st), 1, this.subNet);
+						if(selected[3])
+							net.addArc(pst, t.get(A), 1, this.subNet);						
+						}
+					}
 
-					net.addArc(pst, t.get(crt), 1, this.subNet);
 				}
-
-			}
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
 					.getGraph().getOutEdges(c)) {
 				if(s instanceof Flow){
-
 
 					Place pst = flowMap.get(s);
 
@@ -219,12 +360,25 @@ public class BPMNtoPN {
 					net.addArc(t.get(cpl), pst, 1, this.subNet);
 
 					// skipped -> p_end
-					net.addArc(t.get(skd), pst, 1, this.subNet);
+					if(selected[3])
+						net.addArc(t.get(skd), pst, 1, this.subNet);
 				}
 			}
 
 		}
 
+	}
+
+	private void insertTransition(PetrinetGraph net, String id, String s, Map<String, Transition> t, boolean vs) {
+		String trsName = id + "+" + s;
+		Transition trs = net.addTransition(trsName);
+		trs.setInvisible(vs);
+		t.put(s, trs);
+	}
+
+	private void insertPlace(PetrinetGraph net, String id, String s, Map<String, Place> p) {
+		String placeName = id + "+" + s;
+		p.put(s, net.addPlace(placeName));
 	}
 
 	private void translateGateway(BPMNDiagram bpmn,	LinkedHashMap<Flow, Place> flowMap, PetrinetGraph net) {
@@ -565,6 +719,9 @@ public class BPMNtoPN {
 	}
 
 	private Collection<String> isWellFormed(BPMNDiagram bpmn){
+		if (true)
+			return new Vector<String>();
+		
 		Collection<String> maperror = new Vector<String>();
 		//  Elementi BPMN che non possono essere mappati:
 		//  Event-Start  End != NONE
