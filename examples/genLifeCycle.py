@@ -1,16 +1,26 @@
 #!/usr/bin/python
 
-from generator import Sequence, Choice, Entry
+from generator import Sequence, Choice, Entry, Empty, Recursion
 from generator import generate
 from generator import defaultActivityHook
 
-def task2_hook(startTime, attrs):
-    t0 = defaultActivityHook(startTime, attrs)
-    t0 += 15*60
-    return t0
+#def task2_hook(startTime, attrs):
+#    t0 = defaultActivityHook(startTime, attrs)
+#    t0 += 15*60
+#    return t0
 
 process = Sequence([
-	Entry("secondotask"),
-	Entry("task1", task2_hook)
+    Choice([
+	    Entry("Notify"),
+        Empty()
+    ]),
+    Recursion(
+        Sequence([
+        	Entry("Fix"),
+        	Entry("Check")
+        ])
+    ),
+    Entry("Closed")
 	])
-generate(process, 100)
+
+generate(process, 1)

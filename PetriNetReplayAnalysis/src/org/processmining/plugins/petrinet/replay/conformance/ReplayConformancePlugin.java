@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 
 
@@ -285,8 +286,8 @@ public class ReplayConformancePlugin {
 		suggestActions(setting, log, net);
 		ReplayAnalysisUI ui = new ReplayAnalysisUI(setting);
 		//context.showWizard("Configure Conformance Settings", true, false, ui.initComponents());
-		
-        
+
+
 		//Build and show the UI to make the mapping
 		LogPetrinetConnectionFactoryUI lpcfui = new LogPetrinetConnectionFactoryUI(log, net);
 		//InteractionResult result = context.showWizard("Mapping Petrinet - Log", false, true,  lpcfui.initComponents());
@@ -303,6 +304,7 @@ public class ReplayConformancePlugin {
 		 */
 		JComponent mapping = lpcfui.initComponents();
 		JComponent config = ui.initComponents();
+
 		result = context.showWizard("Mapping Petrinet - Log", true, false, mapping );
 		while (sem) {
 			
@@ -349,7 +351,7 @@ public class ReplayConformancePlugin {
 			context.log("Petri net lacks initial marking");
 			return null;
 		}
-       
+
 		TotalConformanceResult totalResult = getConformanceDetails(context, log, net,marking, setting,map);
 
 

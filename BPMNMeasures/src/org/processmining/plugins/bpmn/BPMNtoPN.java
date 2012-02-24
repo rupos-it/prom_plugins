@@ -1,9 +1,12 @@
 package org.processmining.plugins.bpmn;
 
+import java.awt.GridLayout;
+import java.awt.Component;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,21 +14,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 
 
+import org.deckfour.uitopia.api.event.TaskListener.InteractionResult;
+import org.deckfour.xes.classification.XEventClass;
+import org.deckfour.xes.classification.XEventClassifier;
+import org.deckfour.xes.info.XLogInfo;
+import org.deckfour.xes.info.XLogInfoFactory;
+import org.deckfour.xes.info.impl.XLogInfoImpl;
 import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.AttributeMap.SerializablePoint2D;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
 
 import org.processmining.framework.connections.ConnectionCannotBeObtained;
 import org.processmining.framework.plugin.PluginContext;
+import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginVariant;
+import org.processmining.framework.util.ArrayUtils;
 import org.processmining.models.connections.GraphLayoutConnection;
 import org.processmining.models.connections.petrinets.behavioral.InitialMarkingConnection;
 import org.processmining.models.graphbased.AttributeMap;
+import org.processmining.framework.plugin.events.Logger.MessageLevel;
 
 import org.processmining.models.graphbased.directed.AbstractDirectedGraphEdge;
 import org.processmining.models.graphbased.directed.AbstractDirectedGraphNode;
@@ -54,7 +70,9 @@ import org.processmining.models.jgraph.ProMJGraph;
 import org.processmining.models.jgraph.ProMJGraphVisualizer;
 import org.processmining.models.jgraph.elements.ProMGraphPort;
 import org.processmining.models.semantics.petrinet.Marking;
+import org.processmining.plugins.connectionfactories.logpetrinet.LogPetrinetConnectionFactoryUI;
 
+import com.fluxicon.slickerbox.factory.SlickerFactory;
 import com.jgraph.layout.JGraphFacade;
 import com.jgraph.layout.hierarchical.JGraphHierarchicalLayout;
 
@@ -69,7 +87,7 @@ public class BPMNtoPN {
 			returnTypes = { Petrinet.class, Marking.class, String.class},userAccessible = true)
 	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "GOS", email = "Di.unipi", pack = "BPMN")
 	@PluginVariant(requiredParameterLabels = {0}, variantLabel = "Trasform BPMN to PN")
-	public Object BPMN2PN(PluginContext c ,BPMNDiagram bpmn) {
+	public Object BPMN2PN(UIPluginContext c ,BPMNDiagram bpmn) {
 		Collection<String> error = this.isWellFormed(bpmn);
 
 
@@ -81,7 +99,7 @@ public class BPMNtoPN {
 		Marking marking = new Marking();
 
 
-		//gli argchi del diagramma BPMN diventano piazze della rete BPMN
+		//gli argchi del diagramma BPMN diventano piazze della rete di Petri
 		for (Flow g : bpmn.getFlows()) {
 			String f = g.getSource().getLabel();
 			String z = g.getTarget().getLabel();
@@ -93,7 +111,62 @@ public class BPMNtoPN {
 
 		}
 
-		translateTask(bpmn, flowMap, net);
+		Object[] objects = new Object[3];
+		objects[0]=objects[1]=objects[2]=null;
+		
+		//tabella dei lifecycle selezionati per ogni task
+		Map<Activity, boolean[]> tab = new HashMap<Activity, boolean[]>();
+		
+//		if(c instanceof UIPluginContext) {
+			SlickerFactory factory = SlickerFactory.instance();
+
+			JPanel panel = new JPanel();
+			
+			// tabella delle checkbox
+			Map<String, JCheckBox> boxes = new HashMap <String, JCheckBox>();
+			final String[] cycles = { "creation", "assignment", "pause and resume", "skip" };
+			final int n_cycles = cycles.length;
+			
+			GridLayout experimentLayout = new GridLayout(0, 1);
+			panel.setLayout(experimentLayout);
+
+			for (Activity act : bpmn.getActivities()) {
+
+				String task = act.getLabel();
+				panel.add(factory.createLabel(task + ":"));
+
+				for (String cy : cycles) {
+					boxes.put(task + "+" + cy, factory.createCheckBox(cy, false));
+					panel.add(boxes.get(task + "+" + cy));
+				}
+			}
+
+			InteractionResult result = c.showWizard("Select task lifecycle", true, true, panel);
+
+			switch (result) {
+			
+			case FINISHED :
+				for (Activity act : bpmn.getActivities()) {
+
+					String task = act.getLabel();
+					boolean sel[] = new boolean[n_cycles];
+					
+					//crea l'array delle selezioni per il task act
+					for (int i=0; i<n_cycles; i++)
+						sel[i]=boxes.get(task + "+" + cycles[i]).isSelected();
+					
+					//mette in tabella l'array con il rispettivo task
+					tab.put(act, sel);
+				}
+				break;
+				
+			default :
+				return objects;
+			
+			}
+	//	}
+		
+		translateTask(bpmn, flowMap, net, tab);
 
 		translateGateway(bpmn, flowMap, net);
 
@@ -103,12 +176,8 @@ public class BPMNtoPN {
 
 		String errorLog = error.toString();
 
-		Object[] objects = new Object[3];
 		objects[0] = net;
 		objects[1] = marking;
-
-
-
 
 
 		c.addConnection(new BPMNtoPNConnection(bpmn, net, errorLog, flowMap.values()));
@@ -120,80 +189,18 @@ public class BPMNtoPN {
 		return objects;
 	}
 
+
 	private void translateTask(BPMNDiagram bpmn, LinkedHashMap<Flow,Place> flowMap,
-			PetrinetGraph net) {
+			PetrinetGraph net, Map<Activity, boolean[]> tab) {
 
 		for (Activity c : bpmn.getActivities()) {
 			String id = c.getLabel();
 
-/*			String[] visible = { crt, ass, rvk, rea, pau, rsm, skd, st, cpl };
-			String[] invisible = { A, B, G, D, S, L, E };
-			String[] places = { ctd, asd, rvg, rvd, run, spd, skg };
-
-			Map <String, Integer> set = new HashMap<String, Integer>(); 
-			set.put(crt, 0);
-			set.put(ass, 1);
-			set.put(rvk, 1);
-			set.put(rea, 1);
-			set.put(pau, 2);
-			set.put(rsm, 2);
-			set.put(skd, 3);
-			set.put(A, 3);
-			set.put(B, 1);
-			set.put(B, 3);			
-			set.put(G, 1);
-			set.put(D, 1);
-			set.put(D, 3);			
-			set.put(S, 1);
-			set.put(E, 3);
-			set.put(L, 2);
-			set.put(L, 3);
-			set.put(ctd, 0);
-			set.put(asd, 1);
-			set.put(rvg, 1);
-			set.put(rvd, 1);
-			set.put(spd, 2);
-			set.put(skg, 3);
-*/
-			/*			final int n_vs = visible.length;
-			for (i=0; i < n_vs; i++) {
-				if(visible[i].equals(st) || visible[i].equals(cpl) || selected[set.get(visible[i])]) {
-					String trsName = id + "+" + visible[i];
-					Transition trs = net.addTransition(trsName,this.subNet);
-					trs.setInvisible(false);
-					t.put(visible[i], trs);
-				}
-			}
-
-			final int n_inv = invisible.length;
-			while (i < n_vs + n_inv) {
-				if(selected[set.get(invisible[i-n_vs])]) {
-					String trsName = id + "+" + invisible[i-n_vs];
-					Transition trs = net.addTransition(trsName,this.subNet);
-					trs.setInvisible(true);
-					t.put(invisible[i-n_vs], trs);
-				}
-				i++;
-			}
-			
-			Map<String, Place> p = new HashMap<String, Place>();
-			final int n_pl = places.length;
-			for (i=0; i<n_pl; i++) {
-				if(places[i].equals(run) || selected[set.get(places[i])]) {
-					String placeName = id + "+" + places[i];
-					p.put(places[i], net.addPlace(placeName, this.subNet));
-				}
-			}
-	*/		
 			//mio task
 
-			boolean selected[] = new boolean[4];
-			selected[0] = false;			// create
-			selected[1] = true;			// assign
-			selected[2] = true;			// pause
-			selected[3] = false;			// skip 
+			boolean selected[] = tab.get(c);
 
-			Map<String , Transition> t = new HashMap<String, Transition>();
+			Map<String, Transition> t = new HashMap<String, Transition>();
 			Map<String, Place> p = new HashMap<String, Place>();
 
 			//costanti
@@ -218,18 +225,18 @@ public class BPMNtoPN {
 				insertPlace(net,id,rvd,p);
 				insertTransition(net,id,rea,t,false);
 				insertTransition(net,id,S,t,true);
-			}
-			if(selected[1] && selected[3]) {
-				insertTransition(net,id,B,t,true);
-				insertTransition(net,id,D,t,true);				
+				if(selected[3]) {
+					insertTransition(net,id,B,t,true);
+					insertTransition(net,id,D,t,true);				
+				}
 			}
 			if(selected[2]) {
 				insertTransition(net,id,pau,t,false);
 				insertPlace(net,id,spd,p);
 				insertTransition(net,id,rsm,t,false);				
+				if(selected[3])
+					insertTransition(net,id,L,t,true);
 			}
-			if(selected[2] && selected[3])
-				insertTransition(net,id,L,t,true);
 			if(selected[3]) {
 				insertTransition(net,id,A,t,true);
 				insertTransition(net,id,E,t,true);								
@@ -243,7 +250,7 @@ public class BPMNtoPN {
 			net.addArc (p.get(run), t.get(cpl));
 			if(selected[0]) {
 				net.addArc (t.get(crt), p.get(ctd));
-				if(selected[2])
+				if(selected[1])
 					net.addArc (p.get(ctd), t.get(ass));
 				else
 					net.addArc (p.get(ctd), t.get(st));
@@ -267,11 +274,6 @@ public class BPMNtoPN {
 					net.addArc (t.get(D), p.get(skg));
 				}
 			}
-			if(selected[3]) {
-				net.addArc (t.get(A), p.get(skg));
-				net.addArc (p.get(run), t.get(E));
-				net.addArc (t.get(E), p.get(skg));
-			}
 			if(selected[2]) {
 				net.addArc (p.get(run), t.get(pau));
 				net.addArc (t.get(pau), p.get(spd));
@@ -283,55 +285,18 @@ public class BPMNtoPN {
 					net.addArc (p.get(spd), t.get(L));
 					net.addArc (t.get(L), p.get(skg));
 				}
-				if (selected[1])
-					net.addArc (t.get(S), p.get(rvg));			
 			}
 			else if(selected[1])
 				net.addArc (p.get(run), t.get(S));
-			if(selected[3])
+			if(selected[3]) {
+				net.addArc (t.get(A), p.get(skg));
+				net.addArc (p.get(run), t.get(E));
+				net.addArc (t.get(E), p.get(skg));
 				net.addArc (p.get(skg), t.get(skd));
-
+			}
 			
 			//fine mio task
 			
-			
-			/*Transition t = net.addTransition(id + "+start", this.subNet);
-			Place p = net.addPlace(id + "+running", this.subNet);
-			net.addArc(t, p, 1, this.subNet);
-			Transition t1 = net.addTransition(id + "+complete", this.subNet);
-			net.addArc(p, t1, 1, this.subNet);
-*/
-				/*net.addArc (t.get(crt), p.get(ctd));
-					net.addArc (p.get(ctd), t.get(ass));
-					net.addArc (p.get(ctd), t.get(st));
-					net.addArc (p.get(ctd), t.get(A));
-					net.addArc (t.get(A), p.get(skg));
-				net.addArc (t.get(ass), p.get(asd));
-				net.addArc (p.get(asd), t.get(G));
-				net.addArc (t.get(G), p.get(rvg));
-				net.addArc (p.get(rvg), t.get(rvk));
-				net.addArc (t.get(rvk), p.get(rvd));
-				net.addArc (p.get(rvd), t.get(rea));
-				net.addArc (t.get(rea), p.get(asd));
-				net.addArc (p.get(asd), t.get(st));
-					net.addArc (p.get(asd), t.get(B));
-					net.addArc (t.get(B), p.get(skg));
-					net.addArc (p.get(rvd), t.get(D));
-					net.addArc (t.get(D), p.get(skg));
-			net.addArc (t.get(st), p.get(run));
-				net.addArc (p.get(run), t.get(E));
-				net.addArc (t.get(E), p.get(skg));
-				net.addArc (p.get(run), t.get(pau));
-				net.addArc (t.get(pau), p.get(spd));
-				net.addArc (p.get(spd), t.get(S));
-				net.addArc (p.get(spd), t.get(rsm));
-				net.addArc (t.get(rsm), p.get(run));
-					net.addArc (p.get(spd), t.get(L));
-					net.addArc (t.get(L), p.get(skg));
-					net.addArc (t.get(S), p.get(rvg));			
-			net.addArc (p.get(run), t.get(cpl));
-				net.addArc (p.get(skg), t.get(skd));
-*/
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
 					.getGraph().getInEdges(c)) {
 				if(s instanceof Flow)	{
@@ -366,7 +331,6 @@ public class BPMNtoPN {
 			}
 
 		}
-
 	}
 
 	private void insertTransition(PetrinetGraph net, String id, String s, Map<String, Transition> t, boolean vs) {

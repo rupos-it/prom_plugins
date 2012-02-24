@@ -41,6 +41,8 @@ class BaseWF(object):
         self.states["created"].transitions = [
             WFTransition("assign", "assigned"),
             WFTransition("skipped", "end"),
+#           genera log non conformi
+#            WFTransition("start", "running")
             ]
         self.states["assigned"].transitions = [
             WFTransition("start", "running"),
@@ -130,9 +132,10 @@ class Recursion:
     def gen(self, t, attrs):
         res = ""
         p = 0.5
-        max_rec = 2
+        max_rec = 3
+        min_rec = 1
         it = 1
-        while random.random() < p:
+        while random.random() < p or it <= min_rec:
             if max_rec is not None and it > max_rec:
                 break
             (res1, t) = self.e.gen(t, attrs)
