@@ -117,7 +117,6 @@ public class BPMNtoPN {
 		//tabella dei lifecycle selezionati per ogni task
 		Map<Activity, boolean[]> tab = new HashMap<Activity, boolean[]>();
 		
-//		if(c instanceof UIPluginContext) {
 			SlickerFactory factory = SlickerFactory.instance();
 
 			JPanel panel = new JPanel();
@@ -141,7 +140,7 @@ public class BPMNtoPN {
 				}
 			}
 
-			InteractionResult result = c.showWizard("Select task lifecycle", true, true, panel);
+			InteractionResult result = ((UIPluginContext)c).showWizard("Select task lifecycle", true, true, panel);
 
 			switch (result) {
 			
@@ -164,7 +163,6 @@ public class BPMNtoPN {
 				return objects;
 			
 			}
-	//	}
 		
 		translateTask(bpmn, flowMap, net, tab);
 
