@@ -42,7 +42,7 @@ class BaseWF(object):
             WFTransition("assign", "assigned"),
             WFTransition("skipped", "end"),
 #           genera log non conformi
-#            WFTransition("start", "running")
+            WFTransition("start", "running")
             ]
         self.states["assigned"].transitions = [
             WFTransition("start", "running"),
