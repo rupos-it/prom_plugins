@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-from generator import Sequence, Choice, Entry, Empty, Recursion
-from generator import generate
-from generator import defaultActivityHook
+from generatorBF import Sequence, Choice, Entry, Empty, Recursion
+from generatorBF import generate
+from generatorBF import defaultActivityHook
 
 #def task2_hook(startTime, attrs):
 #    t0 = defaultActivityHook(startTime, attrs)

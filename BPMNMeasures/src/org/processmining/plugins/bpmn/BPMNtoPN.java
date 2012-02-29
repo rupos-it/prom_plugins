@@ -194,8 +194,7 @@ public class BPMNtoPN {
 		for (Activity c : bpmn.getActivities()) {
 			String id = c.getLabel();
 
-			//mio task
-
+			//array delle checkbox
 			boolean selected[] = tab.get(c);
 
 			Map<String, Transition> t = new HashMap<String, Transition>();
@@ -206,6 +205,7 @@ public class BPMNtoPN {
 			final String A="alfa", B="beta", G="gamma", D="delta", S="sigma", L="lambda", E="epsilon";
 			final String ctd="created", asd="assigned", rvg="revoking", rvd="revoked", run="running", spd="suspended", skg="skipping";
 
+			
 			//aggiungo transizioni e piazze alle hashmap
 			insertTransition(net,id,st,t,false);
 			insertPlace(net,id,run,p);
@@ -293,8 +293,7 @@ public class BPMNtoPN {
 				net.addArc (p.get(skg), t.get(skd));
 			}
 			
-			//fine mio task
-			
+	
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
 					.getGraph().getInEdges(c)) {
 				if(s instanceof Flow)	{
