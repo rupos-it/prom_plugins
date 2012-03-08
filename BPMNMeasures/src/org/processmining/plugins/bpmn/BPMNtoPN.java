@@ -1,12 +1,11 @@
 package org.processmining.plugins.bpmn;
 
+import java.awt.event.*;
 import java.awt.GridLayout;
-import java.awt.Component;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,7 +14,6 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -23,11 +21,6 @@ import javax.swing.SwingConstants;
 
 
 import org.deckfour.uitopia.api.event.TaskListener.InteractionResult;
-import org.deckfour.xes.classification.XEventClass;
-import org.deckfour.xes.classification.XEventClassifier;
-import org.deckfour.xes.info.XLogInfo;
-import org.deckfour.xes.info.XLogInfoFactory;
-import org.deckfour.xes.info.impl.XLogInfoImpl;
 import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.AttributeMap.SerializablePoint2D;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -37,11 +30,9 @@ import org.processmining.framework.plugin.PluginContext;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginVariant;
-import org.processmining.framework.util.ArrayUtils;
 import org.processmining.models.connections.GraphLayoutConnection;
 import org.processmining.models.connections.petrinets.behavioral.InitialMarkingConnection;
 import org.processmining.models.graphbased.AttributeMap;
-import org.processmining.framework.plugin.events.Logger.MessageLevel;
 
 import org.processmining.models.graphbased.directed.AbstractDirectedGraphEdge;
 import org.processmining.models.graphbased.directed.AbstractDirectedGraphNode;
@@ -70,7 +61,6 @@ import org.processmining.models.jgraph.ProMJGraph;
 import org.processmining.models.jgraph.ProMJGraphVisualizer;
 import org.processmining.models.jgraph.elements.ProMGraphPort;
 import org.processmining.models.semantics.petrinet.Marking;
-import org.processmining.plugins.connectionfactories.logpetrinet.LogPetrinetConnectionFactoryUI;
 
 import com.fluxicon.slickerbox.factory.SlickerFactory;
 import com.jgraph.layout.JGraphFacade;
@@ -80,7 +70,8 @@ import com.jgraph.layout.hierarchical.JGraphHierarchicalLayout;
 public class BPMNtoPN {
 
 	private ExpandableSubNet subNet = null;
-
+	private BPMNDiagram BPMN;
+	
 	@Plugin(name = "BPMN to PetriNet",
 			parameterLabels = { "BPMNDiagram" },
 			returnLabels = {"Petri Net", "Marking",  "Error Log" },
@@ -88,6 +79,7 @@ public class BPMNtoPN {
 	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "GOS", email = "Di.unipi", pack = "BPMN")
 	@PluginVariant(requiredParameterLabels = {0}, variantLabel = "Trasform BPMN to PN")
 	public Object BPMN2PN(UIPluginContext c ,BPMNDiagram bpmn) {
+		BPMN = bpmn;
 		Collection<String> error = this.isWellFormed(bpmn);
 
 
@@ -115,53 +107,104 @@ public class BPMNtoPN {
 		objects[0]=objects[1]=objects[2]=null;
 		
 		//tabella dei lifecycle selezionati per ogni task
+		BPMN.getGraph();
+		
+		final Map<String, JCheckBox> boxes;
 		Map<Activity, boolean[]> tab = new HashMap<Activity, boolean[]>();
 		
-			SlickerFactory factory = SlickerFactory.instance();
+			final SlickerFactory factory = SlickerFactory.instance();
 
-			JPanel panel = new JPanel();
+			final JPanel panel = new JPanel();
 			
-			// tabella delle checkbox
-			Map<String, JCheckBox> boxes = new HashMap <String, JCheckBox>();
+			// tabella delle JCheckBox
+			boxes = new HashMap <String, JCheckBox>();
 			final String[] cycles = { "creation", "assignment", "pause and resume", "skip" };
 			final int n_cycles = cycles.length;
-			
+			boolean sel[] = new boolean[n_cycles];
+
 			GridLayout experimentLayout = new GridLayout(0, 1);
 			panel.setLayout(experimentLayout);
-
+			
+//			checkbox per ogni task
+			int tasks=0;
 			for (Activity act : bpmn.getActivities()) {
 
 				String task = act.getLabel();
 				panel.add(factory.createLabel(task + ":"));
 
 				for (String cy : cycles) {
-					boxes.put(task + "+" + cy, factory.createCheckBox(cy, false));
-					panel.add(boxes.get(task + "+" + cy));
+					JCheckBox ch = factory.createCheckBox(cy, false);
+					boxes.put(task + "+" + cy, ch);
+					panel.add(ch);
 				}
+				
+				tasks++;
 			}
 
-			InteractionResult result = ((UIPluginContext)c).showWizard("Select task lifecycle", true, true, panel);
-
-			switch (result) {
+			// checkbox per selezionare un sottoinsieme di lifecycle per tutti i task
+			if(tasks>1) {
+				panel.add(factory.createLabel("ALL:"));
 			
-			case FINISHED :
-				for (Activity act : bpmn.getActivities()) {
+				for (final String cy : cycles) {
+					final JCheckBox ch = factory.createCheckBox(cy + " ALL", false);
+					boxes.put(cy,ch);
+					panel.add(ch);
 
-					String task = act.getLabel();
-					boolean sel[] = new boolean[n_cycles];
-					
-					//crea l'array delle selezioni per il task act
-					for (int i=0; i<n_cycles; i++)
-						sel[i]=boxes.get(task + "+" + cycles[i]).isSelected();
-					
-					//mette in tabella l'array con il rispettivo task
-					tab.put(act, sel);
+//				gestore dell'evento sulla checkbox
+					ItemListener i = new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+
+							for (Activity act : BPMN.getActivities()) {
+								String task = act.getLabel();
+								boxes.get(task + "+" + cy).setSelected(ch.isSelected());
+							}
+						}
+
+					};
+
+					panel.add(ch);
+					ch.addItemListener(i);
 				}
-				break;
-				
-			default :
-				return objects;
+			}
 			
+			JComponent netBPMNView = ProMJGraphVisualizer.instance().visualizeGraph(c, BPMN.getGraph());
+					
+			InteractionResult result = ((UIPluginContext)c).showWizard(BPMN.getLabel(), true, false, netBPMNView);
+
+			boolean flag = true;
+			
+			while(flag) {
+
+				switch (result) {
+
+				case PREV:
+					result = ((UIPluginContext)c).showWizard(BPMN.getLabel(), true, false, netBPMNView);
+					break;
+
+				case NEXT:
+					result = ((UIPluginContext)c).showWizard("Select task lifecycle", false, true, panel);
+					break;
+
+				case FINISHED :
+					for (Activity act : bpmn.getActivities()) {
+
+						String task = act.getLabel();
+					
+						//crea l'array delle selezioni per il task act
+						for (int i=0; i<n_cycles; i++)
+							sel[i]=boxes.get(task + "+" + cycles[i]).isSelected();
+						
+						//mette in tabella l'array con il rispettivo task
+						tab.put(act, sel);
+					}
+					
+					flag = false;
+					break;
+					
+				default :
+					return objects;
+			
+				}
 			}
 		
 		translateTask(bpmn, flowMap, net, tab);
@@ -194,7 +237,7 @@ public class BPMNtoPN {
 		for (Activity c : bpmn.getActivities()) {
 			String id = c.getLabel();
 
-			//array delle checkbox
+			//array delle JCheckBox
 			boolean selected[] = tab.get(c);
 
 			Map<String, Transition> t = new HashMap<String, Transition>();

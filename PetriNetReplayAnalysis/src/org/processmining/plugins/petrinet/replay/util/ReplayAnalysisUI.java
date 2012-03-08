@@ -50,7 +50,7 @@ public class ReplayAnalysisUI extends JPanel {
 
 		ChangeListener changeListener = new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				
+
 				for (ReplayAction action : ReplayAction.values()) {
 					sliderMap.get(action).setVisible(checkBoxMap.get(action).isSelected());
 				}
