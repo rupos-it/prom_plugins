@@ -79,7 +79,7 @@ public class BPMNtoPN {
 	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "GOS", email = "Di.unipi", pack = "BPMN")
 	@PluginVariant(requiredParameterLabels = {0}, variantLabel = "Trasform BPMN to PN")
 	public Object BPMN2PN(UIPluginContext c ,BPMNDiagram bpmn) {
-		BPMN = bpmn;
+
 		Collection<String> error = this.isWellFormed(bpmn);
 
 
@@ -103,111 +103,7 @@ public class BPMNtoPN {
 
 		}
 
-		Object[] objects = new Object[3];
-		objects[0]=objects[1]=objects[2]=null;
-		
-		//tabella dei lifecycle selezionati per ogni task
-		BPMN.getGraph();
-		
-		final Map<String, JCheckBox> boxes;
-		Map<Activity, boolean[]> tab = new HashMap<Activity, boolean[]>();
-		
-			final SlickerFactory factory = SlickerFactory.instance();
-
-			final JPanel panel = new JPanel();
-			
-			// tabella delle JCheckBox
-			boxes = new HashMap <String, JCheckBox>();
-			final String[] cycles = { "creation", "assignment", "pause and resume", "skip" };
-			final int n_cycles = cycles.length;
-			boolean sel[] = new boolean[n_cycles];
-
-			GridLayout experimentLayout = new GridLayout(0, 1);
-			panel.setLayout(experimentLayout);
-			
-//			checkbox per ogni task
-			int tasks=0;
-			for (Activity act : bpmn.getActivities()) {
-
-				String task = act.getLabel();
-				panel.add(factory.createLabel(task + ":"));
-
-				for (String cy : cycles) {
-					JCheckBox ch = factory.createCheckBox(cy, false);
-					boxes.put(task + "+" + cy, ch);
-					panel.add(ch);
-				}
-				
-				tasks++;
-			}
-
-			// checkbox per selezionare un sottoinsieme di lifecycle per tutti i task
-			if(tasks>1) {
-				panel.add(factory.createLabel("ALL:"));
-			
-				for (final String cy : cycles) {
-					final JCheckBox ch = factory.createCheckBox(cy + " ALL", false);
-					boxes.put(cy,ch);
-					panel.add(ch);
-
-//				gestore dell'evento sulla checkbox
-					ItemListener i = new ItemListener() {
-						public void itemStateChanged(ItemEvent e) {
-
-							for (Activity act : BPMN.getActivities()) {
-								String task = act.getLabel();
-								boxes.get(task + "+" + cy).setSelected(ch.isSelected());
-							}
-						}
-
-					};
-
-					panel.add(ch);
-					ch.addItemListener(i);
-				}
-			}
-			
-			JComponent netBPMNView = ProMJGraphVisualizer.instance().visualizeGraph(c, BPMN.getGraph());
-					
-			InteractionResult result = ((UIPluginContext)c).showWizard(BPMN.getLabel(), true, false, netBPMNView);
-
-			boolean flag = true;
-			
-			while(flag) {
-
-				switch (result) {
-
-				case PREV:
-					result = ((UIPluginContext)c).showWizard(BPMN.getLabel(), true, false, netBPMNView);
-					break;
-
-				case NEXT:
-					result = ((UIPluginContext)c).showWizard("Select task lifecycle", false, true, panel);
-					break;
-
-				case FINISHED :
-					for (Activity act : bpmn.getActivities()) {
-
-						String task = act.getLabel();
-					
-						//crea l'array delle selezioni per il task act
-						for (int i=0; i<n_cycles; i++)
-							sel[i]=boxes.get(task + "+" + cycles[i]).isSelected();
-						
-						//mette in tabella l'array con il rispettivo task
-						tab.put(act, sel);
-					}
-					
-					flag = false;
-					break;
-					
-				default :
-					return objects;
-			
-				}
-			}
-		
-		translateTask(bpmn, flowMap, net, tab);
+		translateTask(bpmn, flowMap, net);
 
 		translateGateway(bpmn, flowMap, net);
 
@@ -217,9 +113,9 @@ public class BPMNtoPN {
 
 		String errorLog = error.toString();
 
+		Object[] objects = new Object[3];
 		objects[0] = net;
 		objects[1] = marking;
-
 
 		c.addConnection(new BPMNtoPNConnection(bpmn, net, errorLog, flowMap.values()));
 
@@ -232,160 +128,42 @@ public class BPMNtoPN {
 
 
 	private void translateTask(BPMNDiagram bpmn, LinkedHashMap<Flow,Place> flowMap,
-			PetrinetGraph net, Map<Activity, boolean[]> tab) {
+			PetrinetGraph net) {
 
-		for (Activity c : bpmn.getActivities()) {
-			String id = c.getLabel();
+			for (Activity c : bpmn.getActivities()) {
+				String id = c.getLabel();
 
-			//array delle JCheckBox
-			boolean selected[] = tab.get(c);
+				Transition t = net.addTransition(id + "+start", this.subNet);
+				Place p = net.addPlace(id, this.subNet);
+				net.addArc(t, p, 1, this.subNet);
+				Transition t1 = net.addTransition(id + "+complete", this.subNet);
+				net.addArc(p, t1, 1, this.subNet);
 
-			Map<String, Transition> t = new HashMap<String, Transition>();
-			Map<String, Place> p = new HashMap<String, Place>();
+				for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c.getGraph().getInEdges(c)) {
+		if(s instanceof Flow) {
 
-			//costanti
-			final String crt="create", ass="assign", rvk="revoke", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", skd="skipped";
-			final String A="alfa", B="beta", G="gamma", D="delta", S="sigma", L="lambda", E="epsilon";
-			final String ctd="created", asd="assigned", rvg="revoking", rvd="revoked", run="running", spd="suspended", skg="skipping";
+		Place pst = flowMap.get(s);
 
-			
-			//aggiungo transizioni e piazze alle hashmap
-			insertTransition(net,id,st,t,false);
-			insertPlace(net,id,run,p);
-			insertTransition(net,id,cpl,t,false);
-			if(selected[0]) {
-				insertTransition(net, id, crt, t, false);
-				insertPlace(net,id,ctd,p);
-			}
-			if(selected[1]) {
-				insertTransition(net,id,ass,t,false);
-				insertPlace(net,id,asd,p);
-				insertTransition(net,id,G,t,true);
-				insertPlace(net,id,rvg,p);
-				insertTransition(net,id,rvk,t,false);
-				insertPlace(net,id,rvd,p);
-				insertTransition(net,id,rea,t,false);
-				insertTransition(net,id,S,t,true);
-				if(selected[3]) {
-					insertTransition(net,id,B,t,true);
-					insertTransition(net,id,D,t,true);				
-				}
-			}
-			if(selected[2]) {
-				insertTransition(net,id,pau,t,false);
-				insertPlace(net,id,spd,p);
-				insertTransition(net,id,rsm,t,false);				
-				if(selected[3])
-					insertTransition(net,id,L,t,true);
-			}
-			if(selected[3]) {
-				insertTransition(net,id,A,t,true);
-				insertTransition(net,id,E,t,true);								
-				insertPlace(net,id,skg,p);
-				insertTransition(net,id,skd,t,false);				
-			}
-			
-			
-			//archi
-			net.addArc (t.get(st), p.get(run));
-			net.addArc (p.get(run), t.get(cpl));
-			if(selected[0]) {
-				net.addArc (t.get(crt), p.get(ctd));
-				if(selected[1])
-					net.addArc (p.get(ctd), t.get(ass));
-				else
-					net.addArc (p.get(ctd), t.get(st));
-				if(selected[3])
-					net.addArc (p.get(ctd), t.get(A));
-			}
-			if(selected[1]) {
-				net.addArc (t.get(ass), p.get(asd));
-				net.addArc (p.get(asd), t.get(G));
-				net.addArc (t.get(G), p.get(rvg));
-				net.addArc (t.get(S), p.get(rvg));
-				net.addArc (p.get(rvg), t.get(rvk));
-				net.addArc (t.get(rvk), p.get(rvd));
-				net.addArc (p.get(rvd), t.get(rea));
-				net.addArc (t.get(rea), p.get(asd));
-				net.addArc (p.get(asd), t.get(st));
-				if(selected[3]) {				
-					net.addArc (p.get(asd), t.get(B));
-					net.addArc (t.get(B), p.get(skg));
-					net.addArc (p.get(rvd), t.get(D));
-					net.addArc (t.get(D), p.get(skg));
-				}
-			}
-			if(selected[2]) {
-				net.addArc (p.get(run), t.get(pau));
-				net.addArc (t.get(pau), p.get(spd));
-				net.addArc (p.get(spd), t.get(rsm));
-				net.addArc (t.get(rsm), p.get(run));
-				if(selected[1])
-					net.addArc (p.get(spd), t.get(S));
-				if(selected[3]) {
-					net.addArc (p.get(spd), t.get(L));
-					net.addArc (t.get(L), p.get(skg));
-				}
-			}
-			else if(selected[1])
-				net.addArc (p.get(run), t.get(S));
-			if(selected[3]) {
-				net.addArc (t.get(A), p.get(skg));
-				net.addArc (p.get(run), t.get(E));
-				net.addArc (t.get(E), p.get(skg));
-				net.addArc (p.get(skg), t.get(skd));
-			}
-			
-	
-			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
-					.getGraph().getInEdges(c)) {
-				if(s instanceof Flow)	{
-
-					Place pst = flowMap.get(s);
-					if(selected[0])
-						net.addArc(pst, t.get(crt), 1, this.subNet);
-					else {
-						if(selected[1])
-							net.addArc(pst, t.get(ass), 1, this.subNet);
-						else
-							net.addArc(pst, t.get(st), 1, this.subNet);
-						if(selected[3])
-							net.addArc(pst, t.get(A), 1, this.subNet);						
-						}
-					}
-
-				}
-			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
-					.getGraph().getOutEdges(c)) {
-				if(s instanceof Flow){
-
-					Place pst = flowMap.get(s);
-
-					// complete -> p_end
-					net.addArc(t.get(cpl), pst, 1, this.subNet);
-
-					// skipped -> p_end
-					if(selected[3])
-						net.addArc(t.get(skd), pst, 1, this.subNet);
-				}
-			}
+		net.addArc(pst, t, 1, this.subNet);
+		}
 
 		}
-	}
+		for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
+		.getGraph().getOutEdges(c)) {
+		if(s instanceof Flow){
 
-	private void insertTransition(PetrinetGraph net, String id, String s, Map<String, Transition> t, boolean vs) {
-		String trsName = id + "+" + s;
-		Transition trs = net.addTransition(trsName);
-		trs.setInvisible(vs);
-		t.put(s, trs);
-	}
 
-	private void insertPlace(PetrinetGraph net, String id, String s, Map<String, Place> p) {
-		String placeName = id + "+" + s;
-		p.put(s, net.addPlace(placeName));
-	}
+		Place pst = flowMap.get(s);
 
-	private void translateGateway(BPMNDiagram bpmn,	LinkedHashMap<Flow, Place> flowMap, PetrinetGraph net) {
+		net.addArc(t1, pst, 1, this.subNet);
+		}
+		}
+
+		}
+
+		}
+	
+	public void translateGateway(BPMNDiagram bpmn,	LinkedHashMap<Flow, Place> flowMap, PetrinetGraph net) {
 		for (Gateway g : bpmn.getGateways()) {
 			//gateway data-based
 			if (g.getGatewayType().equals(GatewayType.DATABASED)) {
@@ -513,7 +291,7 @@ public class BPMNtoPN {
 		}
 	}
 
-	private void translateEvent(BPMNDiagram bpmn, LinkedHashMap<Flow, Place> flowMap, PetrinetGraph net, Marking marking){
+	public void translateEvent(BPMNDiagram bpmn, LinkedHashMap<Flow, Place> flowMap, PetrinetGraph net, Marking marking){
 		for (Event e : bpmn.getEvents()) {
 			if (e.getEventType().equals(EventType.START) && e.getEventTrigger().equals(EventTrigger.NONE)) {
 
@@ -594,7 +372,7 @@ public class BPMNtoPN {
 
 
 
-	private void layoutcreate(PluginContext c, PetrinetGraph net){
+	public void layoutcreate(PluginContext c, PetrinetGraph net){
 
 		GraphLayoutConnection layout = new GraphLayoutConnection(net);
 		try {
@@ -722,7 +500,7 @@ public class BPMNtoPN {
 		return facade.getPoints(edge);
 	}
 
-	private Collection<String> isWellFormed(BPMNDiagram bpmn){
+	public Collection<String> isWellFormed(BPMNDiagram bpmn){
 		if (true)
 			return new Vector<String>();
 		
