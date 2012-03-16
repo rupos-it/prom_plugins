@@ -10,7 +10,7 @@ def defaultActivityHook(startTime, attrs):
     delta2 = random.randint(delta1+1, 59*60)
     t0 = t+delta1
     t1 = t+delta2
-    return t0, t1
+    return t0, t1, []
     
 def defaultChoiceHook(l, attr):
     x = random.randint(0, len(l)-1)
@@ -49,11 +49,11 @@ class Entry:
     """ % (typeRepr, key, valueRepr)
 
     def gen(self, t, attrs):
-        t0, t1 = self.hook(t, attrs)
+        t0, t1, updatedAttrs = self.hook(t, attrs)
         tf0 = time.strftime("%Y-%m-%dT%H:%M:%S.000+01:00", time.gmtime(t0))
         tf1 = time.strftime("%Y-%m-%dT%H:%M:%S.000+01:00", time.gmtime(t1))
         attr_str = ""
-        for attr in attrs.keys():
+        for attr in updatedAttrs:
             attr_str += self.formatAttr(attr, attrs[attr])
         res = """
         <event>
