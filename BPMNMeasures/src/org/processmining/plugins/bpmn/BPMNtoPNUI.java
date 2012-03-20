@@ -41,7 +41,7 @@ import com.fluxicon.slickerbox.factory.SlickerFactory;
 public class BPMNtoPNUI extends BPMNtoPN{
 
 	private ExpandableSubNet subNet = null;
-	
+
 	@Plugin(name = "BPMN to PetriNet UI",
 			parameterLabels = { "BPMNDiagram" },
 			returnLabels = {"Petri Net", "Marking",  "Error Log" },
@@ -52,14 +52,11 @@ public class BPMNtoPNUI extends BPMNtoPN{
 
 		Collection<String> error = this.isWellFormed(bpmn);
 
-
 		// final	LinkedHashMap<Place, Flow> placeMap = new LinkedHashMap<Place, Flow>();
 		LinkedHashMap<Flow, Place> flowMap = new LinkedHashMap<Flow, Place>();
 
-
 		PetrinetGraph net = PetrinetFactory.newPetrinet(bpmn.getLabel());
 		Marking marking = new Marking();
-
 
 		//gli argchi del diagramma BPMN diventano piazze della rete di Petri
 		for (Flow g : bpmn.getFlows()) {
@@ -69,33 +66,31 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			Place p = net.addPlace(f + z, this.subNet);
 
 			flowMap.put(g, p);
-
-
 		}
 
 		Object[] objects = new Object[3];
 		objects[0]=objects[1]=objects[2]=null;
 
 		//tabella dei lifecycle selezionati per ogni task
-		Map<Activity, boolean[]> tab = new HashMap<Activity, boolean[]>();
+		Map<Activity, boolean[]> lifeCycle = new HashMap<Activity, boolean[]>();
 
-
-		//tabella delle checkbox
-		final Map<String, JCheckBox> boxes;
-		
 		final SlickerFactory factory = SlickerFactory.instance();
-		
+
 		final JPanel panel = new JPanel();
-		
+
 		// tabella delle JCheckBox
-		boxes = new HashMap <String, JCheckBox>();
-		final String[] cycles = { "creation", "assignment", "pause and resume", "skip" };
+		final Map<String, JCheckBox> boxes = new HashMap <String, JCheckBox>();
+
+		// i 4 possibili sottinsiemi
+		final String[] cycles = { "creation", "assignment", "pause/resume", "skip" };
 		final int n_cycles = cycles.length;
+
+		// array delle selezioni
 		boolean sel[] = new boolean[n_cycles];
-		
-		GridLayout experimentLayout = new GridLayout(0, 1);
+
+		GridLayout experimentLayout = new GridLayout(0, n_cycles+1);
 		panel.setLayout(experimentLayout);
-			
+
 //		checkbox per ogni task
 		int tasks=0;
 		for (Activity act : bpmn.getActivities()) {
@@ -108,21 +103,19 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				boxes.put(task + "+" + cycle, ch);
 				panel.add(ch);
 			}
-				
+
 			tasks++;
 		}
 
 		// checkbox per selezionare un sottoinsieme di lifecycle per tutti i task
 		if(tasks>1) {
 			panel.add(factory.createLabel("ALL:"));
-			
+
 			for (final String cycle : cycles) {
 				final JCheckBox ch = factory.createCheckBox(cycle + " ALL", false);
-				boxes.put(cycle,ch);
-				panel.add(ch);
 
 				final BPMNDiagram BPMN = bpmn;
-//			gestore dell'evento sulla checkbox
+//			gestore dell'evento selezione sulla checkbox
 				ItemListener i = new ItemListener() {
 					public void itemStateChanged(ItemEvent e) {
 
@@ -136,13 +129,13 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				ch.addItemListener(i);
 			}
 		}
-			
+
 		JComponent netBPMNView = ProMJGraphVisualizer.instance().visualizeGraph(c, bpmn.getGraph());
-					
+
 		InteractionResult result = c.showWizard(bpmn.getLabel(), true, false, netBPMNView);
 
 		boolean flag = true;
-			
+
 		while(flag) {
 
 			switch (result) {
@@ -150,34 +143,34 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				case PREV:
 					result = c.showWizard(bpmn.getLabel(), true, false, netBPMNView);
 					break;
-				
+
 				case NEXT:
 					result = c.showWizard("Select task lifecycle", false, true, panel);
 					break;
 
-				case FINISHED :
+				case FINISHED:
 					for (Activity act : bpmn.getActivities()) {
 
 						String task = act.getLabel();
-					
+
 						//crea l'array delle selezioni per il task act
 						for (int i=0; i<n_cycles; i++)
 							sel[i]=boxes.get(task + "+" + cycles[i]).isSelected();
-						
+
 						//mette in tabella l'array con il rispettivo task
-						tab.put(act, sel);
+						lifeCycle.put(act, sel);
 					}
-					
+
 					flag = false;
 					break;
-					
-				default :
+
+				default:
 					return objects;
-			
+
 				}
 			}
 
-		translateTask(bpmn, flowMap, net, tab);
+		translateTask(bpmn, flowMap, net, lifeCycle);
 
 		translateGateway(bpmn, flowMap, net);
 
@@ -190,35 +183,35 @@ public class BPMNtoPNUI extends BPMNtoPN{
 		objects[0] = net;
 		objects[1] = marking;
 
-
 		c.addConnection(new BPMNtoPNConnection(bpmn, net, errorLog, flowMap.values()));
 
 		c.addConnection(new InitialMarkingConnection(net, marking));
-
-
 
 		return objects;
 	}
 
 
 	private void translateTask(BPMNDiagram bpmn, LinkedHashMap<Flow,Place> flowMap,
-			PetrinetGraph net, Map<Activity, boolean[]> tab) {
+			PetrinetGraph net, Map<Activity, boolean[]> lifeCycle) {
 
 		for (Activity c : bpmn.getActivities()) {
 			String id = c.getLabel();
 
 			//array delle JCheckBox
-			boolean selected[] = tab.get(c);
+			boolean selected[] = lifeCycle.get(c);
 
+			//Transizioni
 			Map<String, Transition> t = new HashMap<String, Transition>();
+
+			//Mappe
 			Map<String, Place> p = new HashMap<String, Place>();
 
-			//costanti
+			//costanti stringa
 			final String crt="create", ass="assign", rvk="revoke", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", skd="skipped";
 			final String A="alfa", B="beta", G="gamma", D="delta", S="sigma", L="lambda", E="epsilon";
 			final String ctd="created", asd="assigned", rvg="revoking", rvd="revoked", run="running", spd="suspended", skg="skipping";
 
-			
+
 			//aggiungo transizioni e piazze alle hashmap
 			insertTransition(net,id,st,t,false);
 			insertPlace(net,id,run,p);
@@ -254,8 +247,8 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				insertPlace(net,id,skg,p);
 				insertTransition(net,id,skd,t,false);				
 			}
-			
-			
+
+
 			//archi
 			net.addArc (t.get(st), p.get(run));
 			net.addArc (p.get(run), t.get(cpl));
