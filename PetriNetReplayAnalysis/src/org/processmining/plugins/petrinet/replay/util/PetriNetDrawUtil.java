@@ -71,13 +71,13 @@ public class PetriNetDrawUtil {
 			}
 			if(ii>0 && i>0){
 				String r=String.valueOf(ii)+"/-"+String.valueOf(i);
-				pl.getAttributeMap().put(AttributeMap.FILLCOLOR, Color.RED);
+				pl.getAttributeMap().put(AttributeMap.FILLCOLOR, Color.PINK);
 				pl.getAttributeMap().remove(AttributeMap.TOOLTIP);
 				pl.getAttributeMap().put(AttributeMap.TOOLTIP, r);
 				pl.getAttributeMap().put(AttributeMap.SHOWLABEL, true);
 				//this.inserPlace(pl.getLabel(), x, y, "red", r);
 			}else if (ii>0 && i<=0){
-				pl.getAttributeMap().put(AttributeMap.FILLCOLOR, Color.RED);
+				pl.getAttributeMap().put(AttributeMap.FILLCOLOR, Color.CYAN);
 				pl.getAttributeMap().remove(AttributeMap.TOOLTIP);
 				pl.getAttributeMap().put(AttributeMap.TOOLTIP, String.valueOf(ii));
 				pl.getAttributeMap().put(AttributeMap.SHOWLABEL, true);
@@ -140,7 +140,10 @@ public class PetriNetDrawUtil {
 			String name = p.getLabel();
 			if(name2performance.containsKey(name)){
 				PerformanceData res = name2performance.get(name);
-				String r="<html>SyncTime:"+res.getSynchTime()+"<br/>WaitTime:"+res.getWaitTime()+"<br/>SoujourTime:"+res.getTime()+"<br/>CountToken "+res.getTokenCount()+"</html>";
+				String sync = secondsToString((long)res.getSynchTime());
+				String wait = secondsToString((long)res.getWaitTime());
+				String souj = secondsToString((long)res.getTime());
+				String r="<html>SyncTime:"+sync+"<br/>WaitTime:"+wait+"<br/>SoujourTime:"+souj+"<br/>CountToken "+res.getTokenCount()+"</html>";
 				if(res.getSynchTime()>0){
 					p.getAttributeMap().put(AttributeMap.FILLCOLOR, Color.GREEN);
 				}else if(res.getWaitTime()>0){
@@ -174,13 +177,34 @@ public class PetriNetDrawUtil {
 		for(Place place : Result.keySet()){
 			PerformanceData perRes =	Result.get(place);
 			placen+="<td>"+place.getLabel()+"</td>";
-			waitt += "<td>"+perRes.getWaitTime()+"</td>";
-			synct += "<td>"+perRes.getSynchTime()+"</td>";
-			sogtime += "<td>"+perRes.getTime()+"</td>";
+			waitt += "<td>"+secondsToString((long)perRes.getWaitTime())+"</td>";
+			synct += "<td>"+secondsToString((long)perRes.getSynchTime())+"</td>";
+			sogtime += "<td>"+secondsToString((long)perRes.getTime())+"</td>";
 		}
 
 		out=start+"<tr>"+placen+"</tr>"+"<tr>"+waitt+"</tr>"+"<tr>"+synct+"</tr>"+"<tr>"+sogtime+"</tr>"+end;
 		return "<html>"+out+"</html>";
 	}
+	
+	private static String secondsToString(long elapsedTime){
+		System.out.println(""+elapsedTime);
+		String format = String.format("%%0%dd", 2);  
+		elapsedTime = elapsedTime / 1000;  
+		String seconds = String.format(format, elapsedTime % 60);  
+		String minutes = String.format(format, (elapsedTime % 3600) / 60);  
+		String hours = String.format(format, (elapsedTime / 3600)%24); 
+
+		String day = String.format(format, (elapsedTime / 86400));  // % 30
+		
+		String stime =  hours + ":" + minutes + ":" + seconds; 
+		if(!day.equals("00"))
+			 stime = "Day: "+ day +" "+ stime;
+		
+		return stime;  
+		//int day = (int)(time/86400) % 30;
+		//String sday = (day<10 ? "0" : "")+ day;
+		//return new String("Day "+sday+" "+ hoursStr + ":" + minutesStr + ":" + secondsStr);
+	}
+
 
 }
