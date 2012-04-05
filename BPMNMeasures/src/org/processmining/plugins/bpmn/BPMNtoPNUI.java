@@ -82,7 +82,7 @@ public class BPMNtoPNUI extends BPMNtoPN{
 		final Map<String, JCheckBox> boxes = new HashMap <String, JCheckBox>();
 
 		// i 4 possibili sottinsiemi
-		final String[] cycles = { "creation", "assignment", "pause/resume", "skip" };
+		final String[] cycles = { "scheduling", "assignment", "pause/resume", "skip" };
 		final int n_cycles = cycles.length;
 
 		// array delle selezioni
@@ -207,9 +207,9 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			Map<String, Place> p = new HashMap<String, Place>();
 
 			//costanti stringa
-			final String crt="create", ass="assign", rvk="revoke", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", skd="skipped";
-			final String A="alfa", B="beta", G="gamma", D="delta", S="sigma", L="lambda", E="epsilon";
-			final String ctd="created", asd="assigned", rvg="revoking", rvd="revoked", run="running", spd="suspended", skg="skipping";
+			final String crt="shedule", ass="assign", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
+			final String A="alfa", B="beta", G="gamma", D="delta";
+			final String ctd="scheduled", asd="assigned", rvd="revoked", run="running", spd="suspended", skg="manualskipping";
 
 
 			//aggiungo transizioni e piazze alle hashmap
@@ -219,16 +219,15 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			if(selected[0]) {
 				insertTransition(net, id, crt, t, false);
 				insertPlace(net,id,ctd,p);
+				if(selected[3])
+					insertTransition(net,id,A,t,true);
 			}
 			if(selected[1]) {
 				insertTransition(net,id,ass,t,false);
 				insertPlace(net,id,asd,p);
 				insertTransition(net,id,G,t,true);
-				insertPlace(net,id,rvg,p);
-				insertTransition(net,id,rvk,t,false);
 				insertPlace(net,id,rvd,p);
 				insertTransition(net,id,rea,t,false);
-				insertTransition(net,id,S,t,true);
 				if(selected[3]) {
 					insertTransition(net,id,B,t,true);
 					insertTransition(net,id,D,t,true);				
@@ -238,14 +237,13 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				insertTransition(net,id,pau,t,false);
 				insertPlace(net,id,spd,p);
 				insertTransition(net,id,rsm,t,false);				
-				if(selected[3])
-					insertTransition(net,id,L,t,true);
 			}
 			if(selected[3]) {
-				insertTransition(net,id,A,t,true);
-				insertTransition(net,id,E,t,true);								
-				insertPlace(net,id,skg,p);
-				insertTransition(net,id,skd,t,false);				
+				insertTransition(net,id,ask,t,false);
+				if(selected[0] || selected[1]) {
+					insertPlace(net,id,skg,p);
+					insertTransition(net,id,msk,t,false);
+				}
 			}
 
 
@@ -258,20 +256,19 @@ public class BPMNtoPNUI extends BPMNtoPN{
 					net.addArc (p.get(ctd), t.get(ass));
 				else
 					net.addArc (p.get(ctd), t.get(st));
-				if(selected[3])
+				if(selected[3]) {
 					net.addArc (p.get(ctd), t.get(A));
+					net.addArc(t.get(A), p.get(skg));
+				}
 			}
 			if(selected[1]) {
 				net.addArc (t.get(ass), p.get(asd));
 				net.addArc (p.get(asd), t.get(G));
-				net.addArc (t.get(G), p.get(rvg));
-				net.addArc (t.get(S), p.get(rvg));
-				net.addArc (p.get(rvg), t.get(rvk));
-				net.addArc (t.get(rvk), p.get(rvd));
+				net.addArc (t.get(G), p.get(rvd));
 				net.addArc (p.get(rvd), t.get(rea));
 				net.addArc (t.get(rea), p.get(asd));
 				net.addArc (p.get(asd), t.get(st));
-				if(selected[3]) {				
+				if(selected[3]) {
 					net.addArc (p.get(asd), t.get(B));
 					net.addArc (t.get(B), p.get(skg));
 					net.addArc (p.get(rvd), t.get(D));
@@ -283,23 +280,10 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				net.addArc (t.get(pau), p.get(spd));
 				net.addArc (p.get(spd), t.get(rsm));
 				net.addArc (t.get(rsm), p.get(run));
-				if(selected[1])
-					net.addArc (p.get(spd), t.get(S));
-				if(selected[3]) {
-					net.addArc (p.get(spd), t.get(L));
-					net.addArc (t.get(L), p.get(skg));
-				}
 			}
-			else if(selected[1])
-				net.addArc (p.get(run), t.get(S));
-			if(selected[3]) {
-				net.addArc (t.get(A), p.get(skg));
-				net.addArc (p.get(run), t.get(E));
-				net.addArc (t.get(E), p.get(skg));
-				net.addArc (p.get(skg), t.get(skd));
-			}
-			
-	
+			if(selected[3] && (selected[0] || selected[1]))
+				net.addArc (p.get(skg), t.get(msk));
+
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
 					.getGraph().getInEdges(c)) {
 				if(s instanceof Flow)	{
@@ -307,16 +291,13 @@ public class BPMNtoPNUI extends BPMNtoPN{
 					Place pst = flowMap.get(s);
 					if(selected[0])
 						net.addArc(pst, t.get(crt), 1, this.subNet);
-					else {
-						if(selected[1])
-							net.addArc(pst, t.get(ass), 1, this.subNet);
-						else
-							net.addArc(pst, t.get(st), 1, this.subNet);
-						if(selected[3])
-							net.addArc(pst, t.get(A), 1, this.subNet);						
-						}
+					else if(selected[1])
+						net.addArc(pst, t.get(ass), 1, this.subNet);
+					else
+						net.addArc(pst, t.get(st), 1, this.subNet);
+					if(selected[3])
+						net.addArc(pst, t.get(ask), 1, this.subNet);						
 					}
-
 				}
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
 					.getGraph().getOutEdges(c)) {
@@ -327,9 +308,12 @@ public class BPMNtoPNUI extends BPMNtoPN{
 					// complete -> p_end
 					net.addArc(t.get(cpl), pst, 1, this.subNet);
 
-					// skipped -> p_end
-					if(selected[3])
-						net.addArc(t.get(skd), pst, 1, this.subNet);
+					// skip -> p_end
+					if(selected[3]) {
+						net.addArc(t.get(ask), pst, 1, this.subNet);
+						if(selected[0] || selected[1])
+							net.addArc(t.get(msk), pst, 1, this.subNet);
+					}
 				}
 			}
 

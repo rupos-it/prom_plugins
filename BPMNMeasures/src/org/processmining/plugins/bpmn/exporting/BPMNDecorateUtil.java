@@ -88,9 +88,42 @@ public class BPMNDecorateUtil {
 
 		}
 
-		Map<Activity, String> MapActivity = new HashMap<Activity, String>();
+		Map<Activity, Float> MapExc = new HashMap<Activity, Float>();
+		Map<Activity, Float> MapTot = new HashMap<Activity, Float>();
 
-		for (Transition t : net.getTransitions()) {
+		for (Place p : net.getPlaces()) {
+			String pname = p.getLabel();
+			String taskName;
+			try {
+				taskName = (String) pname.subSequence(0, pname.indexOf("+"));
+			}
+			catch (StringIndexOutOfBoundsException e) {
+				taskName = null;	
+			}
+			Activity activity = null;
+			// cerco l'attività bpmn a cui collegare l'artifacts
+			for (Activity a : bpmn.getActivities()) {
+				if (taskName != null && a.getLabel().equals(taskName)) {
+					activity = a;
+					break;
+				}
+			}
+
+			if(activity!=null){
+				PerformanceData ps = getPerfResult(p, Performanceresult.getList());
+				if (ps != null) {
+					if(MapTot.containsKey(activity))
+						MapTot.put(activity, MapTot.get(activity)+ps.getTime());
+					else
+						MapTot.put(activity, ps.getTime());
+					if(pname.endsWith("running"))
+						MapExc.put(activity,ps.getTime());
+				}
+
+			}
+		}
+		/*		for (Transition t : net.getTransitions()) {
+			String text = "";
 			if (!t.isInvisible()) {
 				String tname = t.getLabel();
 				String name = (String) tname.subSequence(0, tname.indexOf("+"));
@@ -102,29 +135,34 @@ public class BPMNDecorateUtil {
 						break;
 					}
 				}
-				Place preplace = (Place) t.getGraph().getInEdges(t).iterator()
-				.next().getSource();
-				// Place postplace = (Place)
-				// t.getGraph().getOutEdges(t).iterator().next().getTarget();
-				String text = "";
-				PerformanceData ps = getPerfResult(preplace, Performanceresult.getList());
-				if (ps != null) {
-					if (t.getLabel().endsWith("start")) {
-						if (ps.getWaitTime() > 0) {
-							text = "Activation Time: " + ps.getWaitTime()
-							+ "<br/>";
+				if(activity!=null){
+					Place preplace = (Place) t.getGraph().getInEdges(t).iterator()
+							.next().getSource();
+			// Place postplace = (Place)
+			// t.getGraph().getOutEdges(t).iterator().next().getTarget();
+					PerformanceData ps = getPerfResult(preplace, Performanceresult.getList());
+					if (ps != null) {
+						if(preplace.getLabel().endsWith("running")) {
+							excTime += ps.getWaitTime(); 
 						}
-					} else if (t.getLabel().endsWith("complete")) {
-						if (ps.getWaitTime() > 0) {
-							text = "Execution Time: " + ps.getWaitTime()
-							+ "<br/>";
+				/*
+						if (t.getLabel().endsWith("start")) {
+							if (ps.getWaitTime() > 0) {
+								text = "Activation Time: " + ps.getWaitTime()
+										+ "<br/>";
+				}
+						} 
+						else if (t.getLabel().endsWith("complete")) {
+					if (ps.getWaitTime() > 0) {
+						text = "Execution Time: " + ps.getWaitTime()
+								+ "<br/>";
 
-						}
 					}
-					if (MapActivity.containsKey(activity)) {
-						text += MapActivity.get(activity);
+				}
+						if (MapActivity.containsKey(activity))
+							text += MapActivity.get(activity);
+						MapActivity.put(activity, text);
 					}
-					MapActivity.put(activity, text);
 				}
 			} else {
 				//t.getLabel().endsWith("_join")
@@ -134,13 +172,12 @@ public class BPMNDecorateUtil {
 					// per ogni ramo parallelo
 					addsoujandsynctime(Performanceresult.getList(), t,
 							archibpmnwithsyncperformance);
+					}
 				}
-			}
+		}*/
 
-		}
-
-		for (Activity a : MapActivity.keySet()) {
-			String text = MapActivity.get(a);
+		for (Activity a : bpmn.getActivities()) {
+			String text = "Execution Time: " + MapExc.get(a) + "<br/>Total Time: " + MapTot.get(a) + "<br/>";
 			String label = "<html>" + text + "</html>";
 			ContainingDirectedGraphNode parent = a.getParent();
 			Artifacts art = null;
