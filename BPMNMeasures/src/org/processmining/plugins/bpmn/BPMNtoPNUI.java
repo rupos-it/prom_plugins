@@ -207,7 +207,7 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			Map<String, Place> p = new HashMap<String, Place>();
 
 			//costanti stringa
-			final String crt="shedule", ass="assign", rea="reassign", st="start", pau="pause", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
+			final String crt="shedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
 			final String A="alfa", B="beta", G="gamma", D="delta";
 			final String ctd="scheduled", asd="assigned", rvd="revoked", run="running", spd="suspended", skg="manualskipping";
 

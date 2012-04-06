@@ -51,7 +51,7 @@ public class BPMNDecorateUtil {
 			Petrinet net) {
 
 		// clona bpmn
-		BPMNDiagramExt bpmn =BPMNDiagramExtFactory.cloneBPMNDiagram(bpmnoriginal);
+		BPMNDiagramExt bpmn = BPMNDiagramExtFactory.cloneBPMNDiagram(bpmnoriginal);
 
 		Map<Arc, Integer> maparc = Performanceresult.getMaparc();
 
@@ -85,10 +85,11 @@ public class BPMNDecorateUtil {
 			}
 
 			ArchiAttivatiBPMN.put(p.getLabel(), count);
-
 		}
 
+		//tempo di esecuzione di un task BPMN
 		Map<Activity, Float> MapExc = new HashMap<Activity, Float>();
+		//tempo totale di un task BPMN
 		Map<Activity, Float> MapTot = new HashMap<Activity, Float>();
 
 		for (Place p : net.getPlaces()) {
@@ -116,10 +117,23 @@ public class BPMNDecorateUtil {
 						MapTot.put(activity, MapTot.get(activity)+ps.getTime());
 					else
 						MapTot.put(activity, ps.getTime());
-					if(pname.endsWith("running"))
-						MapExc.put(activity,ps.getTime());
+					if(pname.endsWith("running")) {
+						//tempo totale delle esecuzioni su p
+						float time = ps.getTime();
+						//numero esecuzioni (numero attivazioni dell'arco start -> running)
+						int count = 1;
+						//	esaminiamo gli archi della stella entrante di p
+						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = p
+								.getGraph().getInEdges(p);
+						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
+							Arc a = (Arc) edge;
+							if (a.getSource().getLabel().endsWith("start"))
+								count = maparc.get(a);
+						}
+						//si considera il tempo medio di esecuzione
+						MapExc.put(activity,time/count);
+					}
 				}
-
 			}
 		}
 		/*		for (Transition t : net.getTransitions()) {
@@ -177,7 +191,8 @@ public class BPMNDecorateUtil {
 		}*/
 
 		for (Activity a : bpmn.getActivities()) {
-			String text = "Execution Time: " + MapExc.get(a) + "<br/>Total Time: " + MapTot.get(a) + "<br/>";
+			float totTime = MapTot.get(a)/ArchiAttivatiBPMN.get(a.getLabel());
+			String text = "Execution Time: " + MapExc.get(a) + "<br/>Total Time: " + totTime + "<br/>";
 			String label = "<html>" + text + "</html>";
 			ContainingDirectedGraphNode parent = a.getParent();
 			Artifacts art = null;
