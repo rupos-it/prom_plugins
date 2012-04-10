@@ -37,6 +37,7 @@ import org.processmining.plugins.petrinet.replay.conformance.ConformanceResult;
 import org.processmining.plugins.petrinet.replay.performance.PerformanceData;
 import org.processmining.plugins.petrinet.replay.performance.PerformanceResult;
 
+import org.processmining.plugins.bpmn.BPMNtoPNUI;
 
 
 public class BPMNDecorateUtil {
@@ -117,17 +118,17 @@ public class BPMNDecorateUtil {
 						MapTot.put(activity, MapTot.get(activity)+ps.getTime());
 					else
 						MapTot.put(activity, ps.getTime());
-					if(pname.endsWith("running")) {
+					if(pname.endsWith(BPMNtoPNUI.run)) {
 						//tempo totale delle esecuzioni su p
 						float time = ps.getTime();
 						//numero esecuzioni (numero attivazioni dell'arco start -> running)
 						int count = 1;
-						//	esaminiamo gli archi della stella entrante di p
+						//	esaminiamo gli archi della stella entrante della piazza running
 						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = p
 								.getGraph().getInEdges(p);
 						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
 							Arc a = (Arc) edge;
-							if (a.getSource().getLabel().endsWith("start"))
+							if (a.getSource().getLabel().endsWith(BPMNtoPNUI.st))
 								count = maparc.get(a);
 						}
 						//si considera il tempo medio di esecuzione
@@ -355,7 +356,7 @@ public class BPMNDecorateUtil {
 
 
 
-		Marking remaning = conformanceresult.getRemainingMarking();
+		Marking remaining = conformanceresult.getRemainingMarking();
 		Marking missing = conformanceresult.getMissingMarking();
 		//Map<Transition, Integer> transnotfit = conformanceresult.getMapTransition();
 		Map<Arc, Integer> attivazionearchi = conformanceresult.getMapArc();
@@ -381,13 +382,13 @@ public class BPMNDecorateUtil {
 		}
 
 		Map<Activity,Artifacts> mapActiArtic = new HashMap<Activity, Artifacts>();
-		// transizioni che nn fittano
+		// transizioni che non fittano
 		String ret = "<br/>";
 		for (Transition t : net.getTransitions()) {
 			if (!t.isInvisible()) {
 				String tname = t.getLabel();
 				String name = (String) tname.subSequence(0, tname.indexOf("+"));
-				
+
 				Activity activity = null;
 				// cerco l'attività bpmn a cui collegare l'artifacts
 				for (Activity a : bpmn.getActivities()) {
@@ -397,20 +398,22 @@ public class BPMNDecorateUtil {
 					}
 				}
 				String unsoundallert = "";
-				for (Place p : remaning.baseSet()) {
-					if (p.getLabel().equals(name)) {
+				for (Place p : remaining.baseSet()) {
+					unsoundallert += ret + p.getLabel();
+/*					if (p.getLabel().equals(name)) {
 						unsoundallert += ret + " Task missing competition\n";
 					} else if (p.getLabel().startsWith(name) && !tname.endsWith("start") ) {
 						unsoundallert += ret + " Task interrupted executions\n";
-					}
+					}*/
 				}
 				for (Place p : missing.baseSet()) {
-					if (p.getLabel().equals(name)) {
+					unsoundallert += ret + tname;
+/*					if (p.getLabel().equals(name)) {
 						unsoundallert += ret + " Task internal failures";
 					}
 					if(p.getLabel().endsWith(name)&& tname.endsWith("start")){
 						unsoundallert += ret + " Task unsound executions\n";
-					}
+					}*/
 				}
 				if (activity != null && unsoundallert!="") {
 					
@@ -467,7 +470,7 @@ public class BPMNDecorateUtil {
 				
 				for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> e : p) {
 					Place target = (Place) e.getTarget();
-					if(remaning.contains(target)){
+					if(remaining.contains(target)){
 						System.out.println(ret + " Fork internal failures");
 							archibpmnwitherrorconformance.put(target.getLabel(),
 							" Fork internal failures");

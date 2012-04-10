@@ -40,6 +40,18 @@ import com.fluxicon.slickerbox.factory.SlickerFactory;
 
 public class BPMNtoPNUI extends BPMNtoPN{
 
+	//costanti stringa
+	public static final String crt="shedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
+	public static final String A="alfa", B="beta", G="gamma", D="delta";
+	public static final String ctd="scheduled", asd="assigned", rvd="revoked", run="running", spd="suspended", skg="manualskipping";
+
+	//costanti
+	final int SCHEDULING=0;
+	final int ASSIGNMENT=1;
+	final int PAUSE=2;
+	final int ASKIP=3;
+	final int MSKIP=4;
+	
 	private ExpandableSubNet subNet = null;
 
 	@Plugin(name = "BPMN to PetriNet UI",
@@ -82,26 +94,51 @@ public class BPMNtoPNUI extends BPMNtoPN{
 		final Map<String, JCheckBox> boxes = new HashMap <String, JCheckBox>();
 
 		// i 4 possibili sottinsiemi
-		final String[] cycles = { "scheduling", "assignment", "pause/resume", "skip" };
+		final String[] cycles = { "scheduling", "assignment", "pause/resume", "autoskip", "manual skip" };
 		final int n_cycles = cycles.length;
-
-		// array delle selezioni
-		boolean sel[] = new boolean[n_cycles];
 
 		GridLayout experimentLayout = new GridLayout(0, n_cycles+1);
 		panel.setLayout(experimentLayout);
 
-//		checkbox per ogni task
+
+		//	creiamo le checkbox per ogni task
+
 		int tasks=0;
 		for (Activity act : bpmn.getActivities()) {
 
-			String task = act.getLabel();
+			final String task = act.getLabel();
 			panel.add(factory.createLabel(task + ":"));
 
 			for (String cycle : cycles) {
-				JCheckBox ch = factory.createCheckBox(cycle, false);
-				boxes.put(task + "+" + cycle, ch);
-				panel.add(ch);
+				JCheckBox box = factory.createCheckBox(cycle, false);
+				boxes.put(task + "+" + cycle, box);
+
+				final BPMNDiagram BPMN = bpmn;
+//				gestore dell'evento "mostra manual skip" sulla checkbox
+					ItemListener ms = new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+							JCheckBox ms = boxes.get(task + "+" + cycles[MSKIP]);
+							JCheckBox sch = boxes.get(task + "+" + cycles[SCHEDULING]);
+							JCheckBox ass = boxes.get(task + "+" + cycles[ASSIGNMENT]);
+							ms.setVisible(sch.isSelected() || ass.isSelected());
+
+							// mostra la box "manual skip all"
+							boolean flag = false;
+							for (Activity act : BPMN.getActivities()) {
+								if(boxes.get(act.getLabel() + "+" + cycles[MSKIP]).isVisible()) {
+									flag = true;
+									break;
+								}
+							}
+							if(boxes.containsKey(cycles[MSKIP]))
+								boxes.get(cycles[MSKIP]).setVisible(flag);
+						}
+					};
+					
+				panel.add(box);
+				if(cycle.equals(cycles[SCHEDULING]) || cycle.equals(cycles[ASSIGNMENT]))
+					box.addItemListener(ms);
+				box.setVisible(!cycle.equals(cycles[MSKIP]));
 			}
 
 			tasks++;
@@ -112,21 +149,23 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			panel.add(factory.createLabel("ALL:"));
 
 			for (final String cycle : cycles) {
-				final JCheckBox ch = factory.createCheckBox(cycle + " ALL", false);
+				final JCheckBox box = factory.createCheckBox(cycle + " ALL", false);
 
 				final BPMNDiagram BPMN = bpmn;
-//			gestore dell'evento selezione sulla checkbox
-				ItemListener i = new ItemListener() {
+//			gestore dell'evento "seleziona tutti" sulla checkbox
+				ItemListener selectAll = new ItemListener() {
 					public void itemStateChanged(ItemEvent e) {
 
 						for (Activity act : BPMN.getActivities())
-							boxes.get(act.getLabel() + "+" + cycle).setSelected(ch.isSelected());
-					}
+							boxes.get(act.getLabel() + "+" + cycle).setSelected(box.isSelected());
 
+					}
 				};
 
-				panel.add(ch);
-				ch.addItemListener(i);
+				panel.add(box);
+				boxes.put(cycle, box);
+				box.addItemListener(selectAll);
+				box.setVisible(!cycle.equals(cycles[MSKIP]));
 			}
 		}
 
@@ -149,13 +188,16 @@ public class BPMNtoPNUI extends BPMNtoPN{
 					break;
 
 				case FINISHED:
+					// array delle selezioni
+					boolean sel[] = new boolean[n_cycles];
+
 					for (Activity act : bpmn.getActivities()) {
 
-						String task = act.getLabel();
-
 						//crea l'array delle selezioni per il task act
-						for (int i=0; i<n_cycles; i++)
-							sel[i]=boxes.get(task + "+" + cycles[i]).isSelected();
+						for (int i=0; i<n_cycles; i++) {
+							JCheckBox box = boxes.get(act.getLabel() + "+" + cycles[i]); 
+							sel[i] = box.isSelected() && box.isVisible();
+						}
 
 						//mette in tabella l'array con il rispettivo task
 						lifeCycle.put(act, sel);
@@ -206,82 +248,75 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			//Mappe
 			Map<String, Place> p = new HashMap<String, Place>();
 
-			//costanti stringa
-			final String crt="shedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
-			final String A="alfa", B="beta", G="gamma", D="delta";
-			final String ctd="scheduled", asd="assigned", rvd="revoked", run="running", spd="suspended", skg="manualskipping";
-
-
 			//aggiungo transizioni e piazze alle hashmap
 			insertTransition(net,id,st,t,false);
 			insertPlace(net,id,run,p);
 			insertTransition(net,id,cpl,t,false);
-			if(selected[0]) {
+			if(selected[SCHEDULING]) {
 				insertTransition(net, id, crt, t, false);
 				insertPlace(net,id,ctd,p);
-				if(selected[3])
+				if(selected[MSKIP])
 					insertTransition(net,id,A,t,true);
 			}
-			if(selected[1]) {
+			if(selected[ASSIGNMENT]) {
 				insertTransition(net,id,ass,t,false);
 				insertPlace(net,id,asd,p);
 				insertTransition(net,id,G,t,true);
 				insertPlace(net,id,rvd,p);
 				insertTransition(net,id,rea,t,false);
-				if(selected[3]) {
+				if(selected[MSKIP]) {
 					insertTransition(net,id,B,t,true);
 					insertTransition(net,id,D,t,true);				
 				}
 			}
-			if(selected[2]) {
+			if(selected[PAUSE]) {
 				insertTransition(net,id,pau,t,false);
 				insertPlace(net,id,spd,p);
 				insertTransition(net,id,rsm,t,false);				
 			}
-			if(selected[3]) {
+			if(selected[ASKIP])
 				insertTransition(net,id,ask,t,false);
-				if(selected[0] || selected[1]) {
-					insertPlace(net,id,skg,p);
-					insertTransition(net,id,msk,t,false);
-				}
+			if(selected[MSKIP]) {
+				insertPlace(net,id,skg,p);
+				insertTransition(net,id,msk,t,false);
 			}
 
 
 			//archi
 			net.addArc (t.get(st), p.get(run));
 			net.addArc (p.get(run), t.get(cpl));
-			if(selected[0]) {
+			if(selected[SCHEDULING]) {
 				net.addArc (t.get(crt), p.get(ctd));
-				if(selected[1])
+				if(selected[ASSIGNMENT])
 					net.addArc (p.get(ctd), t.get(ass));
 				else
 					net.addArc (p.get(ctd), t.get(st));
-				if(selected[3]) {
+				if(selected[MSKIP]) {
 					net.addArc (p.get(ctd), t.get(A));
 					net.addArc(t.get(A), p.get(skg));
 				}
 			}
-			if(selected[1]) {
+			if(selected[ASSIGNMENT]) {
 				net.addArc (t.get(ass), p.get(asd));
 				net.addArc (p.get(asd), t.get(G));
 				net.addArc (t.get(G), p.get(rvd));
 				net.addArc (p.get(rvd), t.get(rea));
 				net.addArc (t.get(rea), p.get(asd));
 				net.addArc (p.get(asd), t.get(st));
-				if(selected[3]) {
+				if(selected[MSKIP]) {
 					net.addArc (p.get(asd), t.get(B));
 					net.addArc (t.get(B), p.get(skg));
 					net.addArc (p.get(rvd), t.get(D));
 					net.addArc (t.get(D), p.get(skg));
 				}
 			}
-			if(selected[2]) {
+			if(selected[PAUSE]) {
 				net.addArc (p.get(run), t.get(pau));
 				net.addArc (t.get(pau), p.get(spd));
 				net.addArc (p.get(spd), t.get(rsm));
 				net.addArc (t.get(rsm), p.get(run));
 			}
-			if(selected[3] && (selected[0] || selected[1]))
+			if(selected[MSKIP])
 				net.addArc (p.get(skg), t.get(msk));
 
 			for (BPMNEdge<? extends BPMNNode, ? extends BPMNNode> s : c
@@ -289,13 +324,13 @@ public class BPMNtoPNUI extends BPMNtoPN{
 				if(s instanceof Flow)	{
 
 					Place pst = flowMap.get(s);
-					if(selected[0])
+					if(selected[SCHEDULING])
 						net.addArc(pst, t.get(crt), 1, this.subNet);
-					else if(selected[1])
+					else if(selected[ASSIGNMENT])
 						net.addArc(pst, t.get(ass), 1, this.subNet);
 					else
 						net.addArc(pst, t.get(st), 1, this.subNet);
-					if(selected[3])
+					if(selected[ASKIP])
 						net.addArc(pst, t.get(ask), 1, this.subNet);						
 					}
 				}
@@ -309,11 +344,10 @@ public class BPMNtoPNUI extends BPMNtoPN{
 					net.addArc(t.get(cpl), pst, 1, this.subNet);
 
 					// skip -> p_end
-					if(selected[3]) {
+					if(selected[ASKIP])
 						net.addArc(t.get(ask), pst, 1, this.subNet);
-						if(selected[0] || selected[1])
-							net.addArc(t.get(msk), pst, 1, this.subNet);
-					}
+					if(selected[MSKIP])
+						net.addArc(t.get(msk), pst, 1, this.subNet);
 				}
 			}
 
