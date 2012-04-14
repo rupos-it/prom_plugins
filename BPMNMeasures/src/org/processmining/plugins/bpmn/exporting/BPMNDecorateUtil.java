@@ -357,8 +357,7 @@ public class BPMNDecorateUtil {
 
 
 		Marking remaining = conformanceresult.getRemainingMarking();
-		Marking missing = conformanceresult.getMissingMarking();
-		//Map<Transition, Integer> transnotfit = conformanceresult.getMapTransition();
+		Map<Transition, Integer> transnotfit = conformanceresult.getMapTransition();
 		Map<Arc, Integer> attivazionearchi = conformanceresult.getMapArc();
 
 		Map<String, Integer> ArchiAttivatiBPMN = new HashMap<String, Integer>();
@@ -384,103 +383,93 @@ public class BPMNDecorateUtil {
 		Map<Activity,Artifacts> mapActiArtic = new HashMap<Activity, Artifacts>();
 		// transizioni che non fittano
 		String ret = "<br/>";
+	
 		for (Transition t : net.getTransitions()) {
 			if (!t.isInvisible()) {
-				String tname = t.getLabel();
-				String name = (String) tname.subSequence(0, tname.indexOf("+"));
+				String fullname = t.getLabel();
+				String task = (String) fullname.subSequence(0, fullname.indexOf("+"));
+				String name = (String) fullname.substring(fullname.indexOf("+")+1);
 
 				Activity activity = null;
 				// cerco l'attività bpmn a cui collegare l'artifacts
 				for (Activity a : bpmn.getActivities()) {
-					if (a.getLabel().equals(name)) {
+					if (a.getLabel().equals(task)) {
 						activity = a;
 						break;
 					}
 				}
-				String unsoundallert = "";
-				for (Place p : remaining.baseSet()) {
-					unsoundallert += ret + p.getLabel();
-/*					if (p.getLabel().equals(name)) {
-						unsoundallert += ret + " Task missing competition\n";
-					} else if (p.getLabel().startsWith(name) && !tname.endsWith("start") ) {
-						unsoundallert += ret + " Task interrupted executions\n";
-					}*/
-				}
-				for (Place p : missing.baseSet()) {
-					unsoundallert += ret + tname;
-/*					if (p.getLabel().equals(name)) {
-						unsoundallert += ret + " Task internal failures";
+				if(activity!=null) {
+					String unsoundallert = "";
+					Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = t
+							.getGraph().getInEdges(t);
+					for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
+						Arc a = (Arc) edge;
+						if (remaining.contains(a.getSource()))
+							unsoundallert += ret + " Interrupted Flow\n";
+						if (transnotfit.containsKey(t))
+							unsoundallert += ret + "Unsound \"" + name + "\"\n";
 					}
-					if(p.getLabel().endsWith(name)&& tname.endsWith("start")){
-						unsoundallert += ret + " Task unsound executions\n";
-					}*/
-				}
-				if (activity != null && unsoundallert!="") {
-					
-					
+					if (activity != null && unsoundallert!="") {
+
 						String label = "<html>"+ unsoundallert + "<html>";
-					if(!mapActiArtic.containsKey(activity)){
+						if(!mapActiArtic.containsKey(activity)){
 
-						
-						Artifacts art = null;
-						if (activity.getParent() == null) {
-							art = bpmn.addArtifacts(label,
-									ArtifactType.TEXTANNOATION);
-							bpmn.addFlowAssociation(art, activity);
-
-						} else {
-							if (activity.getParent() instanceof SubProcess) {
+							Artifacts art = null;
+							if (activity.getParent() == null) {
 								art = bpmn.addArtifacts(label,
-										ArtifactType.TEXTANNOATION,
-										activity.getParentSubProcess());
-								bpmn.addFlowAssociation(art, activity,activity.getParentSubProcess());	
-							} else {
-								if (activity.getParent() instanceof Swimlane) {
+										ArtifactType.TEXTANNOATION);
+								bpmn.addFlowAssociation(art, activity);
+
+							} 
+							else {
+								if (activity.getParent() instanceof SubProcess) {
 									art = bpmn.addArtifacts(label,
 											ArtifactType.TEXTANNOATION,
-											activity.getParentSwimlane());
-									bpmn.addFlowAssociation(art, activity,activity.getParentSwimlane());
+											activity.getParentSubProcess());
+									bpmn.addFlowAssociation(art, activity,activity.getParentSubProcess());
+								} 
+								else {
+									if (activity.getParent() instanceof Swimlane) {
+										art = bpmn.addArtifacts(label,
+												ArtifactType.TEXTANNOATION,
+												activity.getParentSwimlane());
+										bpmn.addFlowAssociation(art, activity,activity.getParentSwimlane());
+									}
 								}
 							}
+
+							mapActiArtic.put(activity, art);
 						}
-
-						mapActiArtic.put(activity, art);
-					}else{
-						Artifacts art = mapActiArtic.get(activity);
-						label+=art.getLabel();
-						art.getAttributeMap().remove(AttributeMap.LABEL);
-						art.getAttributeMap().put(AttributeMap.LABEL, label);
-						
-
+						else {
+							Artifacts art = mapActiArtic.get(activity);
+							label+=art.getLabel();
+							art.getAttributeMap().remove(AttributeMap.LABEL);
+							art.getAttributeMap().put(AttributeMap.LABEL, label);
+						}
 					}
-
 				}
-
 			}
 
-			
-			
-		
+
 			// cerco la transizione del fork
 			//t.getLabel().endsWith("_fork")
-			
+
 			if (t.getGraph().getOutEdges(t).size()>1) {
 				Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> p = t
-				.getGraph().getOutEdges(t);
-				
+						.getGraph().getOutEdges(t);
+
 				for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> e : p) {
 					Place target = (Place) e.getTarget();
-					if(remaining.contains(target)){
+					if(remaining.contains(target)) {
 						System.out.println(ret + " Fork internal failures");
-							archibpmnwitherrorconformance.put(target.getLabel(),
-							" Fork internal failures");
+						archibpmnwitherrorconformance.put(target.getLabel(),
+								" Fork internal failures");
 					}
-					
 				}
-				
 			}
 		}
-		// metto gli attraversamenti sugli archi bpmn
+
+			// metto gli attraversamenti sugli archi bpmn
 		for (Flow f : bpmn.getFlows()) {
 			String from = f.getSource().getLabel();
 			String to = f.getTarget().getLabel();
@@ -491,7 +480,6 @@ public class BPMNDecorateUtil {
 					f.getAttributeMap().put(AttributeMap.TOOLTIP, i.toString());
 					f.getAttributeMap().put(AttributeMap.SHOWLABEL, true);
 				}
-
 			}
 			// metto eventuali errore sul arco di fork
 			if (archibpmnwitherrorconformance.containsKey(from + to)) {
@@ -508,10 +496,8 @@ public class BPMNDecorateUtil {
 		}
 
 		return bpmn;
-
 	}
 
-	
 }
 
 class myFloat {
@@ -524,7 +510,7 @@ class myFloat {
 
 	public void setFlo(float flo) {
 		this.flo = flo;
-	}
+		}
 
 	public void add(float a) {
 		flo += a;

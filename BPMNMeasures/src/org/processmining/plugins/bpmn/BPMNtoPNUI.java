@@ -44,6 +44,9 @@ public class BPMNtoPNUI extends BPMNtoPN{
 	public static final String crt="shedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
 	public static final String A="alfa", B="beta", G="gamma", D="delta";
 	public static final String ctd="scheduled", asd="assigned", rvd="revoked", run="running", spd="suspended", skg="manualskipping";
+	
+	// i 5 possibili sottinsiemi
+	public static final String[] cycles = { "scheduling", "assignment", "pause/resume", "autoskip", "manual skip" };
 
 	//costanti
 	final int SCHEDULING=0;
@@ -51,7 +54,7 @@ public class BPMNtoPNUI extends BPMNtoPN{
 	final int PAUSE=2;
 	final int ASKIP=3;
 	final int MSKIP=4;
-	
+
 	private ExpandableSubNet subNet = null;
 
 	@Plugin(name = "BPMN to PetriNet UI",
@@ -83,9 +86,6 @@ public class BPMNtoPNUI extends BPMNtoPN{
 		Object[] objects = new Object[3];
 		objects[0]=objects[1]=objects[2]=null;
 
-		//tabella dei lifecycle selezionati per ogni task
-		Map<Activity, boolean[]> lifeCycle = new HashMap<Activity, boolean[]>();
-
 		final SlickerFactory factory = SlickerFactory.instance();
 
 		final JPanel panel = new JPanel();
@@ -93,16 +93,17 @@ public class BPMNtoPNUI extends BPMNtoPN{
 		// tabella delle JCheckBox
 		final Map<String, JCheckBox> boxes = new HashMap <String, JCheckBox>();
 
-		// i 4 possibili sottinsiemi
-		final String[] cycles = { "scheduling", "assignment", "pause/resume", "autoskip", "manual skip" };
 		final int n_cycles = cycles.length;
+
+		//tabella dei lifecycle selezionati per ogni task
+		Map<Activity, boolean[]> lifeCycle = new HashMap<Activity, boolean[]>();
+
 
 		GridLayout experimentLayout = new GridLayout(0, n_cycles+1);
 		panel.setLayout(experimentLayout);
 
 
-		//	creiamo le checkbox per ogni task
-
+		//	creo le checkbox per ogni task
 		int tasks=0;
 		for (Activity act : bpmn.getActivities()) {
 
@@ -115,26 +116,26 @@ public class BPMNtoPNUI extends BPMNtoPN{
 
 				final BPMNDiagram BPMN = bpmn;
 //				gestore dell'evento "mostra manual skip" sulla checkbox
-					ItemListener ms = new ItemListener() {
-						public void itemStateChanged(ItemEvent e) {
-							JCheckBox ms = boxes.get(task + "+" + cycles[MSKIP]);
-							JCheckBox sch = boxes.get(task + "+" + cycles[SCHEDULING]);
-							JCheckBox ass = boxes.get(task + "+" + cycles[ASSIGNMENT]);
-							ms.setVisible(sch.isSelected() || ass.isSelected());
+				ItemListener ms = new ItemListener() {
+					public void itemStateChanged(ItemEvent e) {
+						JCheckBox ms = boxes.get(task + "+" + cycles[MSKIP]);
+						JCheckBox sch = boxes.get(task + "+" + cycles[SCHEDULING]);
+						JCheckBox ass = boxes.get(task + "+" + cycles[ASSIGNMENT]);
+						ms.setVisible(sch.isSelected() || ass.isSelected());
 
-							// mostra la box "manual skip all"
-							boolean flag = false;
-							for (Activity act : BPMN.getActivities()) {
-								if(boxes.get(act.getLabel() + "+" + cycles[MSKIP]).isVisible()) {
-									flag = true;
-									break;
-								}
+						// mostra la box "manual skip all"
+						boolean flag = false;
+						for (Activity act : BPMN.getActivities()) {
+							if(boxes.get(act.getLabel() + "+" + cycles[MSKIP]).isVisible()) {
+								flag = true;
+								break;
 							}
-							if(boxes.containsKey(cycles[MSKIP]))
-								boxes.get(cycles[MSKIP]).setVisible(flag);
 						}
-					};
-					
+						if(boxes.containsKey(cycles[MSKIP]))
+							boxes.get(cycles[MSKIP]).setVisible(flag);
+					}
+				};
+
 				panel.add(box);
 				if(cycle.equals(cycles[SCHEDULING]) || cycle.equals(cycles[ASSIGNMENT]))
 					box.addItemListener(ms);
@@ -149,23 +150,23 @@ public class BPMNtoPNUI extends BPMNtoPN{
 			panel.add(factory.createLabel("ALL:"));
 
 			for (final String cycle : cycles) {
-				final JCheckBox box = factory.createCheckBox(cycle + " ALL", false);
+				final JCheckBox boxAll = factory.createCheckBox(cycle + " ALL", false);
 
 				final BPMNDiagram BPMN = bpmn;
-//			gestore dell'evento "seleziona tutti" sulla checkbox
+				// gestore dell'evento "seleziona tutti" sulla checkbox
 				ItemListener selectAll = new ItemListener() {
 					public void itemStateChanged(ItemEvent e) {
 
 						for (Activity act : BPMN.getActivities())
-							boxes.get(act.getLabel() + "+" + cycle).setSelected(box.isSelected());
+							boxes.get(act.getLabel() + "+" + cycle).setSelected(boxAll.isSelected());
 
 					}
 				};
 
-				panel.add(box);
-				boxes.put(cycle, box);
-				box.addItemListener(selectAll);
-				box.setVisible(!cycle.equals(cycles[MSKIP]));
+				panel.add(boxAll);
+				boxes.put(cycle, boxAll);
+				boxAll.addItemListener(selectAll);
+				boxAll.setVisible(!cycle.equals(cycles[MSKIP]));
 			}
 		}
 
@@ -188,10 +189,11 @@ public class BPMNtoPNUI extends BPMNtoPN{
 					break;
 
 				case FINISHED:
-					// array delle selezioni
-					boolean sel[] = new boolean[n_cycles];
 
 					for (Activity act : bpmn.getActivities()) {
+
+						// array delle selezioni
+						boolean sel[] = new boolean[n_cycles];
 
 						//crea l'array delle selezioni per il task act
 						for (int i=0; i<n_cycles; i++) {
@@ -201,6 +203,7 @@ public class BPMNtoPNUI extends BPMNtoPN{
 
 						//mette in tabella l'array con il rispettivo task
 						lifeCycle.put(act, sel);
+
 					}
 
 					flag = false;
