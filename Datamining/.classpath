@@ -59,6 +59,13 @@
 	<classpathentry kind="lib" path="packagelib/PetriNetReplayAnalysis.jar"/>
 	<classpathentry kind="lib" path="packagelib/PetriNetReplayer.jar"/>
 	<classpathentry kind="lib" path="packagelib/PetriNets.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/rupos_main"/>
+	<classpathentry kind="lib" path="packagelib/ProM-Patches.jar"/>
+	<classpathentry kind="lib" path="/home/hind/tirocinio/rupos/prom_plugins/BPMNMeasures/dist/BPMNMeasures.jar"/>
+	<classpathentry kind="lib" path="/BPMN/dist/BPMN.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BPMNMeasures"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Log"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PetriNets"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ProM"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LogDialog"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

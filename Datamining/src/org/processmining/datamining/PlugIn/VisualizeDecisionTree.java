@@ -5,6 +5,9 @@ import java.awt.BorderLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.RootPaneContainer;
+import javax.swing.ScrollPaneConstants;
 
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -27,8 +30,7 @@ public class VisualizeDecisionTree {
 	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "Hind", email = "di.unipi.it")
 	public JPanel visualize(UIPluginContext context, Classifier classifier) throws Exception {
 
-		final javax.swing.JPanel jf = 
-		       new javax.swing.JPanel(new BorderLayout());
+		final javax.swing.JPanel jf = new javax.swing.JPanel(new BorderLayout());
 		     //jf.setSize(500,400);
 		     //jf.getContentPane().setLayout(new BorderLayout());
 		     TreeVisualizer tv = new TreeVisualizer(null,((J48)classifier).graph(), new PlaceNode1());
@@ -39,7 +41,9 @@ public class VisualizeDecisionTree {
 		       //  jf.dispose();
 		       //}
 		     //});
-		     tv.setSize(1000,1000);
+		     
+		    
+		     tv.setSize(800,800);
 		     jf.validate();
 		     jf.add(tv,BorderLayout.CENTER);
 		     jf.setVisible(true);

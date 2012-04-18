@@ -128,7 +128,7 @@ public class GenerateInstancesToClassify {
 		  		  
 		  Vector<String> values = new Vector<String>();
 		  values.add("TRUE");
-		  values.add("False");
+		  values.add("FALSE");
 		  values.add("?");
 		  Attribute wekaAttr = new Attribute("conformance", values);
 		  wekaAttrList.add(wekaAttr);

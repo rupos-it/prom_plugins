@@ -14,16 +14,16 @@ import org.processmining.framework.plugin.annotations.PluginVariant;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
-@Plugin(name = "Import Weka instances file Arff", parameterLabels = { "Filename" }, returnLabels = { "Intances" }, returnTypes = { Instances.class })
+@Plugin(name = "Import Weka instances file Arff", parameterLabels = { "Filename" }, returnLabels = { "Instances" }, returnTypes = { Instances.class })
 @UIImportPlugin(description = "Weka instances file Arff", extensions = { "arff" })
 public class ImportWekaInstances  extends AbstractImportPlugin {
 
-	protected FileFilter getFileFilter() {
+	/*protected FileFilter getFileFilter() {
 		return new FileNameExtensionFilter("Weka instances file Arff", "arff");
-	}
+	}*/
 	
 	@PluginVariant(requiredParameterLabels = { 0 }, variantLabel = "Import Weka instances file Arff")
-	protected Instances importFromStream(PluginContext context, InputStream input, String filename,
+	public Instances importFromStream(PluginContext context, InputStream input, String filename,
 			long fileSizeInBytes) throws Exception {
 	
 		DataSource source = new DataSource(input);

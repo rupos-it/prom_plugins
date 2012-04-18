@@ -19,9 +19,9 @@ import weka.classifiers.Classifier;
 
 public class ImportWekaModel  extends AbstractImportPlugin {
 	
-	protected FileFilter getFileFilter() {
+	/*protected FileFilter getFileFilter() {
 		return new FileNameExtensionFilter("Weka Classifier file model", "model");
-	}
+	}*/
 
 	/*http://weka.wikispaces.com/Serialization*/
 	protected Classifier importFromStream(PluginContext context, InputStream input, String filename,

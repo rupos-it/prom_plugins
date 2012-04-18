@@ -10,7 +10,7 @@ import weka.core.Instances;
 public class DMclassifyPlugin {
 	@Plugin(name = "Classify Istances to", 
 	        parameterLabels = { "Istances", "Classifier" }, 
-	        returnLabels = { "Weka Instance" }, 
+	        returnLabels = { "Weka Instances classified" }, 
 	        returnTypes = { Instances.class }  )
 	@UITopiaVariant(
 			uiLabel="Weka classify Instances",

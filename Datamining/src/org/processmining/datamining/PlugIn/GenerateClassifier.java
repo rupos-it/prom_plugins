@@ -14,7 +14,7 @@ public class GenerateClassifier {
 	        returnLabels = { "Weka Classifier" }, 
 	        returnTypes = { Classifier.class }  )
 	@UITopiaVariant(
-			uiLabel="Weka Classifier ",
+			uiLabel="Generate Weka Classifier ",
 			affiliation = "University of Pisa",
 			author = "Hind",
 			email = "hind")

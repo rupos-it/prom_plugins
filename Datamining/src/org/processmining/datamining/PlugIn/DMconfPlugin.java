@@ -45,11 +45,11 @@ public class DMconfPlugin {
 	        returnLabels = { "Weka Instance" }, 
 	        returnTypes = { Instances.class }  )
 	@UITopiaVariant(
-			uiLabel="Weka Conformance Instances",
+			uiLabel="Weka Instances with Conformance",
 			affiliation = "University of Pisa",
 			author = "Hind",
 			email = "hind")
-	public Object generateWekaInstances(PluginContext context, XLog log, TotalConformanceResult conformance) throws Exception{
+	public static Object generateWekaInstances(PluginContext context, XLog log, TotalConformanceResult conformance) throws Exception{
 		//attributi che per la conformance non servono
 		List<String> NonInteressanti = new Vector<String>();
 	    NonInteressanti.add("org:resource");
@@ -106,7 +106,7 @@ public class DMconfPlugin {
 		/**Attributes**/
 		ArrayList<Attribute> wekaAttrList = new ArrayList<Attribute>();
 		
-		/*file arff*/
+		 /*file arff*/
     	 List<String> litAttrNames = new Vector<String>();
 		 litAttrNames.addAll(litAttributes);
 		 //Gli attributi Lit
@@ -145,8 +145,6 @@ public class DMconfPlugin {
 
 		  
 		  Instances instances = new Instances(name_log, wekaAttrList, capacity);
-		
-		
      	/**Data**/
 		  
 		  for(XTrace tr: log ){

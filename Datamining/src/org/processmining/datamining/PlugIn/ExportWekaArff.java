@@ -13,7 +13,7 @@ import org.processmining.framework.plugin.annotations.PluginVariant;
 import weka.core.Instances;
 
 
-@Plugin(name = "Export Instace to Arff File", parameterLabels = { "Instaces", "File" }, returnLabels = {}, returnTypes = {}, userAccessible = true)
+@Plugin(name = "Export Instance to Arff File", parameterLabels = { "Instaces", "File" }, returnLabels = {}, returnTypes = {}, userAccessible = true)
 @UIExportPlugin(description = "Arff files", extension = "arff")
 public class ExportWekaArff {
 
