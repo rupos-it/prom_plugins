@@ -30,36 +30,34 @@ class WFTransition(object):
 class BaseWF(object):
     def __init__(self):
         self.states = {}
-        for sname in ["start", "created", "assigned", "revoking", "revoked", "running", "suspended","skipping", "end"]:
+        for sname in ["start", "scheduled", "assigned", "revoked", "running", "suspended","manualskipping", "end"]:
             self.states[sname] = WFState(sname)
 
         self.startstatename = "start"
         self.endstatename = "end"
         self.states["start"].transitions = [
-            WFTransition("create", "created")
+            WFTransition("schedule", "scheduled"),
+            WFTransition("autoskip", "end"),
             ]
-        self.states["created"].transitions = [
+        self.states["scheduled"].transitions = [
             WFTransition("assign", "assigned"),
-            WFTransition("skipped", "end"),
+            WFTransition("manualskip", "end")
             ]
         self.states["assigned"].transitions = [
             WFTransition("start", "running"),
-            WFTransition("skipped", "end"),
-            WFTransition("revoke", "revoked")
+            WFTransition("manualskip", "end"),
+            WFTransition("reassign", "assigned")
             ]
         self.states["running"].transitions = [
             WFTransition("complete", "end"),
-            WFTransition("skipped", "end"),
-            WFTransition("pause", "suspended")
+            WFTransition("suspend", "suspended")
             ]
         self.states["revoked"].transitions = [
             WFTransition("reassign", "assigned"),
-            WFTransition("skipped", "end")
+            WFTransition("manualskip", "end")
             ]
         self.states["suspended"].transitions = [
             WFTransition("resume", "running"),
-            WFTransition("skipped", "end"),
-            WFTransition("revoke", "revoked")
             ]
 
 

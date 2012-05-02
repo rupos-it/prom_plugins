@@ -2,12 +2,10 @@ package org.processmining.plugins.bpmn.exporting;
 
 import java.awt.Color;
 
-import java.util.Collection;
-import java.util.HashMap;
-
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Vector;
-
+import java.util.HashMap;
 
 import org.processmining.models.graphbased.AttributeMap;
 
@@ -39,6 +37,7 @@ import org.processmining.plugins.petrinet.replay.performance.PerformanceResult;
 
 import org.processmining.plugins.bpmn.BPMNtoPNUI;
 
+import java.util.Collection;
 
 public class BPMNDecorateUtil {
 
@@ -88,6 +87,37 @@ public class BPMNDecorateUtil {
 			ArchiAttivatiBPMN.put(p.getLabel(), count);
 		}
 
+		// trovo la prima transizione di ogni task
+		Map<String, String> firstTrans = new HashMap<String, String>();
+
+		for(Activity act : bpmn.getActivities())
+			firstTrans.put(act.getLabel(), BPMNtoPNUI.st);
+		
+		for(Transition t : net.getTransitions()) {
+			String fullname = t.getLabel(), task, tname;
+			try {
+				task = (String) fullname.subSequence(0, fullname.indexOf("+"));
+			}
+			catch (StringIndexOutOfBoundsException e) {
+				task = null;
+			}
+			try {
+				tname = (String) fullname.substring(fullname.indexOf("+")+1);
+			}
+			catch (StringIndexOutOfBoundsException e) {
+				tname = null;
+			}
+			if(task!=null && tname!=null) {
+				if(tname.equals(BPMNtoPNUI.crt))
+					firstTrans.put(task, tname);
+				if(tname.equals(BPMNtoPNUI.ass) && firstTrans.get(task).equals(BPMNtoPNUI.st))
+					firstTrans.put(task, tname);
+			}
+		}
+		
+		
+		//tempo di attesa prima dell'attivazione di un task BPMN
+		Map<Activity, Float> MapWait = new HashMap<Activity, Float>();
 		//tempo di esecuzione di un task BPMN
 		Map<Activity, Float> MapExc = new HashMap<Activity, Float>();
 		//tempo totale di un task BPMN
@@ -95,17 +125,17 @@ public class BPMNDecorateUtil {
 
 		for (Place p : net.getPlaces()) {
 			String pname = p.getLabel();
-			String taskName;
+			String task;
 			try {
-				taskName = (String) pname.subSequence(0, pname.indexOf("+"));
+				task = (String) pname.subSequence(0, pname.indexOf("+"));
 			}
 			catch (StringIndexOutOfBoundsException e) {
-				taskName = null;	
+				task = null;
 			}
 			Activity activity = null;
 			// cerco l'attività bpmn a cui collegare l'artifacts
 			for (Activity a : bpmn.getActivities()) {
-				if (taskName != null && a.getLabel().equals(taskName)) {
+				if (task != null && a.getLabel().equals(task)) {
 					activity = a;
 					break;
 				}
@@ -118,21 +148,44 @@ public class BPMNDecorateUtil {
 						MapTot.put(activity, MapTot.get(activity)+ps.getTime());
 					else
 						MapTot.put(activity, ps.getTime());
+					//	esaminiamo gli archi della stella entrante della piazza
+					Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = p
+							.getGraph().getInEdges(p);
 					if(pname.endsWith(BPMNtoPNUI.run)) {
 						//tempo totale delle esecuzioni su p
 						float time = ps.getTime();
 						//numero esecuzioni (numero attivazioni dell'arco start -> running)
 						int count = 1;
-						//	esaminiamo gli archi della stella entrante della piazza running
-						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = p
-								.getGraph().getInEdges(p);
-						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
+						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : 
+								edges) {
 							Arc a = (Arc) edge;
-							if (a.getSource().getLabel().endsWith(BPMNtoPNUI.st))
+							if (maparc.containsKey(a) && a.getSource().getLabel().endsWith(BPMNtoPNUI.st))
 								count = maparc.get(a);
 						}
 						//si considera il tempo medio di esecuzione
 						MapExc.put(activity,time/count);
+					}
+
+					// tempo di attesa attivazione task
+					if(!MapWait.containsKey(activity)) {
+						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
+							outedges = p.getGraph().getOutEdges(p);
+						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> outedge : 
+							outedges) {
+							Arc a = (Arc) outedge;
+							if(a.getTarget().getLabel().endsWith(firstTrans.get(task))) {
+								/* totale attivazioni degli archi entranti in p */
+								int act = 0;
+								for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> 
+										edge : edges) {
+									Arc b = (Arc) edge;
+									if (maparc.containsKey(b))
+										act += maparc.get(b);
+								}
+								if(act!=0)
+									MapWait.put(activity, ps.getTime()/act);
+							}
+						}
 					}
 				}
 			}
@@ -193,7 +246,8 @@ public class BPMNDecorateUtil {
 
 		for (Activity a : bpmn.getActivities()) {
 			float totTime = MapTot.get(a)/ArchiAttivatiBPMN.get(a.getLabel());
-			String text = "Execution Time: " + MapExc.get(a) + "<br/>Total Time: " + totTime + "<br/>";
+			String text = "Activation Time: " + MapWait.get(a) + "<br/>Execution Time: " + 
+					MapExc.get(a) + "<br/>Total Time: " + totTime + "<br/>";
 			String label = "<html>" + text + "</html>";
 			ContainingDirectedGraphNode parent = a.getParent();
 			Artifacts art = null;
@@ -355,10 +409,14 @@ public class BPMNDecorateUtil {
 		BPMNDiagramExt bpmn = BPMNDiagramExtFactory.cloneBPMNDiagram(bpmnoriginal);
 
 
-
+		// remaining tokens
 		Marking remaining = conformanceresult.getRemainingMarking();
+		// transizioni che non fittano
 		Map<Transition, Integer> transnotfit = conformanceresult.getMapTransition();
+		// archi attivati
 		Map<Arc, Integer> attivazionearchi = conformanceresult.getMapArc();
+		// archi attivati
+		Set<Place> examined = new HashSet<Place>();
 
 		Map<String, Integer> ArchiAttivatiBPMN = new HashMap<String, Integer>();
 		Map<String, String> archibpmnwitherrorconformance = new HashMap<String, String>();
@@ -381,71 +439,105 @@ public class BPMNDecorateUtil {
 		}
 
 		Map<Activity,Artifacts> mapActiArtic = new HashMap<Activity, Artifacts>();
-		// transizioni che non fittano
 		String ret = "<br/>";
 	
 		for (Transition t : net.getTransitions()) {
-			if (!t.isInvisible()) {
-				String fullname = t.getLabel();
-				String task = (String) fullname.subSequence(0, fullname.indexOf("+"));
-				String name = (String) fullname.substring(fullname.indexOf("+")+1);
+			String unsoundallert = "";					
+			String fullname = t.getLabel(), task , tname;
+			try {
+				task = (String) fullname.subSequence(0, fullname.indexOf("+"));
+			}
+			catch (StringIndexOutOfBoundsException e) {
+				task = null;
+			}
+			try {
+				tname = (String) fullname.substring(fullname.indexOf("+")+1);
+			}
+			catch (StringIndexOutOfBoundsException e) {
+				tname = null;
+			}
+			Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = t
+					.getGraph().getInEdges(t);
 
-				Activity activity = null;
-				// cerco l'attività bpmn a cui collegare l'artifacts
-				for (Activity a : bpmn.getActivities()) {
-					if (a.getLabel().equals(task)) {
-						activity = a;
-						break;
-					}
+			Activity activity = null;
+			// cerco l'attività bpmn a cui collegare l'artifacts
+			for (Activity a : bpmn.getActivities()) {
+				if (task!= null && a.getLabel().equals(task)) {
+					activity = a;
+					break;
 				}
-				if(activity!=null) {
-					String unsoundallert = "";
-					Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = t
-							.getGraph().getInEdges(t);
-					for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
-						Arc a = (Arc) edge;
-						if (remaining.contains(a.getSource()))
-							unsoundallert += ret + " Interrupted Flow\n";
-						if (transnotfit.containsKey(t))
-							unsoundallert += ret + "Unsound \"" + name + "\"\n";
+			}
+			if(activity!=null && tname!=null) {
+				for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
+					Arc a = (Arc) edge;
+
+					/* riporto missing token */
+					if (transnotfit.containsKey(t)) {
+						float perc = transnotfit.get(t) * 100 / attivazionearchi.get(a);
+						unsoundallert += ret + perc + "% Unsound \"" + tname +  "\"\n";							
 					}
-					if (activity != null && unsoundallert!="") {
 
-						String label = "<html>"+ unsoundallert + "<html>";
-						if(!mapActiArtic.containsKey(activity)){
+				}
+			}
+			for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : edges) {
+				Arc a = (Arc) edge;
+				/* riporto remaining token */
 
-							Artifacts art = null;
-							if (activity.getParent() == null) {
+				/* è sempre una piazza, perché si sta esaminando il preset di una transizione */
+				Place p  = (Place)a.getSource();
+				if (remaining.contains(p) && !examined.contains(p)) {
+					Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
+						inedges = p.getGraph().getInEdges(p);
+					/* totale attivazioni degli archi entranti in p */
+					int act = 0;
+					for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> 
+							inedge : inedges)
+						if(attivazionearchi.containsKey((Arc)inedge))
+							act += attivazionearchi.get((Arc)inedge);
+					String pname = (String) p.getLabel().substring(p.getLabel().indexOf("+")+1);
+					float perc = remaining.occurrences(p) * 100 / act;
+					unsoundallert += ret + perc + "% Interrupted flow while " + 
+							pname + "\n";
+					examined.add(p);
+				}
+			}
+			if (!t.isInvisible()) {
+				if (activity != null && unsoundallert!="") {
+
+					String label = "<html>"+ unsoundallert + "<html>";
+					if(!mapActiArtic.containsKey(activity)){
+
+						Artifacts art = null;
+						if (activity.getParent() == null) {
+							art = bpmn.addArtifacts(label,
+									ArtifactType.TEXTANNOATION);
+							bpmn.addFlowAssociation(art, activity);
+
+						} 
+						else {
+							if (activity.getParent() instanceof SubProcess) {
 								art = bpmn.addArtifacts(label,
-										ArtifactType.TEXTANNOATION);
-								bpmn.addFlowAssociation(art, activity);
-
+										ArtifactType.TEXTANNOATION,
+										activity.getParentSubProcess());
+										bpmn.addFlowAssociation(art, activity,activity.getParentSubProcess());
 							} 
 							else {
-								if (activity.getParent() instanceof SubProcess) {
+								if (activity.getParent() instanceof Swimlane) {
 									art = bpmn.addArtifacts(label,
 											ArtifactType.TEXTANNOATION,
-											activity.getParentSubProcess());
-									bpmn.addFlowAssociation(art, activity,activity.getParentSubProcess());
-								} 
-								else {
-									if (activity.getParent() instanceof Swimlane) {
-										art = bpmn.addArtifacts(label,
-												ArtifactType.TEXTANNOATION,
-												activity.getParentSwimlane());
-										bpmn.addFlowAssociation(art, activity,activity.getParentSwimlane());
-									}
+											activity.getParentSwimlane());
+									bpmn.addFlowAssociation(art, activity,activity.getParentSwimlane());
 								}
 							}
+						}
 
-							mapActiArtic.put(activity, art);
-						}
-						else {
-							Artifacts art = mapActiArtic.get(activity);
-							label+=art.getLabel();
-							art.getAttributeMap().remove(AttributeMap.LABEL);
-							art.getAttributeMap().put(AttributeMap.LABEL, label);
-						}
+						mapActiArtic.put(activity, art);
+					}
+					else {
+						Artifacts art = mapActiArtic.get(activity);
+						label+=art.getLabel();
+						art.getAttributeMap().remove(AttributeMap.LABEL);
+						art.getAttributeMap().put(AttributeMap.LABEL, label);
 					}
 				}
 			}

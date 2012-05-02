@@ -43,8 +43,8 @@ public class BPMNtoPNUI extends BPMNtoPN{
 	//costanti stringa
 	public static final String crt="shedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
 	public static final String A="alfa", B="beta", G="gamma", D="delta";
-	public static final String ctd="scheduled", asd="assigned", rvd="revoked", run="running", spd="suspended", skg="manualskipping";
-	
+	public static final String ctd="scheduled", asd="assigned", rvd="reassigning", run="running", spd="suspended", skg="manualskipping";
+
 	// i 5 possibili sottinsiemi
 	public static final String[] cycles = { "scheduling", "assignment", "pause/resume", "autoskip", "manual skip" };
 
@@ -118,9 +118,9 @@ public class BPMNtoPNUI extends BPMNtoPN{
 //				gestore dell'evento "mostra manual skip" sulla checkbox
 				ItemListener ms = new ItemListener() {
 					public void itemStateChanged(ItemEvent e) {
-						JCheckBox ms = boxes.get(task + "+" + cycles[MSKIP]);
-						JCheckBox sch = boxes.get(task + "+" + cycles[SCHEDULING]);
-						JCheckBox ass = boxes.get(task + "+" + cycles[ASSIGNMENT]);
+						JCheckBox ms = boxes.get(task + "+" + cycles[MSKIP]),
+								 sch = boxes.get(task + "+" + cycles[SCHEDULING]),
+							     ass = boxes.get(task + "+" + cycles[ASSIGNMENT]);
 						ms.setVisible(sch.isSelected() || ass.isSelected());
 
 						// mostra la box "manual skip all"
