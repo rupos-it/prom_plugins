@@ -86,35 +86,6 @@ public class BPMNDecorateUtil {
 
 			ArchiAttivatiBPMN.put(p.getLabel(), count);
 		}
-
-		// trovo la prima transizione di ogni task
-		Map<String, String> firstTrans = new HashMap<String, String>();
-
-		for(Activity act : bpmn.getActivities())
-			firstTrans.put(act.getLabel(), BPMNtoPNUI.st);
-		
-		for(Transition t : net.getTransitions()) {
-			String fullname = t.getLabel(), task, tname;
-			try {
-				task = (String) fullname.subSequence(0, fullname.indexOf("+"));
-			}
-			catch (StringIndexOutOfBoundsException e) {
-				task = null;
-			}
-			try {
-				tname = (String) fullname.substring(fullname.indexOf("+")+1);
-			}
-			catch (StringIndexOutOfBoundsException e) {
-				tname = null;
-			}
-			if(task!=null && tname!=null) {
-				if(tname.equals(BPMNtoPNUI.crt))
-					firstTrans.put(task, tname);
-				if(tname.equals(BPMNtoPNUI.ass) && firstTrans.get(task).equals(BPMNtoPNUI.st))
-					firstTrans.put(task, tname);
-			}
-		}
-		
 		
 		//tempo di attesa prima dell'attivazione di un task BPMN
 		Map<Activity, Float> MapWait = new HashMap<Activity, Float>();
@@ -140,55 +111,70 @@ public class BPMNDecorateUtil {
 					break;
 				}
 			}
-
-			if(activity!=null){
-				PerformanceData ps = getPerfResult(p, Performanceresult.getList());
-				if (ps != null) {
+			
+			PerformanceData ps = getPerfResult(p, Performanceresult.getList());
+			if (ps != null) {
+				if(activity!=null) {
 					if(MapTot.containsKey(activity))
 						MapTot.put(activity, MapTot.get(activity)+ps.getTime());
 					else
 						MapTot.put(activity, ps.getTime());
-					//	esaminiamo gli archi della stella entrante della piazza
-					Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edges = p
-							.getGraph().getInEdges(p);
 					if(pname.endsWith(BPMNtoPNUI.run)) {
-						//tempo totale delle esecuzioni su p
-						float time = ps.getTime();
+						//	esaminiamo gli archi della stella entrante della piazza
+						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
+							edges = p.getGraph().getInEdges(p);
 						//numero esecuzioni (numero attivazioni dell'arco start -> running)
 						int count = 1;
 						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : 
 								edges) {
 							Arc a = (Arc) edge;
-							if (maparc.containsKey(a) && a.getSource().getLabel().endsWith(BPMNtoPNUI.st))
+							if (maparc.containsKey(a) && a.getSource().getLabel().
+									endsWith(BPMNtoPNUI.st))
 								count = maparc.get(a);
 						}
 						//si considera il tempo medio di esecuzione
-						MapExc.put(activity,time/count);
+						MapExc.put(activity,ps.getTime()/count);
 					}
 
-					// tempo di attesa attivazione task
-					if(!MapWait.containsKey(activity)) {
-						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
-							outedges = p.getGraph().getOutEdges(p);
-						for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> outedge : 
+				}
+				// tempo di attesa attivazione task
+				else { 
+					Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
+					outedges = p.getGraph().getOutEdges(p);
+					for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> outedge : 
 							outedges) {
-							Arc a = (Arc) outedge;
-							if(a.getTarget().getLabel().endsWith(firstTrans.get(task))) {
-								/* totale attivazioni degli archi entranti in p */
-								int act = 0;
-								for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> 
-										edge : edges) {
-									Arc b = (Arc) edge;
-									if (maparc.containsKey(b))
-										act += maparc.get(b);
-								}
-								if(act!=0)
-									MapWait.put(activity, ps.getTime()/act);
+						String next = ((Arc)outedge).getTarget().getLabel();
+						try {
+							task = (String) next.subSequence(0, next.indexOf("+"));
+						}
+						catch (StringIndexOutOfBoundsException e) {
+							task = null;
+						}
+						// cerco l'attività bpmn a cui collegare l'artifacts
+						for (Activity a : bpmn.getActivities()) {
+							if (task != null && a.getLabel().equals(task)) {
+								activity = a;
+								break;
 							}
+						}
+						if(activity!=null && !MapWait.containsKey(activity)) {
+							//	esaminiamo gli archi della stella entrante della piazza
+							Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
+								edges = p.getGraph().getInEdges(p);
+							/* totale attivazioni degli archi entranti in p */
+							int act = 0;
+							for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> 
+									edge : edges) {
+								Arc a = (Arc) edge;
+								if (maparc.containsKey(a))
+									act += maparc.get(a);
+							}
+							if(act!=0)
+								MapWait.put(activity, ps.getTime()/act);
 						}
 					}
 				}
-			}
+			}		
 		}
 		/*		for (Transition t : net.getTransitions()) {
 			String text = "";

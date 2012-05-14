@@ -2,8 +2,6 @@
 import random
 import time
 
-
-
 def defaultActivityHook(startTime, attrs):
     t = startTime
     delta1 = random.randint(1, 15*60)
@@ -26,39 +24,60 @@ class WFTransition(object):
         self.name = name
         self.targetState = targetState
 
-        
+
 class BaseWF(object):
-    def __init__(self):
+    def __init__(self, lc):
         self.states = {}
-        for sname in ["start", "scheduled", "assigned", "revoked", "running", "suspended","manualskipping", "end"]:
+
+        for sname in ["start", "scheduled", "assigned", "reassigning", "running", "suspended","manualskipping", "end"]:
             self.states[sname] = WFState(sname)
 
         self.startstatename = "start"
         self.endstatename = "end"
-        self.states["start"].transitions = [
-            WFTransition("schedule", "scheduled"),
-            WFTransition("autoskip", "end"),
-            ]
-        self.states["scheduled"].transitions = [
-            WFTransition("assign", "assigned"),
-            WFTransition("manualskip", "end")
-            ]
-        self.states["assigned"].transitions = [
-            WFTransition("start", "running"),
-            WFTransition("manualskip", "end"),
-            WFTransition("reassign", "assigned")
-            ]
-        self.states["running"].transitions = [
-            WFTransition("complete", "end"),
-            WFTransition("suspend", "suspended")
-            ]
-        self.states["revoked"].transitions = [
+        self.states["start"].transitions = t = []
+        if lc[0]:
+            t.append(WFTransition("schedule", "scheduled"))
+        elif lc[1]:
+            t.append(WFTransition("assign", "assigned"))
+        else:
+            t.append(WFTransition("start", "running"))
+        if lc[3]:
+            t.append(WFTransition("autoskip", "end"))
+
+        if lc[0]:
+            self.states["scheduled"].transitions = t = []
+            if lc[1]:
+                t.append(WFTransition("assign", "assigned"))
+            else:
+                t.append(WFTransition("start", "running"))
+            if lc[4]:
+                t.append(WFTransition("manualskip", "end"))
+
+        if lc[1]:
+            self.states["assigned"].transitions = t = []
+            t.append(WFTransition("start", "running"))
+            t.append(WFTransition("reassign", "assigned"))
+            if lc[4]:
+                t.append(WFTransition("manualskip", "end"))
+
+        self.states["running"].transitions = t = []
+        t.append(WFTransition("complete", "end"))
+        if lc[2]:
+            t.append(WFTransition("suspend", "suspended"))
+
+        if lc[1]:
+            self.states["reassigning"].transitions = t = []
             WFTransition("reassign", "assigned"),
-            WFTransition("manualskip", "end")
-            ]
-        self.states["suspended"].transitions = [
-            WFTransition("resume", "running"),
-            ]
+            if lc[4]:
+                t.append(WFTransition("manualskip", "end"))
+
+        if lc[2]:
+            self.states["suspended"].transitions = t = []
+            t.append(WFTransition("resume", "running"))
+
+        if lc[4]:
+            self.states["manualskipping"].transitions = t = []
+            t.append(WFTransition("manualskip", "end"))
 
 
 
@@ -69,8 +88,9 @@ class Empty():
         return ("", t)
 
 class Entry:
-    def __init__(self, name, hook=None):
+    def __init__(self, name, lc, hook=None):
         self.name = name
+        self.lc = lc
         self.hook = hook
         if self.hook is None:
             self.hook = defaultActivityHook
@@ -95,7 +115,7 @@ class Entry:
     """ % (key, valueRepr, typeRepr)
 
     def gen(self, t, attrs):
-        wf = BaseWF()
+        wf = BaseWF(self.lc)
         currentState = wf.startstatename
 
         res = ""
@@ -183,7 +203,7 @@ class Sequence:
             #    (res1, t) =a1.gen(t)
              #   res += res1
         return (res, t)
-        
+
 
 	
 def generate_instance(process, i):
