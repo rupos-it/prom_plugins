@@ -41,7 +41,7 @@ import com.fluxicon.slickerbox.factory.SlickerFactory;
 public class BPMNtoPNUI extends BPMNtoPN{
 
 	//costanti stringa
-	public static final String crt="shedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
+	public static final String crt="schedule", ass="assign", rea="reassign", st="start", pau="suspend", rsm="resume", cpl="complete", msk="manualskip" ,ask="autoskip";
 	public static final String A="alfa", B="beta", G="gamma", D="delta";
 	public static final String ctd="scheduled", asd="assigned", rvd="reassigning", run="running", spd="suspended", skg="manualskipping";
 

@@ -10,9 +10,9 @@ from generator import defaultActivityHook
 #    return t0
 
 #(scheduling, assignment, pause/resume, autoskip, manual skip)
-notify = (0,0,0,0,0)
-fix = (0,0,0,0,0)
-check = (0,0,0,0,0)
+notify = (1,0,1,0,0)
+fix = (0,1,0,1,0)
+check = (1,0,0,0,1)
 closed = (0,0,0,0,0)
 
 process = Sequence([
@@ -29,4 +29,4 @@ process = Sequence([
     Entry("Closed",closed)
 	])
 
-generate(process, 1)
+generate(process, 100)
