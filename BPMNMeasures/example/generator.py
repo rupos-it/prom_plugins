@@ -131,13 +131,13 @@ class Entry:
             for attr in attrs.keys():
                 attr_str += self.formatAttr(attr, attrs[attr])
             res += """ 
-            <event>
-              %s
+            <event> %s
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="%s"/>
               <string key="concept:name" value="%s"/>
               <date key="time:timestamp" value="%s"/>
-              </event>""" % (attr_str, selTrs.name, self.name, formattime)
+              </event>
+""" % (attr_str, selTrs.name, self.name, formattime)
             currentState = selTrs.targetState
 
         return (res, t)
