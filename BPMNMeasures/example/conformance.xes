@@ -88,13 +88,7 @@
               <date key="time:timestamp" value="2012-05-17T11:39:27.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="assign"/>
-              <string key="concept:name" value="Fix"/>
-              <date key="time:timestamp" value="2012-05-17T11:45:53.000+01:00"/>
-              </event>
- 
+            
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="reassign"/>
@@ -228,13 +222,7 @@
               <date key="time:timestamp" value="2012-05-17T12:58:00.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="complete"/>
-              <string key="concept:name" value="Notify"/>
-              <date key="time:timestamp" value="2012-05-17T12:59:50.000+01:00"/>
-              </event>
- 
+            
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="autoskip"/>
@@ -270,13 +258,7 @@
               <date key="time:timestamp" value="2012-05-17T13:36:58.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="reassign"/>
-              <string key="concept:name" value="Fix"/>
-              <date key="time:timestamp" value="2012-05-17T13:45:22.000+01:00"/>
-              </event>
- 
+           
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="reassign"/>
@@ -368,13 +350,7 @@
               <date key="time:timestamp" value="2012-05-17T13:38:11.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="schedule"/>
-              <string key="concept:name" value="Check"/>
-              <date key="time:timestamp" value="2012-05-17T13:39:49.000+01:00"/>
-              </event>
- 
+           
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="manualskip"/>
@@ -711,13 +687,7 @@
               <date key="time:timestamp" value="2012-05-17T17:41:09.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="start"/>
-              <string key="concept:name" value="Fix"/>
-              <date key="time:timestamp" value="2012-05-17T17:54:42.000+01:00"/>
-              </event>
- 
+       
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="complete"/>
@@ -1271,12 +1241,7 @@
               <date key="time:timestamp" value="2012-05-18T00:01:25.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="complete"/>
-              <string key="concept:name" value="Fix"/>
-              <date key="time:timestamp" value="2012-05-18T00:08:32.000+01:00"/>
-              </event>
+          
  
             <event> 
               <string key="org:resource" value="Guancio"/>
@@ -2034,13 +1999,7 @@
               <date key="time:timestamp" value="2012-05-18T06:25:32.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="reassign"/>
-              <string key="concept:name" value="Fix"/>
-              <date key="time:timestamp" value="2012-05-18T06:35:16.000+01:00"/>
-              </event>
- 
+           
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="start"/>
@@ -2118,13 +2077,7 @@
               <date key="time:timestamp" value="2012-05-18T08:21:35.000+01:00"/>
               </event>
  
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="schedule"/>
-              <string key="concept:name" value="Check"/>
-              <date key="time:timestamp" value="2012-05-18T08:22:20.000+01:00"/>
-              </event>
- 
+           
             <event> 
               <string key="org:resource" value="Guancio"/>
               <string key="lifecycle:transition" value="start"/>
@@ -2599,13 +2552,6 @@
               <string key="lifecycle:transition" value="manualskip"/>
               <string key="concept:name" value="Check"/>
               <date key="time:timestamp" value="2012-05-18T12:06:33.000+01:00"/>
-              </event>
- 
-            <event> 
-              <string key="org:resource" value="Guancio"/>
-              <string key="lifecycle:transition" value="start"/>
-              <string key="concept:name" value="Closed"/>
-              <date key="time:timestamp" value="2012-05-18T12:13:56.000+01:00"/>
               </event>
  
             <event> 
