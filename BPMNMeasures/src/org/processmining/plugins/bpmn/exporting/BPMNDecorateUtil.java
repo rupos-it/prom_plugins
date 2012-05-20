@@ -93,6 +93,8 @@ public class BPMNDecorateUtil {
 		Map<Activity, Float> MapExc = new HashMap<Activity, Float>();
 		//tempo totale di un task BPMN
 		Map<Activity, Float> MapTot = new HashMap<Activity, Float>();
+		//task attivati
+		Map<Activity, Integer> TaskAttivati = new HashMap<Activity, Integer>();
 
 		for (Place p : net.getPlaces()) {
 			String task;
@@ -118,6 +120,7 @@ public class BPMNDecorateUtil {
 						MapTot.put(activity, MapTot.get(activity)+ps.getTime());
 					else
 						MapTot.put(activity, ps.getTime());
+					// il tempo di esecuzione è nella piazza running
 					if(p.getLabel().endsWith(BPMNtoPNUI.run)) {
 						//	esaminiamo gli archi della stella entrante della piazza
 						Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
@@ -134,7 +137,6 @@ public class BPMNDecorateUtil {
 						//si considera il tempo medio di esecuzione
 						MapExc.put(activity,ps.getTime()/count);
 					}
-
 				}
 				// tempo di attesa attivazione task:
 				// una piazza è di attivazione per un task T quando non appartiene a T
@@ -144,7 +146,8 @@ public class BPMNDecorateUtil {
 					outedges = p.getGraph().getOutEdges(p);
 					for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> outedge : 
 							outedges) {
-						String next = ((Arc)outedge).getTarget().getLabel();
+						Arc arc = (Arc)outedge;
+						String next = (arc.getTarget().getLabel());
 						try {
 							task = (String) next.subSequence(0, next.indexOf("+"));
 						}
@@ -158,20 +161,29 @@ public class BPMNDecorateUtil {
 								break;
 							}
 						}
-						if(activity!=null && !MapWait.containsKey(activity)) {
-							//	esaminiamo gli archi della stella entrante della piazza
-							Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
-								edges = p.getGraph().getInEdges(p);
-							/* totale attivazioni degli archi entranti in p */
-							int act = 0;
-							for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> 
-									edge : edges) {
-								Arc a = (Arc) edge;
-								if (maparc.containsKey(a))
-									act += maparc.get(a);
+						if(activity!=null) {
+							// calcolo numero di attivazioni del task
+							if(maparc.containsKey(arc)) {
+								if(TaskAttivati.containsKey(activity))
+									TaskAttivati.put(activity, TaskAttivati.get(activity) + maparc.get(arc));
+								else
+									TaskAttivati.put(activity, maparc.get(arc));
 							}
-							if(act!=0)
-								MapWait.put(activity, ps.getTime()/act);
+							if(!MapWait.containsKey(activity)) {
+								//	esaminiamo gli archi della stella entrante della piazza
+								Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> 
+									edges = p.getGraph().getInEdges(p);
+								/* totale attivazioni degli archi entranti in p */
+								int act = 0;
+								for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> 
+									edge : edges) {
+									Arc a = (Arc) edge;
+									if (maparc.containsKey(a))
+										act += maparc.get(a);
+								}
+								if(act!=0)
+									MapWait.put(activity, ps.getTime()/act);
+							}
 						}
 					}
 				}
@@ -183,10 +195,12 @@ public class BPMNDecorateUtil {
 				actTime = MapWait.get(a);
 			if(MapExc.containsKey(a))
 				excTime = MapExc.get(a);
+			if(ArchiAttivatiBPMN.containsKey(a.getLabel()))
+				ArchiAttivatiBPMN.get(a.getLabel());
 			if(MapTot.containsKey(a))
-				totTime = MapTot.get(a)/ArchiAttivatiBPMN.get(a.getLabel());
-			String text = "Activation Time: " + actTime + "<br/>Execution Time: " + 
-					excTime + "<br/>Total Time: " + totTime + "<br/>";
+				totTime = MapTot.get(a)/TaskAttivati.get(a);
+			String text = "Activation Time: " + secondsToString((long)actTime) + "<br/>Execution Time: " + 
+					secondsToString((long)excTime) + "<br/>Total Time: " + secondsToString((long)totTime) + "<br/>";
 			String label = "<html>" + text + "</html>";
 			ContainingDirectedGraphNode parent = a.getParent();
 			Artifacts art = null;
@@ -539,7 +553,24 @@ public class BPMNDecorateUtil {
 		return (double)((double)num2/(double)mult);
 		
 	}
-	
+
+	private static String secondsToString(long elapsedTime){
+        System.out.println(""+elapsedTime);
+        String format = String.format("%%0%dd", 2);  
+        elapsedTime = elapsedTime / 1000;  
+        String seconds = String.format(format, elapsedTime % 60);  
+        String minutes = String.format(format, (elapsedTime % 3600) / 60);  
+        String hours = String.format(format, (elapsedTime / 3600)%24); 
+
+        String day = String.format(format, (elapsedTime / 86400));  // % 30
+        
+        String stime =  hours + ":" + minutes + ":" + seconds; 
+        if(!day.equals("00"))
+                 stime = "Day: "+ day +" "+ stime;
+        
+        return stime;  
+        
+}
 }
 
 class myFloat {
