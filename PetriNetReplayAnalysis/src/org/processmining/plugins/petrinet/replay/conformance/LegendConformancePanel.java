@@ -73,10 +73,26 @@ public class LegendConformancePanel extends JPanel implements MouseListener, Mou
 		JPanel greenPanel = new JPanel();
 		greenPanel.setBackground(Color.RED);
 		legendPanel.add(greenPanel, "0," + row + ",r, c");
-		JLabel syncLbl = factory.createLabel(" Remaining or produced token");
+		JLabel syncLbl = factory.createLabel(" Produced token");
 		syncLbl.setForeground(Color.WHITE);
 		legendPanel.add(syncLbl, "1," + row++ + ",l, c");
 
+		layout.insertRow(row, TableLayout.PREFERRED);
+		JPanel green1Panel = new JPanel();
+		green1Panel.setBackground(Color.CYAN);
+		legendPanel.add(green1Panel, "0," + row + ",r, c");
+		JLabel syncLbl1 = factory.createLabel(" Remaining token");
+		syncLbl1.setForeground(Color.WHITE);
+		legendPanel.add(syncLbl1, "1," + row++ + ",l, c");
+		
+		layout.insertRow(row, TableLayout.PREFERRED);
+		JPanel green2Panel = new JPanel();
+		green2Panel.setBackground(Color.PINK);
+		legendPanel.add(green2Panel, "0," + row + ",r, c");
+		JLabel syncLbl2 = factory.createLabel(" Remaining and Produced token");
+		syncLbl2.setForeground(Color.WHITE);
+		legendPanel.add(syncLbl2, "1," + row++ + ",l, c");
+		
 		layout.insertRow(row, TableLayout.PREFERRED);
 		JPanel yellowPanel = new JPanel();
 		yellowPanel.setBackground(Color.ORANGE);

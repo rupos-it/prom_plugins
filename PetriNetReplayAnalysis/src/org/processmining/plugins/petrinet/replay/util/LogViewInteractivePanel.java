@@ -65,7 +65,7 @@ public class LogViewInteractivePanel extends JPanel implements MouseListener, Mo
 	
 
 	private void painttabtrace(XLog log) {
-		// TODO Auto-generated method stub
+
 		this.setBackground(new Color(30, 30, 30));
 
 			

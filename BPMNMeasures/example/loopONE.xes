@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <log xes.version="1.0" xes.features="nested-attributes" openxes.version="1.0RC7" xmlns="http://www.xes-standard.org/">
+	<extension name="Lifecycle" prefix="lifecycle" uri="http://www.xes-standard.org/lifecycle.xesext"/>
+	<extension name="Organizational" prefix="org" uri="http://www.xes-standard.org/org.xesext"/>
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext"/>
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext"/>
+	<extension name="Semantic" prefix="semantic" uri="http://www.xes-standard.org/semantic.xesext"/>
+	<global scope="trace">
+		<string key="concept:name" value="__INVALID__"/>
+	</global>
+	<global scope="event">
+		<string key="concept:name" value="__INVALID__"/>
+		<string key="lifecycle:transition" value="complete"/>
+	</global>
+	<classifier name="MXML Legacy Classifier" keys="concept:name lifecycle:transition"/>
+	<classifier name="Event Name" keys="concept:name"/>
+	<classifier name="Resource" keys="org:resource"/>
+	<string key="source" value="Example One from Guancio"/>
+	<string key="concept:name" value="Paper"/>
+	<string key="lifecycle:model" value="standard"/>
+	<string key="description" value="Paper Submission"/>
+       
+
+	<trace>
+		<string key="concept:name" value="0"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T14:58:25.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T15:11:47.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T15:14:09.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T15:15:36.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T15:26:22.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T15:33:21.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="1"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T15:56:10.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T15:59:32.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T16:09:05.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T16:13:45.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T16:26:41.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T16:37:16.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T16:40:33.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T16:47:10.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T16:57:00.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T17:03:19.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T17:16:06.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T17:30:12.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T17:45:02.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T17:55:48.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T18:10:15.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T18:20:09.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:33:55.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:46:28.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:52:09.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T19:06:53.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T19:15:38.000+01:00"/>
+              </event>
+        </trace>
+
+	<trace>
+		<string key="concept:name" value="2"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T16:57:54.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T17:04:56.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T17:12:19.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T17:19:26.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T17:32:18.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T17:32:36.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T17:33:12.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T17:43:50.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T17:53:24.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:00:38.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:05:51.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T18:11:50.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T18:21:40.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="3"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T18:01:18.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:14:24.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T18:22:21.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T18:28:08.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T18:42:43.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="4"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T19:04:33.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T19:11:26.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T19:19:42.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T19:23:43.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T19:27:43.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T19:34:45.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T19:39:56.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T19:43:27.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="5"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T20:07:59.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T20:21:56.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T20:28:31.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T20:38:19.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-16T20:50:01.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T21:03:34.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T21:03:48.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T21:06:01.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T21:06:06.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T21:19:45.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T21:32:06.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="6"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T20:58:34.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T21:10:08.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T21:23:42.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T21:25:42.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T21:31:39.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T21:43:15.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T21:47:24.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T21:59:22.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="7"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T22:04:11.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T22:05:31.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T22:16:21.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T22:29:05.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-16T22:31:46.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="8"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T22:55:18.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T23:06:29.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T23:12:28.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T23:22:36.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-16T23:30:35.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T23:35:31.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-16T23:48:35.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-17T00:02:43.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-17T00:08:47.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-17T00:18:32.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-17T00:27:37.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-17T00:33:04.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-17T00:44:19.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-17T00:51:22.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-17T01:00:17.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-17T01:12:22.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="80"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:02:33.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:04:04.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:17:56.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:18:00.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:28:13.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:40:53.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:41:15.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-19T23:54:13.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:05:05.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:07:45.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:22:24.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:28:23.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:38:49.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T00:40:40.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T00:48:21.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T00:52:57.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T01:06:18.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T01:21:11.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T01:31:11.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T01:45:22.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T01:58:39.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T02:07:48.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="assign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:13:04.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:13:26.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:17:13.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:22:01.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:32:42.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:38:54.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:40:56.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:48:37.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:50:50.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="reassign"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T02:52:30.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T03:05:41.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T03:12:28.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T03:24:09.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T03:37:44.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-20T03:52:43.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-20T04:01:38.000+01:00"/>
+              </event>
+        </trace>
+
+
+	<trace>
+		<string key="concept:name" value="81"/>
+		<string key="description" value="PaperOne"/>
+                 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:09:12.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:11:09.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:20:01.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:28:59.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:36:41.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:45:37.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="suspend"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T00:54:05.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="resume"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T01:01:42.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Notify"/>
+              <date key="time:timestamp" value="2012-05-20T01:11:03.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T01:21:05.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T01:35:41.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="manualskip"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T01:37:15.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="autoskip"/>
+              <string key="concept:name" value="Fix"/>
+              <date key="time:timestamp" value="2012-05-20T01:37:29.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="schedule"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T01:47:57.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T01:59:48.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Check"/>
+              <date key="time:timestamp" value="2012-05-20T02:11:48.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="start"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-20T02:26:05.000+01:00"/>
+              </event> 
+            <event>
+              
+              <string key="org:resource" value="Guancio"/>
+              <string key="lifecycle:transition" value="complete"/>
+              <string key="concept:name" value="Closed"/>
+              <date key="time:timestamp" value="2012-05-20T02:30:13.000+01:00"/>
+              </event>
+        </trace>
+
+
+
+
+        </log>
+          

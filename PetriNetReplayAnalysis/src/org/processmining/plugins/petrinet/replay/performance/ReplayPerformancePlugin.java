@@ -35,6 +35,7 @@ import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
 import org.processmining.framework.connections.ConnectionCannotBeObtained;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
+import org.processmining.framework.plugin.annotations.PluginVariant;
 import org.processmining.models.connections.petrinets.behavioral.InitialMarkingConnection;
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.directed.petrinet.Petrinet;
@@ -46,7 +47,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Transition
 import org.processmining.models.semantics.petrinet.Marking;
 import org.processmining.models.semantics.petrinet.PetrinetSemantics;
 import org.processmining.models.semantics.petrinet.impl.PetrinetSemanticsFactory;
-import org.processmining.plugins.connectionfactories.logpetrinet.LogPetrinetConnectionFactoryUI;
+import org.processmining.plugins.connectionfactories.logpetrinet.LogPetrinetConnectionUI;
 import org.processmining.plugins.petrinet.replay.ReplayAction;
 import org.processmining.plugins.petrinet.replay.Replayer;
 import org.processmining.plugins.petrinet.replay.util.ReplayAnalysisConnection;
@@ -54,13 +55,13 @@ import org.processmining.plugins.petrinet.replay.util.ReplayAnalysisUI;
 import org.processmining.plugins.petrinet.replayfitness.ReplayFitnessCost;
 import org.processmining.plugins.petrinet.replayfitness.ReplayFitnessSetting;
 
-
+@Plugin(name = "PN Performance Analysis", parameterLabels = { "Log", "Petrinet", "ReplayFitnessSetting", "Marking" }, returnLabels = { "Result of Performance" }, returnTypes = { TotalPerformanceResult.class })
 public class ReplayPerformancePlugin {
-	
+
 	Map<Transition, XEventClass> map = null;
-	
-	@Plugin(name = "PerformanceDetailsSettings", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+
+	@PluginVariant(requiredParameterLabels = { 0,1,2 }, variantLabel = "PerformanceDetailsSettings")
+	//@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public TotalPerformanceResult getPerformanceDetails(PluginContext context, XLog log, Petrinet net, ReplayFitnessSetting setting) {
 
 		Marking marking;
@@ -74,26 +75,26 @@ public class ReplayPerformancePlugin {
 			return null;
 		}
 
-		 map = null;
-         return   getPerformanceDetails(context, log, net, setting,marking);
+		map = null;
+		return   getPerformanceDetails(context, log, net, setting,marking);
 	}
 
-	
-	@Plugin(name = "PerformanceDetailsSettingsWithMarking", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+	@PluginVariant(requiredParameterLabels = { 0,1,2,3 }, variantLabel = "PerformanceDetailsSettingsWithMarking")
+	//@Plugin(name = "PerformanceDetailsSettingsWithMarking", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	//@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public TotalPerformanceResult getPerformanceDetails(PluginContext context, XLog log, Petrinet net, ReplayFitnessSetting setting,Marking marking ) {
 
-		
+
 
 
 		TotalPerformanceResult performance = new TotalPerformanceResult();
-		
+
 		XEventClasses classes = getEventClasses(log);
 		if(map==null){
 			//Map<Transition, XEventClass> 
 			map = getMapping(classes, net);
-			}
-		
+		}
+
 		context.getConnectionManager().addConnection(new LogPetrinetConnectionImpl(log, classes, net, map));
 
 		PetrinetSemantics semantics = PetrinetSemanticsFactory.regularPetrinetSemantics(Petrinet.class);
@@ -102,6 +103,8 @@ public class ReplayPerformancePlugin {
 				ReplayFitnessCost.addOperator);
 
 		int replayedTraces = 0;
+		context.getProgress().setMinimum(0);
+		context.getProgress().setMaximum(log.size());
 		for (XTrace trace : log) {
 			List<XEventClass> list = getList(trace, classes);
 			try {
@@ -111,6 +114,7 @@ public class ReplayPerformancePlugin {
 				String tracename = getTraceName(trace);
 				updatePerformance(net, marking, sequence, semantics, trace, performance, map, tracename);
 				replayedTraces++;
+				context.getProgress().inc();
 				System.out.println("Replayed");
 			} catch (Exception ex) {
 				System.out.println("Failed");
@@ -119,19 +123,19 @@ public class ReplayPerformancePlugin {
 		}
 
 		context.log("(based on a successful replay of " + replayedTraces + " out of " + log.size() + " traces)");
-		
+
 		ReplayAnalysisConnection connection = new ReplayAnalysisConnection(performance, log, net);
 		context.getConnectionManager().addConnection(connection);
 
 		return performance;
 	}
 
-	
+
 	private static String getTraceName(XTrace trace) {
 		String traceName = XConceptExtension.instance().extractName(trace);
 		return (traceName != null ? traceName : "<unknown>");
 	}
-	
+
 
 	private List<Transition> sortHiddenTransection(Petrinet net, List<Transition> sequence,
 			Map<Transition, XEventClass> map) {
@@ -139,43 +143,43 @@ public class ReplayPerformancePlugin {
 			Transition current = sequence.get(i);
 			// Do not move visible transitions
 			if (map.containsKey(current)) {
-			    continue;
+				continue;
 			}
 			Set<Place> presetCurrent = new HashSet<Place>();
 			for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : net.getInEdges(current)) {
-			    if (! (edge instanceof Arc))
-				continue;
-			    Arc arc = (Arc) edge;
-			    Place place = (Place)arc.getSource();
-			    presetCurrent.add(place);
+				if (! (edge instanceof Arc))
+					continue;
+				Arc arc = (Arc) edge;
+				Place place = (Place)arc.getSource();
+				presetCurrent.add(place);
 			}
 
 			int k = i-1;
 			while (k >= 0) {
-			    Transition prev = sequence.get(k);
-			    Set<Place> postsetPrev = new HashSet<Place>();
-			    for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : net.getOutEdges(prev)) {
-				if (! (edge instanceof Arc))
-				    continue;
-				Arc arc = (Arc) edge;
-				Place place = (Place)arc.getTarget();
-				postsetPrev.add(place);
-			    }
-			
-			    // Intersection
-			    Set<Place> intersection = new HashSet<Place>();
-			    for (Place place : postsetPrev) {
-				if (presetCurrent.contains(place))
-				    intersection.add(place);
-			    }
-			    if (intersection.size() > 0)
-				break;
-			
-			    // Swap Transitions
-			    sequence.remove(k);
-			    sequence.add(k+1, prev);
+				Transition prev = sequence.get(k);
+				Set<Place> postsetPrev = new HashSet<Place>();
+				for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : net.getOutEdges(prev)) {
+					if (! (edge instanceof Arc))
+						continue;
+					Arc arc = (Arc) edge;
+					Place place = (Place)arc.getTarget();
+					postsetPrev.add(place);
+				}
 
-			    k-=1;
+				// Intersection
+				Set<Place> intersection = new HashSet<Place>();
+				for (Place place : postsetPrev) {
+					if (presetCurrent.contains(place))
+						intersection.add(place);
+				}
+				if (intersection.size() > 0)
+					break;
+
+				// Swap Transitions
+				sequence.remove(k);
+				sequence.add(k+1, prev);
+
+				k-=1;
 			}
 		}
 		return sequence;
@@ -194,7 +198,7 @@ public class ReplayPerformancePlugin {
 		long d1 = date.getValue().getTime();
 
 		Map<Place, PerformanceData> performance = new HashMap<Place, PerformanceData>();
-		
+
 		Map<Arc, Integer> maparc = new HashMap<Arc, Integer>();
 
 		Marking marking = new Marking(initMarking);
@@ -220,9 +224,9 @@ public class ReplayPerformancePlugin {
 				iTrace+=1;
 			}
 			if(iTrace>=0){
-			XEvent event = trace.get(iTrace);
-			XAttributeTimestampImpl date1  = (XAttributeTimestampImpl)(event.getAttributes().get("time:timestamp"));
-			d2 = date1.getValue().getTime();
+				XEvent event = trace.get(iTrace);
+				XAttributeTimestampImpl date1  = (XAttributeTimestampImpl)(event.getAttributes().get("time:timestamp"));
+				d2 = date1.getValue().getTime();
 			}
 			float deltaTime = d2-d1;
 			d1 = d2;
@@ -230,7 +234,7 @@ public class ReplayPerformancePlugin {
 
 			//boolean fittingTransition = true;
 			Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> preset = net
-			.getInEdges(transition);
+					.getInEdges(transition);
 
 			Set<Place> places = new HashSet<Place>();
 			places.addAll(marking);
@@ -253,7 +257,7 @@ public class ReplayPerformancePlugin {
 					if (! (edge instanceof Arc))
 						continue;
 					Arc arc = (Arc) edge;
-					
+
 					Transition trs = (Transition)arc.getTarget();
 					int trsPos = futureTrans.indexOf(trs);
 					if (trsPos < 0)
@@ -261,14 +265,14 @@ public class ReplayPerformancePlugin {
 					if (trsPos > minTransitionDistanceInFuture)
 						continue;
 					minTransitionDistanceInFuture = trsPos;
-						
+
 					// Transition preset
 					int minMarking = placeMarking;
 					for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge1 : net.getInEdges(trs)) {
 						if (! (edge1 instanceof Arc))
 							continue;
 						Arc arc1 = (Arc) edge1;
-						
+
 						Place p1 = (Place)arc1.getSource();
 						int tokens = marking.occurrences(p1);
 						minMarking = Math.min(minMarking, tokens);
@@ -301,7 +305,7 @@ public class ReplayPerformancePlugin {
 				}
 			}
 			Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> postset = net
-			.getOutEdges(transition);
+					.getOutEdges(transition);
 			for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : postset) {
 				if (edge instanceof Arc) {
 					Arc arc = (Arc) edge;
@@ -327,7 +331,7 @@ public class ReplayPerformancePlugin {
 		pr.setList(performance);
 		pr.setMaparc(maparc);
 		totalResult.getListperformance().add(pr);
-		
+
 	}
 
 	private void addArcUsage(Arc arc, Map<Arc, Integer> maparc) {
@@ -383,15 +387,16 @@ public class ReplayPerformancePlugin {
 
 
 	// Rupos public methos
-	@Plugin(name = "PerformanceDetailsUI", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+	@PluginVariant(requiredParameterLabels = { 0,1}, variantLabel = "PerformanceDetailsUI")
+	//@Plugin(name = "PerformanceDetailsUI", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public TotalPerformanceResult getPerformanceDetails(UIPluginContext context, XLog log, Petrinet net) {
 		ReplayFitnessSetting setting = new ReplayFitnessSetting();
 		suggestActions(setting, log, net);
 		ReplayAnalysisUI ui = new ReplayAnalysisUI(setting);
-		
-		
-		
+
+
+
 		Marking marking;
 
 		try {
@@ -403,11 +408,11 @@ public class ReplayPerformancePlugin {
 			return null;
 		}
 		//Build and show the UI to make the mapping
-		LogPetrinetConnectionFactoryUI lpcfui = new LogPetrinetConnectionFactoryUI(log, net);
-	
+		LogPetrinetConnectionUI lpcfui = new LogPetrinetConnectionUI(log, net);
+
 		//Create map or not according to the button pressed in the UI
 		map=null;
-		InteractionResult result =null;
+		InteractionResult result = InteractionResult.NEXT;
 		/*
 		 * The wizard loop.
 		 */
@@ -415,48 +420,87 @@ public class ReplayPerformancePlugin {
 		/*
 		 * Show the current step.
 		 */
-		JComponent mapping = lpcfui.initComponents();
+		int currentStep=0;
+		
+		// TODO: Insert plugin description
+		String label = "<html><h3>TODO: Insert plugin description</h3></html>";
+				
+
+		JComponent configsimilarity = lpcfui.initComponentsDifferntMapping(label);
 		JComponent config = ui.initComponents();
-		result = context.showWizard("Mapping Petrinet - Log", true, false, mapping );
+		result = context.showWizard("Select Type Mapping", true, false, configsimilarity );
+
+
+		JComponent mapping = lpcfui.initComponents();
+		currentStep++;
+		boolean d=false;
 		while (sem) {
-			
+
 			switch (result) {
-				case NEXT :
-					/*
-					 * Show the next step. 
-					 */
+			case NEXT :
+				/*
+				 * Show the next step. 
+				 */
+				
+				if (currentStep == 0) {
+					currentStep = 1;
+				}
+				if(currentStep==1){
+					result =context.showWizard("Mapping Petrinet - Log", false, false, mapping );
+					currentStep++;
+					d=true;
+					break;
+				}
+				if(currentStep==2){
+					d=false;
 					result =context.showWizard("Configure Performance Settings", false, true, config);
 					ui.setWeights();
-					break;
-				case PREV :
-					/*
-					 * Move back. 
-					 */
-					result = context.showWizard("Mapping Petrinet - Log", true, false,  mapping);
-					break;
-				case FINISHED :
-					/*
-					 * Return  final step.
-					 */
-					map = lpcfui.getMap();
-					sem=false;
-					break;
-				default :
-					/*
-					 * Should not occur.
-					 */
-					context.log("press Cancel");
-					return null;
+				}
+				
+				break;
+			case PREV :
+				/*
+				 * Move back. 
+				 */
+				if(d){
+					currentStep--;
+					d=false;
+				}
+				if(currentStep==1){
+					result = context.showWizard("Select Type Mapping", true, false, configsimilarity );
+					mapping = lpcfui.initComponents();
+				}
+				if(currentStep==2){
+					result =context.showWizard("Mapping Petrinet - Log", false, false, mapping );
+					currentStep--;
+					
+				}
+
+
+				break;
+			case FINISHED :
+				/*
+				 * Return  final step.
+				 */
+				map = lpcfui.getMap();
+				sem=false;
+				break;
+			default :
+				/*
+				 * Should not occur.
+				 */
+				context.log("press Cancel");
+				return null;
 			}
 		}
-		
+
 		TotalPerformanceResult total = getPerformanceDetails(context, log, net, setting,marking);
 
 		return total;
 	}
-
-	@Plugin(name = "PerformanceDetails", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+	//@Plugin(name = "PerformanceDetails", returnLabels = { "Performance Total" }, returnTypes = { TotalPerformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	@PluginVariant(requiredParameterLabels = { 0,1 }, variantLabel = "PerformanceDetails")
+	@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public TotalPerformanceResult getPerformanceDetails(PluginContext context, XLog log, Petrinet net) {
 		ReplayFitnessSetting setting = new ReplayFitnessSetting();
 		suggestActions(setting, log, net);

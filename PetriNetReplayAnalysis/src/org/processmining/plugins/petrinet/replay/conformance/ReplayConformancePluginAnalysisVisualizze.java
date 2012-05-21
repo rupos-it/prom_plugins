@@ -24,7 +24,7 @@ import org.processmining.plugins.petrinet.replay.util.ReplayAnalysisConnection;
 public class ReplayConformancePluginAnalysisVisualizze {
 
 	@PluginVariant(requiredParameterLabels = { 0 })
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "gos", email = "di.unipi.it")
+	@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public JComponent visualize(PluginContext context, TotalConformanceResult tovisualize) {
 		if(context instanceof UIPluginContext){
 			try {

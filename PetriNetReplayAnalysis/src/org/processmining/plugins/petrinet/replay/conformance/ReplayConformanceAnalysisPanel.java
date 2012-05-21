@@ -261,7 +261,7 @@ public class ReplayConformanceAnalysisPanel extends JPanel{
 
 
 	public void onerepaint(int i) {
-		// TODO Auto-generated method stub
+		
 		ConformanceResult result = tovisualize.getList().get(i);
 		if(i>=0){
 			Petrinet netx = PetrinetFactory.clonePetrinet(net);

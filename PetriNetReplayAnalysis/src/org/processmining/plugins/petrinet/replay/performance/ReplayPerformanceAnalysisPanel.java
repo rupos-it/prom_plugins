@@ -115,7 +115,7 @@ public class ReplayPerformanceAnalysisPanel extends JPanel{
 
 
 	public void fullrepaint(PerformanceResult performanceResult) {
-		// TODO Auto-generated method stub
+
 		Petrinet nety = PetrinetFactory.clonePetrinet(net_original);
 		
 		PetriNetDrawUtil.drawperformancenet(nety,performanceResult.getList(), performanceResult.getMaparc());
