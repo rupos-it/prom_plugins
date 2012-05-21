@@ -5,10 +5,10 @@ package org.processmining.plugins.petrinet.replay.conformance;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -19,23 +19,17 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import org.processmining.framework.util.ui.scalableview.ScalableComponent;
 import org.processmining.framework.util.ui.scalableview.ScalableViewPanel;
 import org.processmining.framework.util.ui.scalableview.interaction.ViewInteractionPanel;
-import org.processmining.models.graphbased.directed.petrinet.Petrinet;
-import org.processmining.models.graphbased.directed.petrinet.impl.PetrinetFactory;
-import org.processmining.models.jgraph.ProMJGraphVisualizer;
-import org.processmining.plugins.petrinet.replay.util.PetriNetDrawUtil;
-
-
 
 import com.fluxicon.slickerbox.components.AutoFocusButton;
 import com.fluxicon.slickerbox.factory.SlickerDecorator;
@@ -84,7 +78,7 @@ public class TabTraceConformancePanel extends JPanel implements MouseListener, M
 	
 
 	private void painttabtrace() {
-		// TODO Auto-generated method stub
+
 		this.setBackground(new Color(30, 30, 30));
 
 		JPanel legendPanel = new JPanel();
@@ -125,7 +119,22 @@ public class TabTraceConformancePanel extends JPanel implements MouseListener, M
 				return false; 
 			}
 		});
-		
+		 tab.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+				public Component getTableCellRendererComponent (JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) 
+				{
+					Component cell = super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
+					if (tovisualize.getList().get(row).getMissingMarking().isEmpty() &&
+							tovisualize.getList().get(row).getMapTransition().isEmpty() &&
+							tovisualize.getList().get(row).getConformance()>0.92){
+						cell.setBackground( Color.gray );
+					}else{
+					
+						cell.setBackground( Color.red );
+					}
+						
+					return cell;
+
+				}});
 		 legendPanel.setLayout(new BoxLayout(legendPanel, BoxLayout.Y_AXIS));
 		 jp1.setLayout(new BoxLayout(jp1, BoxLayout.X_AXIS));
 		 

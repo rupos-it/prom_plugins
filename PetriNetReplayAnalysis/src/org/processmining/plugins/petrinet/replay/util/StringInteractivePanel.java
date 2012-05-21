@@ -87,7 +87,7 @@ public class StringInteractivePanel extends JPanel implements MouseListener, Mou
 	
 
 	private void painttabtrace() {
-		// TODO Auto-generated method stub
+
 		this.setBackground(new Color(30, 30, 30));
 		
 		//JPanel legendPanel = new JPanel();

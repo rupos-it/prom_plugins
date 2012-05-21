@@ -79,7 +79,7 @@ public class TabTracePerformacePanel extends JPanel implements MouseListener, Mo
 	
 
 	private void painttabtrace() {
-		// TODO Auto-generated method stub
+
 		this.setBackground(new Color(30, 30, 30));
 
 		JPanel legendPanel = new JPanel();

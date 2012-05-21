@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import java.util.Vector;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 
 
@@ -37,6 +35,7 @@ import org.processmining.framework.connections.ConnectionCannotBeObtained;
 
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
+import org.processmining.framework.plugin.annotations.PluginVariant;
 import org.processmining.models.connections.petrinets.behavioral.InitialMarkingConnection;
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.directed.petrinet.Petrinet;
@@ -50,6 +49,7 @@ import org.processmining.models.semantics.petrinet.PetrinetSemantics;
 import org.processmining.models.semantics.petrinet.impl.PetrinetSemanticsFactory;
 
 import org.processmining.plugins.connectionfactories.logpetrinet.LogPetrinetConnectionFactoryUI;
+import org.processmining.plugins.connectionfactories.logpetrinet.LogPetrinetConnectionUI;
 import org.processmining.plugins.petrinet.replay.ReplayAction;
 import org.processmining.plugins.petrinet.replay.Replayer;
 import org.processmining.plugins.petrinet.replay.util.ReplayAnalysisConnection;
@@ -58,7 +58,7 @@ import org.processmining.plugins.petrinet.replayfitness.ReplayFitnessCost;
 import org.processmining.plugins.petrinet.replayfitness.ReplayFitnessSetting;
 
 
-
+@Plugin(name = "PN Conformace Analysis", returnLabels = { "Conformace Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {"Log", "Petrinet", "ReplayFitnessSetting", "Marking"}, userAccessible = true)
 public class ReplayConformancePlugin {
 
 
@@ -71,11 +71,11 @@ public class ReplayConformancePlugin {
 
 		XEventClasses classes = getEventClasses(log);
 		if(map==null){
-		//Map<Transition, XEventClass> 
-		map = getMapping(classes, net);
+			//Map<Transition, XEventClass> 
+			map = getMapping(classes, net);
 		}
 		context.getConnectionManager().addConnection(new LogPetrinetConnectionImpl(log, classes, net, map));
-		
+
 		PetrinetSemantics semantics = PetrinetSemanticsFactory.regularPetrinetSemantics(Petrinet.class);
 
 		Replayer<ReplayFitnessCost> replayer = new Replayer<ReplayFitnessCost>(context, net, semantics, map,
@@ -83,10 +83,13 @@ public class ReplayConformancePlugin {
 
 		int replayedTraces = 0;
 		int i =0;
+		context.getProgress().setMinimum(0);
+		context.getProgress().setMaximum(log.size());
 		for (XTrace trace : log) {
 			List<XEventClass> list = getList(trace, classes);
 			try {
 				System.out.println("Replay :" + ++i);
+				context.getProgress().inc();
 				List<Transition> sequence = replayer.replayTrace(marking, list, setting);
 				String tracename = getTraceName(trace);
 				updateConformance(net, marking, sequence, semantics, totalResult,tracename);
@@ -134,7 +137,7 @@ public class ReplayConformancePlugin {
 		for (Transition transition : sequence) {
 			boolean fittingTransition = true;
 			Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> preset = net
-			.getInEdges(transition);
+					.getInEdges(transition);
 			for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : preset) {
 				if (edge instanceof Arc) {
 					Arc arc = (Arc) edge;
@@ -162,7 +165,7 @@ public class ReplayConformancePlugin {
 				}
 			}
 			Collection<PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> postset = net
-			.getOutEdges(transition);
+					.getOutEdges(transition);
 			for (PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode> edge : postset) {
 				if (edge instanceof Arc) {
 					Arc arc = (Arc) edge;
@@ -187,7 +190,7 @@ public class ReplayConformancePlugin {
 		consumedTokens += marking.size();
 		consumedTrace += marking.size();
 		int remainingTokens = marking.isEmpty() ? 0 : marking.size() - 1;
-		
+
 		// Rupos patches
 		totalResult.getTotal().getRemainingMarking().addAll(marking);
 		tempConformanceResult.getRemainingMarking().addAll(marking);
@@ -233,11 +236,11 @@ public class ReplayConformancePlugin {
 			if(!visible){
 				transition.setInvisible(true);
 			}
-			
+
 		}
 		return map;
 	}
-	
+
 
 	private void suggestActions(ReplayFitnessSetting setting, XLog log, Petrinet net) {
 		boolean hasInvisibleTransitions = false;
@@ -279,8 +282,10 @@ public class ReplayConformancePlugin {
 	}
 
 	// Rupos public methos
-	@Plugin(name = "ConformaceDetailsUI", returnLabels = { "Conformace Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+
+	//@Plugin(name = "ConformaceDetailsUI", returnLabels = { "Conformace Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	@PluginVariant(requiredParameterLabels = { 0,1})
+	@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public TotalConformanceResult getConformanceDetails(UIPluginContext context, XLog log, Petrinet net) {
 		ReplayFitnessSetting setting = new ReplayFitnessSetting();
 		suggestActions(setting, log, net);
@@ -289,12 +294,12 @@ public class ReplayConformancePlugin {
 
 
 		//Build and show the UI to make the mapping
-		LogPetrinetConnectionFactoryUI lpcfui = new LogPetrinetConnectionFactoryUI(log, net);
+		LogPetrinetConnectionUI lpcfui = new LogPetrinetConnectionUI(log, net);
 		//InteractionResult result = context.showWizard("Mapping Petrinet - Log", false, true,  lpcfui.initComponents());
 
 		//Create map or not according to the button pressed in the UI
 		Map<Transition, XEventClass> map=null;
-		InteractionResult result =null;
+		InteractionResult result = InteractionResult.NEXT;
 		/*
 		 * The wizard loop.
 		 */
@@ -302,39 +307,77 @@ public class ReplayConformancePlugin {
 		/*
 		 * Show the current step.
 		 */
-		JComponent mapping = lpcfui.initComponents();
-		JComponent config = ui.initComponents();
+		int currentStep=0;
 
-		result = context.showWizard("Mapping Petrinet - Log", true, false, mapping );
+		// TODO: Insert plugin description
+		String label = "<html><h3>TODO: Insert plugin description</h3></html>";
+
+
+		JComponent configsimilarity = lpcfui.initComponentsDifferntMapping(label);
+		JComponent config = ui.initComponents();
+		result = context.showWizard("Select Type Mapping", true, false, configsimilarity );
+
+
+		JComponent mapping = lpcfui.initComponents();
+		currentStep++;
+		boolean d=false;
 		while (sem) {
-			
+
 			switch (result) {
-				case NEXT :
-					/*
-					 * Show the next step. 
-					 */
-					result =context.showWizard("Configure Conformance Settings", false, true, config);
+			case NEXT :
+				/*
+				 * Show the next step. 
+				 */
+
+				if (currentStep == 0) {
+					currentStep = 1;
+				}
+				if(currentStep==1){
+					result =context.showWizard("Mapping Petrinet - Log", false, false, mapping );
+					currentStep++;
+					d=true;
+					break;
+				}
+				if(currentStep==2){
+					d=false;
+					result =context.showWizard("Configure Performance Settings", false, true, config);
 					ui.setWeights();
-					break;
-				case PREV :
-					/*
-					 * Move back. 
-					 */
-					result = context.showWizard("Mapping Petrinet - Log", true, false,  mapping);
-					break;
-				case FINISHED :
-					/*
-					 * Return  final step.
-					 */
-					map = lpcfui.getMap();
-					sem=false;
-					break;
-				default :
-					/*
-					 * Should not occur.
-					 */
-					context.log("press Cancel");
-					return null;
+				}
+				
+				break;
+			case PREV :
+				/*
+				 * Move back. 
+				 */
+				if(d){
+					currentStep--;
+					d=false;
+				}
+				if(currentStep==1){
+					result = context.showWizard("Select Type Mapping", true, false, configsimilarity );
+					mapping = lpcfui.initComponents();
+				}
+				if(currentStep==2){
+					result =context.showWizard("Mapping Petrinet - Log", false, false, mapping );
+					currentStep--;
+					
+				}
+
+
+				break;
+			case FINISHED :
+				/*
+				 * Return  final step.
+				 */
+				map = lpcfui.getMap();
+				sem=false;
+				break;
+			default :
+				/*
+				 * Should not occur.
+				 */
+				context.log("press Cancel");
+				return null;
 			}
 		}
 		//if (result == InteractionResult.FINISHED) {
@@ -358,8 +401,9 @@ public class ReplayConformancePlugin {
 		return totalResult;
 	}
 
-	@Plugin(name = "ConformanceDetails", returnLabels = { "Conformance Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+	//@Plugin(name = "ConformanceDetails", returnLabels = { "Conformance Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	@PluginVariant(requiredParameterLabels = { 0,1 })
+	@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
 	public TotalConformanceResult getConformanceDetails(PluginContext context, XLog log, Petrinet net) {
 		ReplayFitnessSetting setting = new ReplayFitnessSetting();
 		suggestActions(setting, log, net);
@@ -370,8 +414,9 @@ public class ReplayConformancePlugin {
 		return total;
 	}
 
-	@Plugin(name = "ConformanceDetailsSettingsWithMarking", returnLabels = { "Conformance Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+	//@Plugin(name = "ConformanceDetailsSettingsWithMarking", returnLabels = { "Conformance Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	//@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
+	@PluginVariant(requiredParameterLabels = { 0,1,2,3 })
 	public TotalConformanceResult getFitnessDetails(PluginContext context, XLog log, Petrinet net, ReplayFitnessSetting setting, Marking marking) {
 
 
@@ -381,8 +426,9 @@ public class ReplayConformancePlugin {
 		return total;
 	}
 
-	@Plugin(name = "ConformanceDetailsSettings", returnLabels = { "Conformance Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
-	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "di.unipi.it", email = "di.unipi.it")
+	//@Plugin(name = "ConformanceDetailsSettings", returnLabels = { "Conformance Total" }, returnTypes = { TotalConformanceResult.class }, parameterLabels = {}, userAccessible = true)
+	//@UITopiaVariant(affiliation = "Department of Computer Science University of Pisa", author = "R.Guanciale,G.Spagnolo et al.", email = "spagnolo@di.unipi.it", pack = "PetriNetReplayAnalysis")
+	@PluginVariant(requiredParameterLabels = { 0,1,2 })
 	public TotalConformanceResult getConformanceDetails(PluginContext context, XLog log, Petrinet net, ReplayFitnessSetting setting) {
 
 		Marking marking;
@@ -402,19 +448,13 @@ public class ReplayConformancePlugin {
 		return total;
 	}
 
-	  @Plugin(name = "FitnessSuggestSettings", returnLabels = { "Settings" }, returnTypes = { ReplayFitnessSetting.class }, parameterLabels = {}, userAccessible = true)
-   // @UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "T. Yuliani and H.M.W. Verbeek", email = "h.m.w.verbeek@tue.nl")
-    public ReplayFitnessSetting suggestSettings(PluginContext context, XLog log, Petrinet net) {
-	ReplayFitnessSetting settings = new ReplayFitnessSetting();
-	suggestActions(settings, log, net);
-	return settings;
-    }
-/* 
-   @Visualizer
-	@Plugin(name = "Fitness Result Visualizer", parameterLabels = "String", returnLabels = "Label of String", returnTypes = JComponent.class)
-	public static JComponent visualize(PluginContext context, TotalFitnessResult tovisualize) {
-		return StringVisualizer.visualize(context, tovisualize.toString());
-	}*/
+	@Plugin(name = "FitnessSuggestSettings", returnLabels = { "Settings" }, returnTypes = { ReplayFitnessSetting.class }, parameterLabels = {}, userAccessible = true)
+	// @UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "T. Yuliani and H.M.W. Verbeek", email = "h.m.w.verbeek@tue.nl")
+	public ReplayFitnessSetting suggestSettings(PluginContext context, XLog log, Petrinet net) {
+		ReplayFitnessSetting settings = new ReplayFitnessSetting();
+		suggestActions(settings, log, net);
+		return settings;
+	}
 
 
 
