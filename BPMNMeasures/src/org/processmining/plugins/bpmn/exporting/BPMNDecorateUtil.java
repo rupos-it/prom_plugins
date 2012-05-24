@@ -199,8 +199,8 @@ public class BPMNDecorateUtil {
 				ArchiAttivatiBPMN.get(a.getLabel());
 			if(MapTot.containsKey(a))
 				totTime = MapTot.get(a)/TaskAttivati.get(a);
-			String text = "Activation Time: " + secondsToString((long)actTime) + "<br/>Execution Time: " + 
-					secondsToString((long)excTime) + "<br/>Total Time: " + secondsToString((long)totTime) + "<br/>";
+			String text = "Average Activation Time: " + secondsToString((long)actTime) + "<br/>Average Execution Time: " + 
+					secondsToString((long)excTime) + "<br/>Average Total Time: " + secondsToString((long)totTime) + "<br/>";
 			String label = "<html>" + text + "</html>";
 			ContainingDirectedGraphNode parent = a.getParent();
 			Artifacts art = null;
