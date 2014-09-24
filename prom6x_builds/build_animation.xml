@@ -1,4 +1,4 @@
-<project name="PetriNets" default="Compile Sources" basedir="../prom61_origin/PetriNets">
+<project name="Animation" default="Compile Sources" basedir="../prom6x_origin/Animation">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -8,7 +8,7 @@
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
 		<property name="version" value="6.1.${env.BUILD_NUMBER}" />
-		<property name="project" value="PetriNets" />
+		<property name="project" value="Animation" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -25,11 +25,7 @@
  				<include name="lib/**/*.jar" />
  				<include name="stdlib/**/*.jar" />
  				<include name="packagelib/**/*.jar" />
-				
  			</fileset>
-		        <fileset dir="..">
-				<include name="TransitionSystems/dist/*.jar" />
-			</fileset>
      </path>
 
 		<macrodef name="compile">
@@ -126,16 +122,14 @@
 							version="${version}" 
 							os="all" 
 							url="http://www.promtools.org/prom6/packages/${project}/${project}-${version}-${os}.zip"
-							desc="Petri nets"
+							desc="Animation"
 							org="Eindhoven University of Technology" 
 							license="LGPL" 
-							author="H.M.W. Verbeek"
+							author="H.M.W. Verbeek and C.W. Guenther"
 							auto="false"
 							hasPlugins="true"
 							logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png"
 						>
-							<dependency name="Log"/>
-							<dependency name="TransitionSystems"/>
 						</package>
 					</packages>
 				</echoxml>

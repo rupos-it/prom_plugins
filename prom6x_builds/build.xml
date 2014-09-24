@@ -46,28 +46,28 @@
 					<fileset dir=".">
 						<include name="lib/**/*.jar" />
 					</fileset>
-					<fileset dir="../prom61_origin/ProM/dist/">
+					<fileset dir="../prom6x_origin/ProM/dist/">
 						<include name="*.jar" />
 					</fileset>
-					<fileset dir="../prom61_origin/ProM/lib/">
+					<fileset dir="../prom6x_origin/ProM/lib/">
 						<include name="*.jar" />
 					</fileset>
-					<fileset dir="../prom61_origin/PetriNets/dist/">
+					<fileset dir="../prom6x_origin/PetriNets/dist/">
 						<include name="*.jar" />
 					</fileset>
 					<pathelement path="@{dependson}" />
 
-					<fileset dir="../prom61_origin/PetriNetReplayer/dist/">
+					<fileset dir="../prom6x_origin/PetriNetReplayer/dist/">
 						<include name="*.jar" />
 					</fileset>
-					<fileset dir="../prom61_origin/BPMN/dist/">
+					<fileset dir="../prom6x_origin/BPMN/dist/">
                                                 <include name="*.jar" />
                                         </fileset>
 
-					 <fileset dir="../prom61_origin/Log/dist/">
+					 <fileset dir="../prom6x_origin/Log/dist/">
                                                 <include name="*.jar" />
                                         </fileset>
-					<fileset dir="../prom61_origin/LogDialog/dist/">
+					<fileset dir="../prom6x_origin/LogDialog/dist/">
                                                 <include name="*.jar" />
                                         </fileset>
 

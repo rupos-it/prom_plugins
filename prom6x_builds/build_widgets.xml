@@ -1,4 +1,4 @@
-<project name="OSService" default="Compile Sources" basedir="../prom61_origin/OSService">
+<project name="Widgets" default="Compile Sources" basedir="../prom6x_origin/Widgets">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -7,8 +7,8 @@
 		<property name="lib" location="lib" />
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
-		<property name="version" value="6.1.${env.BUILD_NUMBER}" />
-		<property name="project" value="OSService" />
+		<property name="version" value="6.3.${env.BUILD_NUMBER}" />
+		<property name="project" value="Widgets" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -76,7 +76,7 @@
 
 
 		<!-- clean all binaries and distributions -->
-		<target name="clean" description="clean up" id="1">
+		<target name="Clean build and dist folders" description="clean up" id="1">
 			<!-- Delete the ${build} and ${dist} directory trees -->
 			<delete dir="${build}" />
 			<delete dir="${dist}" />
@@ -87,7 +87,7 @@
 		<target name="Create Javadoc" description="Generated javadoc">
 			<javadoc packagenames="**" classpathref="classpath" useexternalfile="true" defaultexcludes="yes" destdir="${doc}" author="true" version="true" verbose="false" use="true" windowtitle="${project}">
 				<fileset dir=".">
-					<include name="src/**" />
+					<include name="src/**/*.java" />
 					<exclude name="src/test/**" />
 					<exclude name="**/*.jj" />
 					<exclude name="**/*.jjt" />
@@ -122,15 +122,14 @@
 							version="${version}" 
 							os="all" 
 							url="http://www.promtools.org/prom6/packages/${project}/${project}-${version}-${os}.zip"
-							desc="Operational Support Service"
+							desc="Generic widgets"
 							org="Eindhoven University of Technology" 
 							license="LGPL" 
 							author="M. Westergaard"
 							auto="false"
 							hasPlugins="true"
-							logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png"
+							logo="http://westergaard.eu/wp-content/uploads/2011/10/IMG_6005-200x195.jpg"
 						>
-							<dependency name="Log"/>
 						</package>
 					</packages>
 				</echoxml>

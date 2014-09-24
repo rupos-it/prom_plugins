@@ -1,4 +1,4 @@
-<project name="InteractiveVisualization" default="Compile Sources" basedir="../prom61_origin/InteractiveVisualization">
+<project name="BPMN" default="Compile Sources" basedir="../prom6x_origin/BPMN">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -8,7 +8,7 @@
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
 		<property name="version" value="6.1.${env.BUILD_NUMBER}" />
-		<property name="project" value="InteractiveVisualization" />
+		<property name="project" value="BPMN" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -26,6 +26,10 @@
  				<include name="stdlib/**/*.jar" />
  				<include name="packagelib/**/*.jar" />
  			</fileset>
+			<fileset dir="..">
+				<include name="Log/dist/*.jar" />
+				<include name="PetriNets/dist/*.jar" />
+			</fileset>
      </path>
 
 		<macrodef name="compile">
@@ -122,14 +126,15 @@
 							version="${version}" 
 							os="all" 
 							url="http://www.promtools.org/prom6/packages/${project}/${project}-${version}-${os}.zip"
-							desc="Interactive Visualization"
+							desc="Artifact Modeling"
 							org="Eindhoven University of Technology" 
-							license="LGPL" 
-							author="Danny van Heumen"
+							license="BPMN" 
+							author="H.M.W. Verbeek"
 							auto="false"
 							hasPlugins="true"
-							logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png"
+							logo="http://www.promtools.org/prom6/packages/6.1/prom_subtitle_hat_300.png"
 						>
+							<dependency name="Log"/>
 						</package>
 					</packages>
 				</echoxml>

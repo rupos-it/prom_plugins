@@ -1,4 +1,4 @@
-<project name="TransitionSystems" default="Compile Sources" basedir="../prom61_origin/TransitionSystems">
+<project name="PetriNetReplayer" default="Compile Sources" basedir="../prom6x_origin/PetriNetReplayer">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -8,7 +8,7 @@
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
 		<property name="version" value="6.1.${env.BUILD_NUMBER}" />
-		<property name="project" value="TransitionSystems" />
+		<property name="project" value="PetriNetReplayer" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -27,8 +27,9 @@
  				<include name="packagelib/**/*.jar" />
  			</fileset>
 			<fileset dir="..">
-				<include name="OSService/dist/*.jar" />
-				<include name="Animation/dist/*.jar" />
+				<include name="Log/dist/*.jar" />
+				<include name="LogDialog/dist/*.jar" />
+				<include name="PetriNets/dist/*.jar" />
 			</fileset>
      </path>
 
@@ -126,7 +127,7 @@
 							version="${version}" 
 							os="all" 
 							url="http://www.promtools.org/prom6/packages/${project}/${project}-${version}-${os}.zip"
-							desc="Transition Systems"
+							desc="Petri-net Replayer"
 							org="Eindhoven University of Technology" 
 							license="LGPL" 
 							author="H.M.W. Verbeek"
@@ -134,9 +135,9 @@
 							hasPlugins="true"
 							logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png"
 						>
-							<dependency name="Animation"/>
 							<dependency name="Log"/>
-							<dependency name="OSService"/>
+							<dependency name="LogDialog"/>
+							<dependency name="PetriNets"/>
 						</package>
 					</packages>
 				</echoxml>

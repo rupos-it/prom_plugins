@@ -1,4 +1,4 @@
-<project name="PetriNetReplayer" default="Compile Sources" basedir="../prom61_origin/PetriNetReplayer">
+<project name="SimpleLogOperations" default="Compile Sources" basedir="../prom6x_origin/SimpleLogOperations">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -7,8 +7,8 @@
 		<property name="lib" location="lib" />
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
-		<property name="version" value="6.1.${env.BUILD_NUMBER}" />
-		<property name="project" value="PetriNetReplayer" />
+		<property name="version" value="6.3.${env.BUILD_NUMBER}" />
+		<property name="project" value="SimpleLogOperations" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -26,11 +26,6 @@
  				<include name="stdlib/**/*.jar" />
  				<include name="packagelib/**/*.jar" />
  			</fileset>
-			<fileset dir="..">
-				<include name="Log/dist/*.jar" />
-				<include name="LogDialog/dist/*.jar" />
-				<include name="PetriNets/dist/*.jar" />
-			</fileset>
      </path>
 
 		<macrodef name="compile">
@@ -81,7 +76,7 @@
 
 
 		<!-- clean all binaries and distributions -->
-		<target name="clean" description="clean up" id="1">
+		<target name="Clean build and dist folders" description="clean up" id="1">
 			<!-- Delete the ${build} and ${dist} directory trees -->
 			<delete dir="${build}" />
 			<delete dir="${dist}" />
@@ -104,6 +99,9 @@
 		<target name="Create downloadable archive" depends="Compile Sources">
 			<echo message="Building zip file packaging this project" />
 			<sequential>
+				<delete includeEmptyDirs="true" quiet="true">
+			    	<fileset dir="${release}" includes="${project}-*-${os}.zip"/>
+			  	</delete>
 				<zip destfile="${release}/${project}-${version}-${os}.zip">
 					<zipfileset dir="${lib}" prefix="lib">
 						<include name="**" />
@@ -127,17 +125,16 @@
 							version="${version}" 
 							os="all" 
 							url="http://www.promtools.org/prom6/packages/${project}/${project}-${version}-${os}.zip"
-							desc="Petri-net Replayer"
-							org="Eindhoven University of Technology" 
+							desc="SimpleLogOperations"
+							org="Ghent University" 
 							license="LGPL" 
-							author="H.M.W. Verbeek"
+							author="Jan Claes"
 							auto="false"
 							hasPlugins="true"
-							logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png"
-						>
-							<dependency name="Log"/>
-							<dependency name="LogDialog"/>
-							<dependency name="PetriNets"/>
+							logo="http://www.janclaes.info/img/ugentlogo300.jpg">
+							<!--dependency name="Upstream Package 1 (CHANGE)"/>
+							<dependency name="Upstream Package 2 (CHANGE)"/>
+							<dependency name="Upstream Package 3 (CHANGE)"/-->
 						</package>
 					</packages>
 				</echoxml>

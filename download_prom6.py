@@ -1,4 +1,4 @@
-#!/usr/bin/python
+q#!/usr/bin/python
 import os
 import sys
 
@@ -15,6 +15,14 @@ os.mkdir(destDir)
 os.popen2("svn co --ignore-externals https://svn.win.tue.nl/repos/prom/Framework/trunk/ " + destDir + "/ProM")[1].read()
 
 print "Downloaded ProM"
+
+os.popen2("svn co  https://svn.win.tue.nl/repos/prom/Releases/Framework/lib/ " + destDir + "/ProM/lib")[1].read()
+
+print "Downloaded lib"
+
+os.popen2("svn co https://svn.win.tue.nl/repos/prom/TestSuite/ " + destDir + "/ProM/tests/libs-external/")[1].read()
+
+print "Downloaded lib-exsternal"
 
 i = 0
 for f in files:

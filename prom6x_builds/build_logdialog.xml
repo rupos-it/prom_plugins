@@ -1,4 +1,4 @@
-<project name="LogDialog" default="Compile Sources" basedir="../prom61_origin/LogDialog">
+<project name="LogDialog" default="Compile Sources" basedir="../prom6x_origin/LogDialog">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />

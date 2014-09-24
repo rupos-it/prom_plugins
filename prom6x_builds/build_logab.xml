@@ -1,4 +1,4 @@
-<project name="LogMerge" default="Compile Sources" basedir="../prom61_origin/LogMerge">
+<project name="LogAbstractions" default="Compile Sources" basedir="../prom6x_origin/LogAbstractions">
 		<!-- set global properties for this build -->
 		<property environment="env" />
 		<property name="src" location="src" />
@@ -7,8 +7,8 @@
 		<property name="lib" location="lib" />
 		<property name="dist" location="dist" />
 		<property name="release" location="latestrelease" />
-		<property name="version" value="6.1.${env.BUILD_NUMBER}" />
-		<property name="project" value="LogMerge" />
+		<property name="version" value="6.3.${env.BUILD_NUMBER}" />
+		<property name="project" value="LogAbstractions" />
 
 		<!-- Set the os to win32, win64, lin32, lin64, mac, or all -->
 		<property name="os" value="all" />
@@ -76,7 +76,7 @@
 
 
 		<!-- clean all binaries and distributions -->
-		<target name="Clean" description="clean up" id="1">
+		<target name="Clean build and dist folders" description="clean up" id="1">
 			<!-- Delete the ${build} and ${dist} directory trees -->
 			<delete dir="${build}" />
 			<delete dir="${dist}" />
@@ -122,14 +122,15 @@
 							version="${version}" 
 							os="all" 
 							url="http://www.promtools.org/prom6/packages/${project}/${project}-${version}-${os}.zip"
-							desc="Log Merge"
-							org="Ghent University" 
+							desc="Log Abstractions"
+							org="Eindhoven University of Technology" 
 							license="LGPL" 
-							author="Jan Claes"
+							author="H.M.W. Verbeek"
 							auto="false"
 							hasPlugins="true"
 							logo="http://www.promtools.org/prom6/packages/prom_subtitle_hat_300.png"
 						>
+							<dependency name="Log"/>
 						</package>
 					</packages>
 				</echoxml>

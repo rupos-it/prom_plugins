@@ -1,4 +1,4 @@
-<project name="ProM" default="Compile ProM Sources" basedir="../prom61_origin/ProM">
+<project name="ProM" default="Compile ProM Sources" basedir="../prom6x_origin/ProM">
 	<description>
         Build file for XProM.
 		

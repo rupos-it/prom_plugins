@@ -1,6 +1,7 @@
 *~
 \#*
 .metadata
+.metadata*
 .classpath
 .project
 .settings
@@ -22,3 +23,9 @@ cobertura.ser
 bin-test
 bin-test-instrument
 TEST-org.processmining*
+
+Classification/
+
+prom63_origin/
+KeyValue
+prom6x_origin

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-PROM_ORIGIN=../prom61_origin/ProM
-PROM_ORIGIN_BASE=../prom61_origin
+PROM_ORIGIN=../prom6x_origin/ProM
+PROM_ORIGIN_BASE=../prom6x_origin
 
 CPATH=./bindist/
 CPATH=$CPATH:$PROM_ORIGIN/dist/ProM-Contexts.jar
@@ -62,3 +62,6 @@ CPATH=$CPATH:$PROM_ORIGIN_BASE/PetriNetReplayer/dist/PetriNetReplayer.jar
 
 #CPATH=$CPATH:$PROM_ORIGIN_BASE/TSPetrinet/dist/TSPetrinet.jar
 
+CPATH=$CPATH:../PetriNetReplayAnalysis/dist/PetriNetReplayAnalysis.jar
+
+CPATH=$CPATH:../BPMNMeasures/dist/BPMNMeasures.jar
